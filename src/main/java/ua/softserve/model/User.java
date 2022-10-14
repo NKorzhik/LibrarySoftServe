@@ -21,9 +21,9 @@ public class User extends BaseEntity<Long>{
     private String name;
     private String surname;
     private String email;
-    private String password;
-    private LocalDate birthday;
-    private LocalDate registrationDate;
+//    private String password;
+//    private LocalDate birthday;
+//    private LocalDate registrationDate;
 
     @OneToMany(mappedBy = "userId", cascade = {CascadeType.MERGE,CascadeType.REMOVE})
     @ToString.Exclude
