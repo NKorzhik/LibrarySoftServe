@@ -1,41 +1,55 @@
 package ua.softserve.config;
 
-import java.io.IOException;
-import java.util.Properties;
-
-
-import org.apache.commons.dbcp2.BasicDataSource;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.cfg.Environment;
-import org.hibernate.service.ServiceRegistry;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.orm.hibernate5.HibernateTransactionManager;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
-import ua.softserve.model.Author;
-import ua.softserve.model.Book;
-import ua.softserve.model.Quantity;
-import ua.softserve.model.User;
-
-import javax.sql.DataSource;
+import ua.softserve.model.*;
 
 //@Configuration
 //@EnableTransactionManagement
 //@ComponentScan(basePackages = "ua.softserve")
 public class HibernateConfig {
+
+    private static StandardServiceRegistry standardServiceRegistry;
+    private static SessionFactory sessionFactory;
+
+    static {
+        if (sessionFactory == null) {
+            try {
+                // Create StandardServiceRegistry
+                standardServiceRegistry = new StandardServiceRegistryBuilder()
+                        .configure()
+                        .build();
+                // Create MetadataSources
+                MetadataSources metadataSources = new MetadataSources(standardServiceRegistry);
+                // Create Metadata
+                //Metadata metadata = metadataSources.getMetadataBuilder().build();
+                Metadata metadata = metadataSources
+                        .addAnnotatedClass(User.class)
+                        .addAnnotatedClass(Book.class)
+                        .addAnnotatedClass(HistoryOfRequest.class)
+                        .addAnnotatedClass(Quantity.class)
+                        .addAnnotatedClass(Author.class).getMetadataBuilder().build();
+
+                // Create SessionFactory
+                sessionFactory = metadata.getSessionFactoryBuilder().build();
+            } catch (Exception e) {
+                e.printStackTrace();
+                if (standardServiceRegistry != null) {
+                    StandardServiceRegistryBuilder.destroy(standardServiceRegistry);
+                }
+            }
+        }
+    }
+
+    public static SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
+
+
+    //-------------------------------------------------------------------------------//
 
 //    private static final Logger logger = LoggerFactory.getLogger(HibernateConfig.class);
 //
@@ -90,51 +104,53 @@ public class HibernateConfig {
 //        return new CleanUp(new JdbcTemplate(dataSource()));
 //    }
 
-    private static SessionFactory sessionFactory;
 
-    public static SessionFactory getSessionFactory() {
-        if (sessionFactory == null) {
-            try {
-                Configuration configuration = new Configuration();
+    //------------------------------------------------------------------------//
 
-                // Hibernate settings equivalent to hibernate.cfg.xml's properties
-                Properties settings = new Properties();
-                settings.put(Environment.DRIVER, "org.postgresql.Driver");
-                settings.put(Environment.URL, "jdbc:postgresql://localhost:5432/library_softserve");
-                settings.put(Environment.DIALECT, "org.hibernate.dialect.PostgreSQLDialect");
-
-                //Add here your own username
-                settings.put(Environment.USER, "postgres");
-                settings.put(Environment.PASS, "NIKITA");
-
-
-                settings.put(Environment.SHOW_SQL, "true");
-                settings.put(Environment.FORMAT_SQL, "true");
-                settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
-
-                settings.put(Environment.HBM2DDL_AUTO, "update");
-
-                configuration.setProperties(settings);
-
-                configuration
-                        .addAnnotatedClass(User.class)
-                        .addAnnotatedClass(Book.class)
-                        .addAnnotatedClass(HibernateConfig.class)
-                        .addAnnotatedClass(Quantity.class)
-                        .addAnnotatedClass(Author.class);
-
-
-//                ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
-//                        .applySettings(configuration.getProperties()).build();
-                // sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-                StandardServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
-                        .configure(String.valueOf(configuration)).build();
-                Metadata metadata = new MetadataSources(serviceRegistry).getMetadataBuilder().build();
-                sessionFactory = metadata.getSessionFactoryBuilder().build();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return sessionFactory;
-    }
+//    private static SessionFactory sessionFactory;
+//
+//    public static SessionFactory getSessionFactory() {
+//        if (sessionFactory == null) {
+//            try {
+//                Configuration configuration = new Configuration();
+//
+//                // Hibernate settings equivalent to hibernate.cfg.xml's properties
+//                Properties settings = new Properties();
+//                settings.put(Environment.DRIVER, "org.postgresql.Driver");
+//                settings.put(Environment.URL, "jdbc:postgresql://localhost:5432/library_softserve");
+//                settings.put(Environment.DIALECT, "org.hibernate.dialect.PostgreSQLDialect");
+//
+//                //Add here your own username
+//                settings.put(Environment.USER, "postgres");
+//                settings.put(Environment.PASS, "NIKITA");
+//
+//                settings.put(Environment.SHOW_SQL, "true");
+//                settings.put(Environment.FORMAT_SQL, "true");
+//                settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
+//
+//                settings.put(Environment.HBM2DDL_AUTO, "update");
+//
+//                configuration.setProperties(settings);
+//
+//                configuration
+//                        .addAnnotatedClass(User.class)
+//                        .addAnnotatedClass(Book.class)
+//                        .addAnnotatedClass(HistoryOfRequest.class)
+//                        .addAnnotatedClass(Quantity.class)
+//                        .addAnnotatedClass(Author.class);
+//
+//
+////                ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
+////                        .applySettings(configuration.getProperties()).build();
+//                // sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+//                StandardServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
+//                        .configure(String.valueOf(configuration)).build();
+//                Metadata metadata = new MetadataSources(serviceRegistry).getMetadataBuilder().build();
+//                sessionFactory = metadata.getSessionFactoryBuilder().build();
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        return sessionFactory;
+//    }
 }

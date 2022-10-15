@@ -5,7 +5,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ua.softserve.config.HibernateConfig;
 import ua.softserve.model.User;
@@ -36,21 +35,24 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void addUser(User user) {
-        Session session = sessionFactory.getCurrentSession();
+        //Session session = sessionFactory.getCurrentSession();
+        Session session = sessionFactory.openSession();
         session.persist(user);
         logger.info("User saved successfully");
     }
 
     @Override
     public void update(User user) {
-        Session session = sessionFactory.getCurrentSession();
+        //Session session = sessionFactory.getCurrentSession();
+        Session session =  sessionFactory.openSession();
         session.merge(user);
         logger.info("User updated successfully");
     }
 
     @Override
     public List<User> listUsers() {
-        Session session = sessionFactory.getCurrentSession();
+        //Session session = sessionFactory.getCurrentSession();
+        Session session =  sessionFactory.openSession();
         CriteriaQuery<User> cq = session.getCriteriaBuilder().createQuery(User.class);
         cq.from(User.class);
 
