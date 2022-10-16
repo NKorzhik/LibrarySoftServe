@@ -1,9 +1,7 @@
 package ua.softserve.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import ua.softserve.model.enums.Genre;
 
 import java.util.List;
@@ -11,15 +9,20 @@ import java.util.List;
 @Entity
 @Data
 @Table(name = "book")
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 public class Book extends BaseEntity<Long> {
 
+    @Column(name = "title")
     public String title;
 
     @ElementCollection
     @Enumerated(value = EnumType.STRING)
     public List<Genre> genreList;
+
+    @Column(name = "description")
     public String description;
+    @Column(name = "isbn")
     public String ISBN;
 
     @ManyToMany(fetch = FetchType.LAZY)

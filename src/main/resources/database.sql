@@ -19,7 +19,7 @@ create table if not exists book
 (
     id bigserial NOT NULL,
     title varchar(100) NOT NULL,
-    genre varchar(100) NOT NULL,
+    genre varchar(100),
     description varchar(250),
     ISBN varchar(13) NOT NULL,
 

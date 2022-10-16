@@ -5,9 +5,7 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -15,7 +13,8 @@ import java.util.List;
 @Entity
 @Data
 @Table(name = "user_account")
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 public class User extends BaseEntity<Long>{
 
     private String name;
