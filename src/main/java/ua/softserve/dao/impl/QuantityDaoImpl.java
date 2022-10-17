@@ -40,4 +40,5 @@ public class QuantityDaoImpl implements QuantityDao {
             session.getTransaction().commit();
         }
     }
+
 }
