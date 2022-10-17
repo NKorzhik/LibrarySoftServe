@@ -22,7 +22,7 @@ public class User extends BaseEntity<Long>{
     @Column(name = "registration_date")
     private LocalDate registrationDate;
 
-    @OneToMany(mappedBy = "userId", cascade = {CascadeType.MERGE,CascadeType.REMOVE})
+    @OneToMany(mappedBy = "userId", cascade = {CascadeType.MERGE})
     @ToString.Exclude
     private List<HistoryOfRequest> listOfRequests;
 

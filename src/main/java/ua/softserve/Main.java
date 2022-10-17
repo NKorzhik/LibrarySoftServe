@@ -24,6 +24,7 @@ public class Main {
         //CREATE BOOK
         BookDao bookDao = new BookDaoImpl();
         Book book = new Book();
+        Book book1 = new Book();
         book.setId(4L);
         book.setTitle("book2");
         book.setDescription("I love Hibernate");
