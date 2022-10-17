@@ -24,8 +24,11 @@ public class HistoryOfRequest extends BaseEntity<Long> {
     @JoinColumn(name = "book_id")
     public Book bookId;
 
+    @Column(name = "date_of_issue")
     public LocalDate dateOfIssue;
+    @Column(name = "should_be_return")
     public LocalDate shouldBeReturn;
+    @Column(name = "return_date")
     public LocalDate returnDate;
 
     @Enumerated(EnumType.STRING)

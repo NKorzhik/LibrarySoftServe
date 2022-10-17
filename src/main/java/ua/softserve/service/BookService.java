@@ -19,7 +19,7 @@ public class BookService {
     }
 
     public void deleteBook(long id) {
-        bookDao.deleteBook(id);
+        bookDao.deleteAllCopiesBook(id);
     }
 
     public List<Book> listBook() {

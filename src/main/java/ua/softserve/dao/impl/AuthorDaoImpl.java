@@ -1,9 +1,10 @@
-package ua.softserve.dao;
+package ua.softserve.dao.impl;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import ua.softserve.config.HibernateConfig;
+import ua.softserve.dao.AuthorDao;
 import ua.softserve.model.Author;
 
 public class AuthorDaoImpl implements AuthorDao {

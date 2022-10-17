@@ -31,7 +31,8 @@ public class HibernateConfig {
 
                 //Add here your own username
                 settings.put(Environment.USER, "postgres");
-                settings.put(Environment.PASS, "NIKITA");
+                //settings.put(Environment.PASS, "NIKITA");
+                settings.put(Environment.PASS, "1234");
 
                 settings.put(Environment.SHOW_SQL, "true");
                 settings.put(Environment.FORMAT_SQL, "true");

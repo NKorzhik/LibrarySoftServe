@@ -1,10 +1,7 @@
 package ua.softserve.model;
 
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -20,12 +17,13 @@ public class User extends BaseEntity<Long>{
     private String name;
     private String surname;
     private String email;
-//    private String password;
-//    private LocalDate birthday;
-//    private LocalDate registrationDate;
+    private String password;
+    private LocalDate birthday;
+    @Column(name = "registration_date")
+    private LocalDate registrationDate;
 
     @OneToMany(mappedBy = "userId", cascade = {CascadeType.MERGE,CascadeType.REMOVE})
     @ToString.Exclude
-    private List<HistoryOfRequest> requestList;
+    private List<HistoryOfRequest> listOfRequests;
 
 }

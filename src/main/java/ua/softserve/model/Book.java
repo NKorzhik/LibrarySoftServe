@@ -16,12 +16,14 @@ public class Book extends BaseEntity<Long> {
     @Column(name = "title")
     public String title;
 
-    @ElementCollection
+    //@ElementCollection
     @Enumerated(value = EnumType.STRING)
-    public List<Genre> genreList;
+    //@Column(name = "genre")
+    public Genre genre;
 
     @Column(name = "description")
     public String description;
+
     @Column(name = "isbn")
     public String ISBN;
 

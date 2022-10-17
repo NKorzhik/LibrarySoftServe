@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface BookDao {
     void addBook(Book book);
-    void deleteBook(long id);
+    void deleteAllCopiesBook(long id);
+    void deleteOneCopyBook(long id);
     List<Book> listBook();
+    Book getBook(long id);
 }
