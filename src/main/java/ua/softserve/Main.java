@@ -12,7 +12,6 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
-
         /*AuthorDao authorDao = new AuthorDaoImpl();
         Author author = new Author();
         author.setName("nikita2");
@@ -25,6 +24,7 @@ public class Main {
         //CREATE BOOK
         BookDao bookDao = new BookDaoImpl();
         Book book = new Book();
+        book.setId(4L);
         book.setTitle("book2");
         book.setDescription("I love Hibernate");
         book.setISBN("2114567894445");
@@ -33,15 +33,10 @@ public class Main {
 
         //CREATE QUANTITY
         QuantityDao quantityDao = new QuantityDaoImpl();
-        quantityDao.addQuantity(book, 5);
+        //quantityDao.addQuantity(book, 5);
 
         //DELETE BOOK WITH QUANTITY
-        bookDao.deleteAllBooks(book.getId());
-
-        /*List<Book> bookList = bookDao.listBook();
-        for (Book b:bookList) {
-            System.out.println(b.toString());
-        }*/
-
+        //bookDao.deleteAllCopiesBook(book.getId());
+        quantityDao.deleteOneQuantity(4);
     }
 }
