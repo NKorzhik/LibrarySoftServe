@@ -10,4 +10,6 @@ public interface BookDao {
     void deleteOneCopyBook(long id);
     List<Book> listBook();
     Book getBook(long id);
+
+
 }

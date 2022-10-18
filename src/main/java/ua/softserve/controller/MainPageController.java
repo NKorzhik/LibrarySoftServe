@@ -11,7 +11,6 @@ import java.util.List;
 
 @Controller
 public class MainPageController {
-
     private final BookService bookService;
 
     @Autowired
@@ -25,8 +24,4 @@ public class MainPageController {
         model.addAttribute("books", books);
         return "books";
     }
-
-
-
-
 }

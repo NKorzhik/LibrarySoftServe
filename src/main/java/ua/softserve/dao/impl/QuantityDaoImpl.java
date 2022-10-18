@@ -3,12 +3,14 @@ package ua.softserve.dao.impl;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 import ua.softserve.config.HibernateConfig;
 import ua.softserve.dao.QuantityDao;
 import ua.softserve.model.Book;
 import ua.softserve.model.Quantity;
 import ua.softserve.model.enums.Type;
 
+@Repository
 public class QuantityDaoImpl implements QuantityDao {
 
     private final SessionFactory sessionFactory;

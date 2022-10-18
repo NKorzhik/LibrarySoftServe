@@ -65,7 +65,7 @@ public class BookDaoImpl implements BookDao {
     }
 
     @Override
-    public Book getBook(long id){
+    public Book getBook(long id) {
         Book book;
         try(Session session = sessionFactory.openSession()){
             session.beginTransaction();

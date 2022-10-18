@@ -18,7 +18,6 @@ public class Book extends BaseEntity<Long> {
 
     //@ElementCollection
     @Enumerated(value = EnumType.STRING)
-    //@Column(name = "genre")
     public Genre genre;
 
     @Column(name = "description")
