@@ -22,7 +22,7 @@ public class Main {
 
 
         //CREATE BOOK
-        BookDao bookDao = new BookDaoImpl();
+        /*BookDao bookDao = new BookDaoImpl();
         Book book = new Book();
         Book book1 = new Book();
         book.setId(4L);
@@ -30,14 +30,14 @@ public class Main {
         book.setDescription("I love Hibernate");
         book.setISBN("2114567894445");
         book.setGenre(Genre.ROMAN);
-        bookDao.addBook(book);
+        bookDao.addBook(book);*/
 
         //CREATE QUANTITY
-        QuantityDao quantityDao = new QuantityDaoImpl();
+        //QuantityDao quantityDao = new QuantityDaoImpl();
         //quantityDao.addQuantity(book, 5);
 
         //DELETE BOOK WITH QUANTITY
         //bookDao.deleteAllCopiesBook(book.getId());
-        quantityDao.deleteOneQuantity(4);
+        //quantityDao.deleteOneQuantity(4);
     }
 }

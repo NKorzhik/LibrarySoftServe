@@ -11,23 +11,12 @@ import java.util.List;
 
 @Controller
 public class HelloController {
-
     @GetMapping("/test1")
     public String sayHello() {
         return "hello";
     }
-
     @GetMapping("/test")
     public String sayTest() {
         return "test";
-    }
-
-    BookDao bookDao = new BookDaoImpl();
-
-    List<Book> books = bookDao.listBook();
-    @GetMapping("/list")
-    public String getBook(Model model){
-        model.addAttribute("books", books);
-        return "books";
     }
 }

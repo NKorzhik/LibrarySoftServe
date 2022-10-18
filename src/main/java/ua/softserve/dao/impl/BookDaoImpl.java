@@ -55,6 +55,7 @@ public class BookDaoImpl implements BookDao {
     public List<Book> listBook() {
         List<Book> bookList;
         try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
             bookList = session.createQuery("FROM Book", Book.class).getResultList();
             session.getTransaction().commit();
         }
@@ -62,7 +63,7 @@ public class BookDaoImpl implements BookDao {
     }
 
     @Override
-    public Book getBook(long id){
+    public Book getBook(long id) {
         Book book;
         try(Session session = sessionFactory.openSession()){
             session.beginTransaction();
