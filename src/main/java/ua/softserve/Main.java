@@ -23,13 +23,13 @@ public class Main {
 
 
         //CREATE BOOK
-        BookDao bookDao = new BookDaoImpl();
-        BookService bookService = new BookService(bookDao);
+//        BookDao bookDao = new BookDaoImpl();
+//        //BookService bookService = new BookService(bookDao);
 //        Book book = new Book();
-//        book.setTitle("book3");
-//        book.setDescription("I love Hibernate");
-//        book.setISBN("6114567894445");
-//        book.setGenre(Genre.ROMAN);
+//        book.setTitle("book4");
+//        book.setDescription("Yes");
+//        book.setISBN("6114567894446");
+//        book.setGenre(Genre.NOVELA);
 //        bookDao.addBook(book);
 
 //        List<Book> lis  = bookService.listBook();
