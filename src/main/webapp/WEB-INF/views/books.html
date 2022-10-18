@@ -1,18 +1,42 @@
 <!DOCTYPE html>
-<html lang="en" , xmlns:th = "http://www.thymeleaf.org">
+<html lang="en" , xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!--    <style>-->
+    <!--        div {-->
+    <!--            background-color: lightgrey;-->
+    <!--            width: 300px;-->
+    <!--            border: 15px solid green;-->
+    <!--            padding: 50px;-->
+    <!--            margin: 20px;-->
+    <!--        }-->
+    <!--    </style>-->
 </head>
 <body>
 
+<div class="container">
+    <div class="jumbotron">
+        <h1>Library</h1>
+        <p>Library modeling</p>
+    </div>
+    <p>This is some text.</p>
+    <p>This is another text.</p>
 
-<tr th:each = "book : ${books}">
-    <td th:text = "${book.id}"></td>
-    <td th:text = "${book.title}"></td>
-    <td th:text= "${book.description}"></td>
-</tr>
+    <tr th:each="book : ${books}">
+        <td th:text="${book.id}"></td>
+        <td th:text="${book.title}"></td>
+        <td th:text="${book.description}"></td>
+    </tr>
+</div>
 
-<
+<div>
+
+</div>
 </body>
 </html>

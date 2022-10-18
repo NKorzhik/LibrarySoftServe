@@ -1,5 +1,6 @@
 package ua.softserve.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,6 +8,8 @@ import ua.softserve.dao.BookDao;
 //import ua.softserve.dao.BookDaoImpl;
 import ua.softserve.dao.impl.BookDaoImpl;
 import ua.softserve.model.Book;
+import ua.softserve.service.BookService;
+
 import java.util.List;
 
 @Controller
@@ -22,12 +25,5 @@ public class HelloController {
         return "test";
     }
 
-    BookDao bookDao = new BookDaoImpl();
 
-    List<Book> books = bookDao.listBook();
-    @GetMapping("/list")
-    public String getBook(Model model){
-        model.addAttribute("books", books);
-        return "books";
-    }
 }
