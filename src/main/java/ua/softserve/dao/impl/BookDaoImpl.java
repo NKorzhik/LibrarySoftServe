@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ua.softserve.config.HibernateConfig;
 import ua.softserve.dao.BookDao;
+import ua.softserve.model.Author;
 import ua.softserve.model.Book;
 
 import java.util.List;

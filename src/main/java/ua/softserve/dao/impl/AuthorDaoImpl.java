@@ -6,6 +6,7 @@ import org.hibernate.Transaction;
 import ua.softserve.config.HibernateConfig;
 import ua.softserve.dao.AuthorDao;
 import ua.softserve.model.Author;
+import ua.softserve.model.Book;
 
 public class AuthorDaoImpl implements AuthorDao {
 
@@ -27,5 +28,16 @@ public class AuthorDaoImpl implements AuthorDao {
                 transaction.rollback();
             }
         }
+    }
+
+    @Override
+    public Author getAuthor(long id) {
+        Author author;
+        try(Session session = sessionFactory.openSession()){
+            session.beginTransaction();
+            author = session.get(Author.class, id);
+            session.getTransaction().commit();
+        }
+        return author;
     }
 }

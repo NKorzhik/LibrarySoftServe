@@ -1,5 +1,6 @@
 package ua.softserve.dao;
 
+import ua.softserve.model.Author;
 import ua.softserve.model.Book;
 
 import java.util.List;

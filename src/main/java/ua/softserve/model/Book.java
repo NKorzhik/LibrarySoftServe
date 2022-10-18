@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import ua.softserve.model.enums.Genre;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,14 +27,13 @@ public class Book extends BaseEntity<Long> {
     @Column(name = "isbn")
     public String ISBN;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "book_author",
-            joinColumns = @JoinColumn(name = "book_id"),
-            inverseJoinColumns = @JoinColumn(name = "author_id")
-    )
-    @ToString.Exclude
-    private List<Author> authorList;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "author_id")
+    private Author author;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "co_author_id")
+    private Author coAuthors;
 
     @OneToMany(mappedBy = "bookId", cascade = {CascadeType.MERGE, CascadeType.REMOVE})
     @ToString.Exclude
