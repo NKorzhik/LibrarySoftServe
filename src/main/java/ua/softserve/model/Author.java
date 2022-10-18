@@ -3,6 +3,7 @@ package ua.softserve.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -18,7 +19,7 @@ public class Author extends BaseEntity<Long> {
     @Column(name = "surname")
     private String surname;
 
-    @ManyToMany(mappedBy = "authorList")
+    @OneToMany(mappedBy = "author")
     @ToString.Exclude
-    List<Book> books;
+    List<Book> books = new ArrayList<>();
 }
