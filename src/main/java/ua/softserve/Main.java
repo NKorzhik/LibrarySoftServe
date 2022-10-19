@@ -17,41 +17,57 @@ public class Main {
     public static void main(String[] args) {
 
         AuthorDao authorDao = new AuthorDaoImpl();
+        BookDao bookDao = new BookDaoImpl();
+        QuantityDao quantityDao = new QuantityDaoImpl();
+
        /* Author author = new Author();
         author.setName("nikita2");
         author.setSurname("korzh2");*/
 
         //CREATE BOOK
-        BookDao bookDao = new BookDaoImpl();
-        BookService bookService = new BookService(bookDao);
 
-        Author author = new Author();
-        author.setName("Man1");
-        author.setSurname("Manovich1");
-        //authorDao.addAuthor(author);
 
-        Author coAuthor = new Author();
-        coAuthor.setName("Man2");
-        coAuthor.setSurname("Manovich2");
-        //authorDao.addAuthor(coAuthor);
+//        Author author = new Author();
+//        author.setName("Jane");
+//        author.setSurname("Austen");
+//        authorDao.addAuthor(author);
+////
+//        Author coAuthor = new Author();
+//        coAuthor.setName("Man2");
+//        coAuthor.setSurname("Manovich2");
+//        authorDao.addAuthor(coAuthor);
+////
+//        Book book = new Book();
+//        book.setTitle("Pride and Prejudice");
+//        book.setDescription("Pride and Prejudice is an 1813 novel of manners by Jane Austen. " +
+//                "The novel follows the character development of Elizabeth Bennet, the dynamic protagonist of the book " +
+//                "who learns about the repercussions of hasty judgments and comes to appreciate the difference between " +
+//                "superficial goodness and actual goodness.");
+//        book.setISBN("3114567894445");
+//        book.setGenre(Genre.NOVEL);
+//        book.setAuthor(authorDao.getAuthor(2));
+//        book.setCoAuthors(authorDao.getAuthor(1));
+//        bookDao.addBook(book);
 
-        Book book = new Book();
-        book.setTitle("book10000");
-        book.setDescription("fdfdfdf");
-        book.setISBN("7114567894445");
-        book.setGenre(Genre.ROMAN);
-        book.setAuthor(authorDao.getAuthor(2));
-        book.setCoAuthors(authorDao.getAuthor(1));
-        bookDao.addBook(book);
+
+
+//        Author author = authorDao.getAuthor(book.getAuthor().getId());
+//
+//        System.out.println(author.getId() +
+//                author.getName() + author.getSurname());
+
+
 
 //        List<Book> lis  = bookService.listBook();
 //
 //        for (Book b : lis) {
-//            System.out.println(b.getId());
+//            //System.out.println(authorDao.getAuthor(b.getAuthor().getId()).getName());
+//            System.out.println(b.getCoAuthors().getId());
 //        }
 //        //CREATE QUANTITY
-//        QuantityDao quantityDao = new QuantityDaoImpl();
-        //quantityDao.addQuantity(book, 5);
+//        quantityDao.addQuantity(book, 5);
+//        quantityDao.deleteOneQuantity(9);
+//        System.out.println(quantityDao.getCountOfQuantityByBookId(book.getId()));
 
         //DELETE BOOK WITH QUANTITY
         //bookDao.deleteAllCopiesBook(book.getId());

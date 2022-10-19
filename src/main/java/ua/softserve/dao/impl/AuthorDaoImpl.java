@@ -3,11 +3,13 @@ package ua.softserve.dao.impl;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Repository;
 import ua.softserve.config.HibernateConfig;
 import ua.softserve.dao.AuthorDao;
 import ua.softserve.model.Author;
 import ua.softserve.model.Book;
 
+@Repository
 public class AuthorDaoImpl implements AuthorDao {
 
     private final SessionFactory sessionFactory;

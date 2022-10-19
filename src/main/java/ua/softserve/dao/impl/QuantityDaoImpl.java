@@ -43,4 +43,17 @@ public class QuantityDaoImpl implements QuantityDao {
         }
     }
 
+    @Override
+    public long getCountOfQuantityByBookId(long bookId) {
+        try(Session session = sessionFactory.openSession()){
+            session.beginTransaction();
+            Query<Quantity> query = session.createQuery(
+                    "select q from Quantity q where q.bookId.id =:bookId",
+                    Quantity.class);
+            query.setParameter("bookId",bookId);
+
+            return query.getResultStream().count();
+        }
+    }
+
 }
