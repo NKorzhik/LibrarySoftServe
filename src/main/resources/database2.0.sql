@@ -30,7 +30,7 @@ create table if not exists book
     id           bigserial    NOT NULL,
     title        varchar(100) NOT NULL,
     author_id    bigint       NOT NULL,
-    co_author_id bigint       NOT NULL,
+    co_author_id bigint,
     genre        varchar(100) NOT NULL,
     description  varchar(1000),
     ISBN         varchar(13)  NOT NULL,

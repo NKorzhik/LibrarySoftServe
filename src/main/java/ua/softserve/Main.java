@@ -19,35 +19,40 @@ public class Main {
         AuthorDao authorDao = new AuthorDaoImpl();
         BookDao bookDao = new BookDaoImpl();
         QuantityDao quantityDao = new QuantityDaoImpl();
+        BookService service = new BookService(bookDao, quantityDao);
 
-       /* Author author = new Author();
+        Book book = service.getBook(1);
+        System.out.println(book.getAuthor().getName());
+
+
+        /*Author author = new Author();
         author.setName("nikita2");
         author.setSurname("korzh2");*/
 
         //CREATE BOOK
 
 
-//        Author author = new Author();
-//        author.setName("Jane");
-//        author.setSurname("Austen");
-//        authorDao.addAuthor(author);
+        /*Author author = new Author();
+        author.setName("Jane");
+        author.setSurname("Austen");
+        authorDao.addAuthor(author);
+
+        Author coAuthor = new Author();
+        coAuthor.setName("Man2");
+        coAuthor.setSurname("Manovich2");
+        authorDao.addAuthor(coAuthor);*/
 ////
-//        Author coAuthor = new Author();
-//        coAuthor.setName("Man2");
-//        coAuthor.setSurname("Manovich2");
-//        authorDao.addAuthor(coAuthor);
-////
-//        Book book = new Book();
-//        book.setTitle("Pride and Prejudice");
-//        book.setDescription("Pride and Prejudice is an 1813 novel of manners by Jane Austen. " +
-//                "The novel follows the character development of Elizabeth Bennet, the dynamic protagonist of the book " +
-//                "who learns about the repercussions of hasty judgments and comes to appreciate the difference between " +
-//                "superficial goodness and actual goodness.");
-//        book.setISBN("3114567894445");
-//        book.setGenre(Genre.NOVEL);
-//        book.setAuthor(authorDao.getAuthor(2));
-//        book.setCoAuthors(authorDao.getAuthor(1));
-//        bookDao.addBook(book);
+        /*Book book = new Book();
+        book.setTitle("Pride and Prejudice");
+        book.setDescription("Pride and Prejudice is an 1813 novel of manners by Jane Austen. " +
+                "The novel follows the character development of Elizabeth Bennet, the dynamic protagonist of the book " +
+                "who learns about the repercussions of hasty judgments and comes to appreciate the difference between " +
+                "superficial goodness and actual goodness.");
+        book.setISBN("3114567894445");
+        book.setGenre(Genre.NOVEL);
+        book.setAuthor(authorDao.getAuthor(1));
+        book.setCoAuthors(authorDao.getAuthor(2));
+        bookDao.addBook(book);*/
 
 
 
@@ -65,7 +70,7 @@ public class Main {
 //            System.out.println(b.getCoAuthors().getId());
 //        }
 //        //CREATE QUANTITY
-//        quantityDao.addQuantity(book, 5);
+          //quantityDao.addQuantity(book, 5);
 //        quantityDao.deleteOneQuantity(9);
 //        System.out.println(quantityDao.getCountOfQuantityByBookId(book.getId()));
 

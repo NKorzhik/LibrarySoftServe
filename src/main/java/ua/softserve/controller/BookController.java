@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import ua.softserve.dto.BookDto;
 import ua.softserve.model.Author;
 import ua.softserve.model.Book;
 import ua.softserve.service.AuthorService;
@@ -30,13 +31,18 @@ public class BookController {
 
     @GetMapping("/add")
     public String addBook(Model model) {
-        model.addAttribute("book", new Book());
-        return "addbook";
+        model.addAttribute("book", new BookDto());
+        return "add-book";
+    }
+    @PostMapping()
+    public String addBook(@ModelAttribute("book") BookDto book) {
+        bookService.addBook(book);
+        return "books";
     }
 
     @GetMapping("/list")
     public String getBook(Model model){
-        List<Book> books = bookService.listBook();
+        List<BookDto> books = bookService.listBook();
 //        List<Author> authors = new ArrayList<>();
 //        for (Book book : books) {
 //            authors.add(authorService.getAuthor(book.getAuthor().getId()));
@@ -45,7 +51,6 @@ public class BookController {
         //model.addAttribute("authors",authors);
         return "books";
     }
-
 
     @GetMapping("/more/{id}")
     public String getMoreInfoAboutBook(@PathVariable(value = "id") long id ,Model model){
@@ -61,11 +66,4 @@ public class BookController {
     }
 
 
-
-
-    @PostMapping()
-    public String addBook(@ModelAttribute("book") Book book) {
-        bookService.addBook(book);
-        return "books";
-    }
 }

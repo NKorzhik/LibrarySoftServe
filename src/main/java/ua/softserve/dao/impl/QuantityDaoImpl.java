@@ -51,8 +51,9 @@ public class QuantityDaoImpl implements QuantityDao {
                     "select q from Quantity q where q.bookId.id =:bookId",
                     Quantity.class);
             query.setParameter("bookId",bookId);
-
-            return query.getResultStream().count();
+            long result = query.getResultStream().count();
+            session.getTransaction().commit();
+            return result;
         }
     }
 
