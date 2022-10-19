@@ -48,9 +48,10 @@ public class QuantityDaoImpl implements QuantityDao {
         try(Session session = sessionFactory.openSession()){
             session.beginTransaction();
             Query<Quantity> query = session.createQuery(
-                    "select q from Quantity q where q.bookId.id =:bookId",
+                    "select q from Quantity q where q.bookId.id =:bookId and q.type =: type",
                     Quantity.class);
             query.setParameter("bookId",bookId);
+            query.setParameter("type", Type.FREE);
             long result = query.getResultStream().count();
             session.getTransaction().commit();
             return result;

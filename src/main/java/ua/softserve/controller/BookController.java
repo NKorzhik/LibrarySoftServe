@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import ua.softserve.dto.BookDto;
 import ua.softserve.dto.CreateBookDto;
 import ua.softserve.model.Author;
@@ -46,14 +43,10 @@ public class BookController {
     }
 
     @GetMapping("/list")
-    public String getBook(Model model){
+    public String getBook(Model model) {
         List<BookDto> books = bookService.listBook();
-//        List<Author> authors = new ArrayList<>();
-//        for (Book book : books) {
-//            authors.add(authorService.getAuthor(book.getAuthor().getId()));
-//        }
+        setAuthors(books);
         model.addAttribute("books", books);
-        //model.addAttribute("authors",authors);
         return "books";
     }
 
@@ -69,6 +62,20 @@ public class BookController {
         model.addAttribute("quantity",quantity);
         return "description-of-book";
     }
-
-
+    @RequestMapping("/search")
+    public String getBooksByTitle(String keyword, Model model){
+        List<BookDto> books = bookService.findBookByTitle(keyword);
+        setAuthors(books);
+        model.addAttribute("books", books);
+        return "books";
+    }
+    public List<BookDto> setAuthors(List<BookDto> books){
+        for (BookDto book : books) {
+            Author author = authorService.getAuthor(book.getAuthor().getId());
+            Author coAuthor = authorService.getAuthor(book.getCoAuthors().getId());
+            book.setAuthor(author);
+            book.setCoAuthors(coAuthor);
+        }
+        return books;
+    }
 }

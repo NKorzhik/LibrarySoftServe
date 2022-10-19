@@ -19,16 +19,19 @@ public class Main {
         AuthorDao authorDao = new AuthorDaoImpl();
         BookDao bookDao = new BookDaoImpl();
         QuantityDao quantityDao = new QuantityDaoImpl();
-        BookService service = new BookService(bookDao, authorDao, quantityDao);
+        BookService service = new BookService(bookDao, quantityDao);
 
-        Book book = service.getBook(1);
-        //System.out.println(book.getAuthor().getName());
+//        Book book = service.getBook(1);
 
+//        List<Book> list = bookDao.findBookByTitle("Pride");
+//
+//        for (Book b : list) {
+//            System.out.println(b.getTitle());
+//        }
 
-        Author author = new Author();
+        /*Author author = new Author();
         author.setName("nikita2");
-        author.setSurname("korzh2");
-        authorDao.addAuthor(author);
+        author.setSurname("korzh2");*/
 
         //CREATE BOOK
 
@@ -43,17 +46,14 @@ public class Main {
         coAuthor.setSurname("Manovich2");
         authorDao.addAuthor(coAuthor);*/
 ////
-        /*Book book = new Book();
-        book.setTitle("Pride and Prejudice");
-        book.setDescription("Pride and Prejudice is an 1813 novel of manners by Jane Austen. " +
-                "The novel follows the character development of Elizabeth Bennet, the dynamic protagonist of the book " +
-                "who learns about the repercussions of hasty judgments and comes to appreciate the difference between " +
-                "superficial goodness and actual goodness.");
-        book.setISBN("3114567894445");
-        book.setGenre(Genre.NOVEL);
-        book.setAuthor(authorDao.getAuthor(1));
-        book.setCoAuthors(authorDao.getAuthor(2));
-        bookDao.addBook(book);*/
+//        Book book = new Book();
+//        book.setTitle("Pride");
+//        book.setDescription("Pride and Prejudice is an 1813 novel of manners by Jane Austen.");
+//        book.setISBN("4114567894445");
+//        book.setGenre(Genre.NOVEL);
+//        book.setAuthor(authorDao.getAuthor(2));
+//        book.setCoAuthors(authorDao.getAuthor(1));
+//        bookDao.addBook(book);
 
 
 

@@ -134,6 +134,13 @@ public class BookService {
                 .collect(Collectors.toList());
     }
 
+    public List<BookDto> findBookByTitle(String title){
+        return bookDao.findBookByTitle(title).stream()
+                .map(BookMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+
     public Book getBook(long id){
         return bookDao.getBook(id);
     }
@@ -149,4 +156,7 @@ public class BookService {
     public long getCountOfQuantityByBookId(long bookId){
         return quantityDao.getCountOfQuantityByBookId(bookId);
     }
+
+
+
 }
