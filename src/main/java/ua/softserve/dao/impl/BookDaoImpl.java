@@ -1,5 +1,6 @@
 package ua.softserve.dao.impl;
 
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
@@ -72,5 +73,16 @@ public class BookDaoImpl implements BookDao {
             session.getTransaction().commit();
         }
         return book;
+    }
+
+    @Override
+    public List<Book> findBookByTitle(String title) {
+        try(Session session = sessionFactory.openSession()){
+            session.beginTransaction();
+            List<Book> books = session.createQuery("from Book b WHERE b.title like :title",Book.class)
+                    .setParameter("title","%" + title + "%").getResultList();
+            session.getTransaction().commit();
+            return books;
+        }
     }
 }

@@ -166,20 +166,31 @@
 <!--            <p><a href="#">Link</a></p>-->
         </div>
         <div class="col-sm-8 text-left">
+
             <h1>List of Book</h1>
+
+            <form th:action="@{/search}" method="get">
+                <label>
+                    <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find book by title" size="50" >
+                </label>
+                <button type="submit" class="btn btn-info" >Search</button>
+                <button type="submit" class="btn btn-info" >Reset</button>
+            </form>
+
+
             <table class = "table book-list">
                 <thead>
                 <tr>
                     <th><span>Title</span></th>
+                    <th><span>Author</span></th>
                     <th><span>Genre</span></th>
-                    <th><span>ISBN</span></th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="book : ${books}">
                     <td th:text="${book.title}"></td>
+                    <td th:text="${book.author.getName()} + ' ' + ${book.author.getSurname()}"></td>
                     <td th:text="${book.genre}"></td>
-                    <td th:text="${book.ISBN}"></td>
                     <td><a th:href="@{/more/{id}(id=${book.id})}" class="btn btn-primary">More</a></td>
                     </tr>
                 </tbody>
