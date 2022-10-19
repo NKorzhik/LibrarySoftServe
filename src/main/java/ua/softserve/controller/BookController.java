@@ -3,11 +3,13 @@ package ua.softserve.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ua.softserve.dto.BookDto;
+import ua.softserve.dto.CreateBookDto;
 import ua.softserve.model.Author;
 import ua.softserve.model.Book;
 import ua.softserve.service.AuthorService;
@@ -29,15 +31,18 @@ public class BookController {
         this.authorService = authorService;
     }
 
-    @GetMapping("/add")
-    public String addBook(Model model) {
-        model.addAttribute("book", new BookDto());
+    @GetMapping("/get/add")
+    public String newBook(@ModelAttribute("book") CreateBookDto bookDto) {
         return "add-book";
     }
-    @PostMapping()
-    public String addBook(@ModelAttribute("book") BookDto book) {
-        bookService.addBook(book);
-        return "books";
+    @PostMapping("/post/add")
+    public String create(@ModelAttribute("book") CreateBookDto bookDto,
+                         BindingResult result) {
+        //изменить проверку, т.к значение по умолчанию ""
+        if (bookDto.getCoAuthorName() == null || bookDto.getCoAuthorSurname() == null) {
+            bookService.addBookWithMainAuthor(bookDto);
+        } else bookService.addBookWithMainAuthorAndCoAuthor(bookDto);
+        return "redirect:/list";
     }
 
     @GetMapping("/list")
@@ -53,7 +58,7 @@ public class BookController {
     }
 
     @GetMapping("/more/{id}")
-    public String getMoreInfoAboutBook(@PathVariable(value = "id") long id ,Model model){
+    public String getMoreInfoAboutBook(@PathVariable(value = "id") long id, Model model){
         Book book = bookService.getBook(id);
         Author author =  authorService.getAuthor(book.getAuthor().getId());
         Author co_author = authorService.getAuthor(book.getCoAuthors().getId());

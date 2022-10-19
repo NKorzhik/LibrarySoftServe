@@ -16,11 +16,11 @@ import java.util.Objects;
 @AllArgsConstructor
 public class BookDto {
 
-    public long id;
-    public String title;
-    public Genre genre;
-    public String description;
-    public String ISBN;
+    private long id;
+    private String title;
+    private Genre genre;
+    private String description;
+    private String ISBN;
     private Author author;
     private Author coAuthors;
     private List<Quantity> quantities;

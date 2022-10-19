@@ -58,6 +58,7 @@ public class BookDaoImpl implements BookDao {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             bookList = session.createQuery("FROM Book", Book.class).getResultList();
+
             session.getTransaction().commit();
         }
         return bookList;

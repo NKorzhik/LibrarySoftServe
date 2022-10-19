@@ -13,7 +13,6 @@ import ua.softserve.model.enums.Type;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Quantity extends BaseEntity<Long> {
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "book_id")
     public Book bookId;

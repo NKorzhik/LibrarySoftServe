@@ -166,18 +166,27 @@
       <!--            <p><a href="#">Link</a></p>-->
     </div>
     <div class="col-sm-8 text-left">
-      <form th:method="POST" th:action="@{/book}" th:object="${book}">
+      <h1>List of Book</h1>
+      <form th:method="POST" th:action="@{/post/add}" th:object="${book}">
         <div>
           <label for="title">Title</label>
           <input type="text" th:field="*{title}" id="title"/>
         </div>
         <div>
-          <label for="author">Author</label>
-          <input type="text" th:field="*{author}" id="author"/>
+          <label for="authorName">Author:name</label>
+          <input type="text" th:field="*{mainAuthorName}" id="authorName"/>
         </div>
         <div>
-          <label for="author">Co-Author</label>
-          <input type="text" th:field="*{coAuthors}" id="coAuthors"/>
+          <label for="authorSurname">Author:surname</label>
+          <input type="text" th:field="*{mainAuthorSurname}" id="authorSurname"/>
+        </div>
+        <div>
+          <label for="coAuthorName">Co-Author:name</label>
+          <input type="text" th:field="*{coAuthorName}" id="coAuthorName"/>
+        </div>
+        <div>
+          <label for="coAuthorSurname">Co-Author:surname</label>
+          <input type="text" th:field="*{coAuthorSurname}" id="coAuthorSurname"/>
         </div>
         <div>
           <label for="genre">Genre</label>
@@ -190,6 +199,10 @@
         <div>
           <label for="description">Description</label>
           <input type="text" th:field="*{description}" id="description"/>
+        </div>
+        <div>
+          <label for="quantity">Quantity</label>
+          <input type="text" th:field="*{quantity}" id="quantity"/>
         </div>
         <button type="submit" class="btn btn-default">Add book</button>
       </form>
@@ -214,6 +227,8 @@
 
 </body>
 </html>
+
+
 
 
 <!--

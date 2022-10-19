@@ -19,15 +19,16 @@ public class Main {
         AuthorDao authorDao = new AuthorDaoImpl();
         BookDao bookDao = new BookDaoImpl();
         QuantityDao quantityDao = new QuantityDaoImpl();
-        BookService service = new BookService(bookDao, quantityDao);
+        BookService service = new BookService(bookDao, authorDao, quantityDao);
 
         Book book = service.getBook(1);
-        System.out.println(book.getAuthor().getName());
+        //System.out.println(book.getAuthor().getName());
 
 
-        /*Author author = new Author();
+        Author author = new Author();
         author.setName("nikita2");
-        author.setSurname("korzh2");*/
+        author.setSurname("korzh2");
+        authorDao.addAuthor(author);
 
         //CREATE BOOK
 
