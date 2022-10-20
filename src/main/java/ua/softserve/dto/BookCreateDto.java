@@ -1,36 +1,31 @@
 package ua.softserve.dto;
 
-import lombok.*;
-import ua.softserve.model.Author;
-import ua.softserve.model.HistoryOfRequest;
-import ua.softserve.model.Quantity;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import ua.softserve.model.enums.Genre;
 
-import java.util.List;
 import java.util.Objects;
 
 @Getter
 @Setter
-//@ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class BookDto {
-
-    private long id;
+public class BookCreateDto {
     private String title;
     private Genre genre;
     private String description;
     private String ISBN;
-    private Author author;
-    private Author coAuthors;
-    private List<Quantity> quantities;
-    private List<HistoryOfRequest> requests;
+    private AuthorCreateDto authorDto;
+    private AuthorCreateDto coAuthorDto;
+    private int quantity;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        BookDto bookDto = (BookDto) o;
+        BookCreateDto bookDto = (BookCreateDto) o;
         return title.equals(bookDto.title) && ISBN.equals(bookDto.ISBN);
     }
     @Override

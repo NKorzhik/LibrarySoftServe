@@ -29,9 +29,8 @@ public class QuantityDaoImpl implements QuantityDao {
             session.getTransaction().commit();
         }
     }
-
     @Override
-    public void deleteOneQuantity(long bookId) {
+    public void deleteOneCopyById(long bookId) {
         try(Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             Query<Quantity> query = session.createQuery(

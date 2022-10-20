@@ -11,6 +11,7 @@ import java.util.List;
 @Table(name = "author")
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Author extends BaseEntity<Long> {
 
     @Column(name = "name")

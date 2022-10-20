@@ -8,8 +8,7 @@ import java.util.List;
 
 public interface BookDao {
     void addBook(Book book);
-    void deleteAllCopiesBook(long id);
-    void deleteOneCopyBook(long id);
+    void deleteBook(long id);
     List<Book> listBook();
     Book getBook(long id);
     List<Book> findBookByTitle(String title);

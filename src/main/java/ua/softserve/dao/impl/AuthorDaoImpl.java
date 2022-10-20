@@ -8,7 +8,6 @@ import ua.softserve.config.HibernateConfig;
 import ua.softserve.dao.AuthorDao;
 import ua.softserve.model.Author;
 
-import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -21,20 +20,19 @@ public class AuthorDaoImpl implements AuthorDao {
     }
 
     @Override
-    public long addAuthor(Author author) {
-        long id = -1;
+    public Author addAuthor(Author author) {
+        //long id = -1;
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             session.persist(author);
             session.flush();
-            id = author.getId();
             session.getTransaction().commit();
         } catch (Exception e) {
             /*if (transaction != null) {
                 transaction.rollback();
             }*/
         }
-        return id;
+        return author;
     }
 
     @Override
@@ -47,30 +45,8 @@ public class AuthorDaoImpl implements AuthorDao {
         }
         return author;
     }
-
     @Override
-    public List<Author> getBothAuthorsByNameAndSurname(String mainAuthorName,
-                                                   String mainAuthorSurname,
-                                                   String coAuthorName,
-                                                   String coAuthorSurname) {
-        List<Author> authors;
-        try(Session session = sessionFactory.openSession()){
-            session.beginTransaction();
-            Query<Author> query = session.createQuery(
-                    "select a from Author a where (a.name =:mainAuthorName and a.surname =:mainAuthorSurname) or " +
-                            "(a.name =: coAuthorName and a.surname =: coAuthorSurname)", Author.class);
-            query.setParameter("mainAuthorName", mainAuthorName);
-            query.setParameter("mainAuthorSurname", mainAuthorSurname);
-            query.setParameter("coAuthorName", coAuthorName);
-            query.setParameter("coAuthorSurname", coAuthorSurname);
-            authors = query.list();
-            session.getTransaction().commit();
-        }
-        return authors;
-    }
-
-    @Override
-    public Optional<Author> getOneAuthorByNameAndSurname(String name, String surname) {
+    public Optional<Author> getAuthorByNameAndSurname(String name, String surname) {
         Optional<Author> author;
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();

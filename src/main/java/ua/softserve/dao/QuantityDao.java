@@ -7,7 +7,7 @@ import ua.softserve.model.Book;
 public interface QuantityDao {
     void addQuantity(Book book, int count);
 
-    void deleteOneQuantity(long bookId);
+    void deleteOneCopyById(long bookId);
 
     long getCountOfQuantityByBookId(long bookId);
 }
