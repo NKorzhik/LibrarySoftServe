@@ -1,10 +1,12 @@
 package ua.softserve.model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import ua.softserve.model.enums.Genre;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
