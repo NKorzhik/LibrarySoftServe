@@ -15,13 +15,12 @@ import ua.softserve.model.Quantity;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class BookService {
-
     private final BookDao bookDao;
-
     private final AuthorDao authorDao;
     private final QuantityDao quantityDao;
 
@@ -33,13 +32,13 @@ public class BookService {
     }
     public void addBookWithMainAuthor(CreateBookDto bookDto) {
         Book book = CreateBookMapper.toModel(bookDto);
-        Author author = authorDao.getOneAuthorByNameAndSurname(
+        Optional<Author> author = authorDao.getOneAuthorByNameAndSurname(
                 bookDto.getMainAuthorName(),
                 bookDto.getMainAuthorSurname()
         );
         //Book book = CreateBookMapper.toModel(bookDto);
-        if (author != null) {
-            book.setAuthor(author);
+        if (author.isPresent()) {
+            book.setAuthor(author.get());
             bookDao.addBook(book);
         } else {
             long authorId = authorDao.addAuthor(new Author(
@@ -52,7 +51,7 @@ public class BookService {
             bookDao.addBook(book);
         }
     }
-    public void addBookWithMainAuthorAndCoAuthor(CreateBookDto bookDto) {
+    /*public void addBookWithMainAuthorAndCoAuthor(CreateBookDto bookDto) {
         Book book = CreateBookMapper.toModel(bookDto);
         List<Author> authors = authorDao.getBothAuthorsByNameAndSurname(
                 bookDto.getMainAuthorName(),
@@ -122,7 +121,7 @@ public class BookService {
             bookDao.addBook(book);
             quantityDao.addQuantity(book, bookDto.getQuantity());
         }
-    }
+    }*/
 
     public void deleteBook(long id) {
         bookDao.deleteAllCopiesBook(id);

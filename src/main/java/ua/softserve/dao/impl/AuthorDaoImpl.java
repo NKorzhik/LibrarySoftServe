@@ -2,15 +2,14 @@ package ua.softserve.dao.impl;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 import ua.softserve.config.HibernateConfig;
 import ua.softserve.dao.AuthorDao;
 import ua.softserve.model.Author;
-import ua.softserve.model.Book;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class AuthorDaoImpl implements AuthorDao {
@@ -23,14 +22,12 @@ public class AuthorDaoImpl implements AuthorDao {
 
     @Override
     public long addAuthor(Author author) {
-        //Transaction transaction = null;
         long id = -1;
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             session.persist(author);
             session.flush();
             id = author.getId();
-            //transaction.commit();
             session.getTransaction().commit();
         } catch (Exception e) {
             /*if (transaction != null) {
@@ -67,19 +64,23 @@ public class AuthorDaoImpl implements AuthorDao {
             query.setParameter("coAuthorName", coAuthorName);
             query.setParameter("coAuthorSurname", coAuthorSurname);
             authors = query.list();
+            session.getTransaction().commit();
         }
         return authors;
     }
 
     @Override
-    public Author getOneAuthorByNameAndSurname(String name, String surname) {
+    public Optional<Author> getOneAuthorByNameAndSurname(String name, String surname) {
+        Optional<Author> author;
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             Query<Author> query = session.createQuery(
                     "select a from Author a where a.name =:name and a.surname =:surname", Author.class);
             query.setParameter("name", name);
             query.setParameter("surname", surname);
-            return query.getSingleResult();
+            author = Optional.ofNullable(query.getSingleResultOrNull());
+            session.getTransaction().commit();
+            return author;
         }
     }
 }

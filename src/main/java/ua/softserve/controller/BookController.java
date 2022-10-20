@@ -18,10 +18,8 @@ import java.util.List;
 @Controller
 //@RequestMapping("/book")
 public class BookController {
-
     private final BookService bookService;
     private final AuthorService authorService;
-
 
     @Autowired
     public BookController(BookService bookService, AuthorService authorService) {
@@ -38,9 +36,10 @@ public class BookController {
     public String create(@ModelAttribute("book") CreateBookDto bookDto,
                          BindingResult result) {
         //изменить проверку, т.к значение по умолчанию ""
-        if (bookDto.getCoAuthorName() == null || bookDto.getCoAuthorSurname() == null) {
+        if (bookDto.getCoAuthorName().equals("") || bookDto.getCoAuthorSurname().equals("")) {
             bookService.addBookWithMainAuthor(bookDto);
-        } else bookService.addBookWithMainAuthorAndCoAuthor(bookDto);
+        }
+        //else bookService.addBookWithMainAuthorAndCoAuthor(bookDto);
         return "redirect:/list";
     }
 

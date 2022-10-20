@@ -3,6 +3,7 @@ package ua.softserve.dao;
 import ua.softserve.model.Author;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface AuthorDao{
 
@@ -14,5 +15,5 @@ public interface AuthorDao{
                                             String mainAuthorSurname,
                                             String coAuthorName,
                                             String coAuthorSurname);
-    Author getOneAuthorByNameAndSurname(String name, String surname);
+    Optional<Author> getOneAuthorByNameAndSurname(String name, String surname);
 }
