@@ -1,6 +1,7 @@
 package ua.softserve.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -29,8 +30,9 @@ public class BookController {
     }
 
     @GetMapping("/get/add")
+    @PreAuthorize("hasRole('ROLE_MANAGER')")
     public String newBook(@ModelAttribute("book") CreateBookDto bookDto) {
-        return "add-book";
+        return "manager/add-book";
     }
     @PostMapping("/post/add")
     public String create(@ModelAttribute("book") CreateBookDto bookDto,
@@ -47,7 +49,7 @@ public class BookController {
         List<BookDto> books = bookService.listBook();
         setAuthors(books);
         model.addAttribute("books", books);
-        return "books";
+        return "user/books";
     }
 
     @GetMapping("/more/{id}")
@@ -60,14 +62,14 @@ public class BookController {
         model.addAttribute("author", author);
         model.addAttribute("co_author", co_author);
         model.addAttribute("quantity",quantity);
-        return "description-of-book";
+        return "user/description-of-book";
     }
     @RequestMapping("/search")
     public String getBooksByTitle(String keyword, Model model){
         List<BookDto> books = bookService.findBookByTitle(keyword);
         setAuthors(books);
         model.addAttribute("books", books);
-        return "books";
+        return "user/books";
     }
     public List<BookDto> setAuthors(List<BookDto> books){
         for (BookDto book : books) {

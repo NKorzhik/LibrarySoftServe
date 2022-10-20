@@ -16,10 +16,10 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
-        AuthorDao authorDao = new AuthorDaoImpl();
-        BookDao bookDao = new BookDaoImpl();
-        QuantityDao quantityDao = new QuantityDaoImpl();
-        BookService service = new BookService(bookDao, quantityDao);
+//        AuthorDao authorDao = new AuthorDaoImpl();
+//        BookDao bookDao = new BookDaoImpl();
+//        QuantityDao quantityDao = new QuantityDaoImpl();
+//        BookService service = new BookService(bookDao, quantityDao);
 
 //        Book book = service.getBook(1);
 
