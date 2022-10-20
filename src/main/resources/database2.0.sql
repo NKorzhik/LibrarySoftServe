@@ -18,7 +18,7 @@ create table if not exists user_account
 create table if not exists author
 (
     id      bigserial NOT NULL,
-    name    varchar(100) NOT NULL,
+    name    varchar(100) NOT NULL ,
     surname varchar(100) NOT NULL,
 
     CONSTRAINT PK_author_id PRIMARY KEY (id)

@@ -168,14 +168,21 @@
         <div class="col-sm-8 text-left">
             <h1>Detailed description of the book</h1>
             <p th:text="'Title of book: ' + ${book.title}"></p>
-            <p th:text="'Author: '  + ${author.getName()} + ' ' +  ${author.getSurname()}"></p>
+            <p th:text="'Author: '  + ${book.author.name} + ' ' +  ${book.author.surname}"></p>
+
+
 
 <!--            if co-author.getName and co-author.getSurname == null than we avoid this field-->
+<!--            <div th:if="${book.coAuthors.name != null}">-->
+<!--                <p th:text="'Co-author: ' + ${book.coAuthors.name} + ' ' +  ${book.coAuthors.surname}"></p>-->
+<!--            </div>-->
 
-            <p th:text="'Co-author: ' + ${co_author.getName()} + ' ' +  ${co_author.getSurname()}"></p>
+            <p th:if="${book.coAuthors != null}" th:text ="'Co-author: ' + ${book.coAuthors.name} + ' ' +  ${book.coAuthors.surname}"></p>
+
             <p th:text="'Description of book: ' + ${book.description}"></p>
             <p th:text="'Genre: ' + ${book.genre}"></p>
             <p th:text="'ISBN of book: ' +  ${book.ISBN}"></p>
+
 
 <!--            if quantity where status FREE > 0 -> Free else NotFree-->
             <p th:text="'In stock: ' + ${quantity}"></p>

@@ -16,11 +16,19 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
-//        AuthorDao authorDao = new AuthorDaoImpl();
-//        BookDao bookDao = new BookDaoImpl();
-//        QuantityDao quantityDao = new QuantityDaoImpl();
-//        BookService service = new BookService(bookDao, quantityDao);
+        AuthorDao authorDao = new AuthorDaoImpl();
+        BookDao bookDao = new BookDaoImpl();
+        QuantityDao quantityDao = new QuantityDaoImpl();
+        BookService service = new BookService(bookDao, authorDao, quantityDao);
 
+
+
+//
+//        List<Book> list = bookDao.findBookByAuthor(3);
+//
+//        for (Book b : list) {
+//            System.out.println(b.getTitle());
+//        }
 //        Book book = service.getBook(1);
 
 //        List<Book> list = bookDao.findBookByTitle("Pride");
@@ -29,30 +37,30 @@ public class Main {
 //            System.out.println(b.getTitle());
 //        }
 
-        /*Author author = new Author();
-        author.setName("nikita2");
-        author.setSurname("korzh2");*/
-
-        //CREATE BOOK
-
-
-        /*Author author = new Author();
-        author.setName("Jane");
-        author.setSurname("Austen");
-        authorDao.addAuthor(author);
-
-        Author coAuthor = new Author();
-        coAuthor.setName("Man2");
-        coAuthor.setSurname("Manovich2");
-        authorDao.addAuthor(coAuthor);*/
+//        Author author2 = new Author();
+//        author2.setName("nikita2");
+//        author2.setSurname("korzh2");
+//        authorDao.addAuthor(author2);
+//        //CREATE BOOK
+//
+//
+//        Author author = new Author();
+//        author.setName("Jane");
+//        author.setSurname("Austen");
+//        authorDao.addAuthor(author);
+//
+//        Author coAuthor = new Author();
+//        coAuthor.setName("Man2");
+//        coAuthor.setSurname("Manovich2");
+//        authorDao.addAuthor(coAuthor);
 ////
 //        Book book = new Book();
-//        book.setTitle("Pride");
-//        book.setDescription("Pride and Prejudice is an 1813 novel of manners by Jane Austen.");
+//        book.setTitle("Java4");
+//        book.setDescription("The best language x4");
 //        book.setISBN("4114567894445");
 //        book.setGenre(Genre.NOVEL);
-//        book.setAuthor(authorDao.getAuthor(2));
-//        book.setCoAuthors(authorDao.getAuthor(1));
+//        book.setAuthor(authorDao.getAuthor(3));
+//        //book.setCoAuthors(authorDao.getAuthor(3));
 //        bookDao.addBook(book);
 
 
@@ -64,12 +72,12 @@ public class Main {
 
 
 
-//        List<Book> lis  = bookService.listBook();
+        List<Book> lis  = bookDao.listBook();
 //
-//        for (Book b : lis) {
-//            //System.out.println(authorDao.getAuthor(b.getAuthor().getId()).getName());
-//            System.out.println(b.getCoAuthors().getId());
-//        }
+        for (Book b : lis) {
+            //System.out.println(authorDao.getAuthor(b.getAuthor().getId()).getName());
+            System.out.println(b.getId() + b.getAuthor().getName() + " " + b.getCoAuthors().getName());
+        }
 //        //CREATE QUANTITY
           //quantityDao.addQuantity(book, 5);
 //        quantityDao.deleteOneQuantity(9);
