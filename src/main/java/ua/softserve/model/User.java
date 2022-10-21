@@ -3,6 +3,7 @@ package ua.softserve.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import ua.softserve.model.enums.Role;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -18,6 +19,7 @@ public class User extends BaseEntity<Long>{
     private String surname;
     private String email;
     private String password;
+    private Role role;
     private LocalDate birthday;
     @Column(name = "registration_date")
     private LocalDate registrationDate;

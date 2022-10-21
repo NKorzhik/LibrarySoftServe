@@ -92,9 +92,9 @@ public class BookService {
     public BookReadUpdateDto getBook(long id){
         return Optional.of(bookDao.getBook(id))
                 .map(BookReadUpdateMapper::toDto)
-                .get();
+                .orElseThrow();
     }
-
+    
     public void addQuantity(Book book, int count){
         quantityDao.addQuantity(book, count);
     }

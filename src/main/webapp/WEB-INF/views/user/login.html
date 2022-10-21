@@ -169,18 +169,17 @@
 
             <h1> Print your credentials</h1>
 
-            <form>
+            <form th:method="POST" th:action="@{/post/add}" th:object="${user}">
                 <!-- Email input -->
                 <div class="form-outline mb-4">
-                    <input type="email" id="form2Example1" class="form-control" />
-                    <label class="form-label" for="form2Example1">Email address</label>
+                    <input type="text" th:field="*{email}" id="email"/>
+                    <label class="form-label" for="email">Email address</label>
                 </div>
-
-                <!-- Password input -->
                 <div class="form-outline mb-4">
-                    <input type="password" id="form2Example2" class="form-control" />
-                    <label class="form-label" for="form2Example2">Password</label>
+                    <input type="text" th:field="*{password}" id="password"/>
+                    <label class="form-label" for="password">Password</label>
                 </div>
+            </form>
 
                 <!-- 2 column grid layout for inline styling -->
                 <div class="row mb-4">

@@ -201,7 +201,6 @@
         </div>
         <button type="submit" class="btn btn-default">Add book</button>
       </form>
-
       <!--            <h3>Test</h3>-->
       <!--            <p>Lorem ipsum...</p>-->
     </div>
@@ -223,50 +222,3 @@
 </body>
 </html>
 
-
-
-
-<!--
-<!DOCTYPE html>
-<html lang="en" , xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-</head>
-<body>
-
-<form th:method="POST" th:action="@{/book}" th:object="${book}">
-  <div>
-    <label for="title">Title</label>
-    <input type="text" th:field="*{title}" id="title"/>
-  </div>
-  <div>
-    <label for="author">Author</label>
-    <input type="text" th:field="*{author}" id="author"/>
-  </div>
-  <div>
-    <label for="author">Co-Author</label>
-    <input type="text" th:field="*{coAuthors}" id="coAuthors"/>
-  </div>
-  <div>
-    <label for="genre">Genre</label>
-    <input type="text" th:field="*{genre}" id="genre"/>
-  </div>
-  <div>
-    <label for="isbn">ISBN</label>
-    <input type="text" th:field="*{ISBN}" id="isbn"/>
-  </div>
-  <div>
-    <label for="description">Description</label>
-    <input type="text" th:field="*{description}" id="description"/>
-  </div>
-  <button type="submit" class="btn btn-default">Add book</button>
-</form>
-
-</body>
-</html>-->
