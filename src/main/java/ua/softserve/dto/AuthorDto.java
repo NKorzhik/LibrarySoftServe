@@ -7,7 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AuthorCreateDto {
+public class AuthorDto {
     private String name;
     private String surname;
 }

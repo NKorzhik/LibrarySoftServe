@@ -167,8 +167,8 @@
         </div>
         <div class="col-sm-8 text-left">
             <h1>Detailed description of the book</h1>
-            <p th:text="'Title of book: ' + ${book.title}"></p>
-            <p th:text="'Author: '  + ${book.author.name} + ' ' +  ${book.author.surname}"></p>
+            <p th:text="'Title of book: ' + ${bookReadDto.title}"></p>
+            <p th:text="'Author: '  + ${bookReadDto.authorDto.name} + ' ' +  ${bookReadDto.authorDto.surname}"></p>
 
 
 
@@ -177,17 +177,20 @@
 <!--                <p th:text="'Co-author: ' + ${book.coAuthors.name} + ' ' +  ${book.coAuthors.surname}"></p>-->
 <!--            </div>-->
 
-            <p th:if="${book.coAuthors != null}" th:text ="'Co-author: ' + ${book.coAuthors.name} + ' ' +  ${book.coAuthors.surname}"></p>
+            <p th:if="${bookReadDto.coAuthorDto != null}" th:text ="'Co-author: ' + ${bookReadDto.coAuthorDto.name} + ' ' +  ${bookReadDto.coAuthorDto.surname}"></p>
 
-            <p th:text="'Description of book: ' + ${book.description}"></p>
-            <p th:text="'Genre: ' + ${book.genre}"></p>
-            <p th:text="'ISBN of book: ' +  ${book.ISBN}"></p>
+            <p th:text="'Description of book: ' + ${bookReadDto.description}"></p>
+            <p th:text="'Genre: ' + ${bookReadDto.genre}"></p>
+            <p th:text="'ISBN of book: ' +  ${bookReadDto.ISBN}"></p>
 
 
 <!--            if quantity where status FREE > 0 -> Free else NotFree-->
             <p th:text="'In stock: ' + ${quantity}"></p>
-            <form th:method="DELETE" th:action="@{/delete/{id}(id=${book.id})}">
+            <form th:method="DELETE" th:action="@{/delete/copy/{id}(id=${bookReadDto.id})}">
                 <button type="submit" class="btn btn-default">Delete one copy</button>
+            </form>
+            <form th:method="DELETE" th:action="@{/delete/{id}(id=${bookReadDto.id})}">
+                <button type="submit" class="btn btn-default">Delete book</button>
             </form>
 
             <!--            <h3>Test</h3>-->

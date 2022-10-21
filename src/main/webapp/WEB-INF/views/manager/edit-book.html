@@ -166,8 +166,7 @@
       <!--            <p><a href="#">Link</a></p>-->
     </div>
     <div class="col-sm-8 text-left">
-      <h1>List of Book</h1>
-      <form th:method="POST" th:action="@{/post/add}" th:object="${bookCreateDto}">
+      <form th:method="PATCH" th:action="@{/{id}(id=${bookReadDto.getId()})}" th:object="${bookReadDto}">
         <label for="title">Title</label>
         <div>
           <input type="text" th:field="*{title}" id="title"/>
@@ -199,10 +198,6 @@
         <label for="description">Description</label>
         <div>
           <input type="text" th:field="*{description}" id="description"/>
-        </div>
-        <label for="quantity">Quantity</label>
-        <div>
-          <input type="text" th:field="*{quantity}" id="quantity"/>
         </div>
         <button type="submit" class="btn btn-default">Add book</button>
       </form>

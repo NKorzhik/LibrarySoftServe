@@ -1,35 +1,36 @@
 package ua.softserve.dto;
 
 import lombok.*;
-import ua.softserve.model.Author;
-import ua.softserve.model.HistoryOfRequest;
-import ua.softserve.model.Quantity;
 import ua.softserve.model.enums.Genre;
 
-import java.util.List;
 import java.util.Objects;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BookDto {
+@Builder
+public class BookReadUpdateDto {
 
     private long id;
     private String title;
     private Genre genre;
     private String description;
     private String ISBN;
-    private Author author;
-    private Author coAuthors;
-    private List<Quantity> quantities;
-    private List<HistoryOfRequest> requests;
+    private AuthorDto authorDto;
+    private AuthorDto coAuthorDto;
+
+    //private List<Quantity> quantities; //закоментировано т.к в методе getMoreInfoAboutBook мы используем метод
+    //getCountOfQuantityByBookId
+
+    //private int quantities;
+    //private List<HistoryOfRequest> requests;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        BookDto bookDto = (BookDto) o;
+        BookReadUpdateDto bookDto = (BookReadUpdateDto) o;
         return title.equals(bookDto.title) && ISBN.equals(bookDto.ISBN);
     }
     @Override

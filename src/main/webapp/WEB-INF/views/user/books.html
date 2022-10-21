@@ -195,9 +195,9 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="book : ${books}">
+                <tr th:each="book : ${booksReadDto}">
                     <td th:text="${book.title}"></td>
-                    <td th:text="${book.author.getName()} + ' ' + ${book.author.getSurname()}"></td>
+                    <td th:text="${book.authorDto.name} + ' ' + ${book.authorDto.surname}"></td>
                     <td th:text="${book.genre}"></td>
                     <td><a th:href="@{/more/{id}(id=${book.id})}" class="btn btn-primary">More</a></td>
                     </tr>

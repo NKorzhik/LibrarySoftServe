@@ -1,19 +1,19 @@
 package ua.softserve.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import ua.softserve.model.enums.Genre;
 
 import java.util.List;
+import java.util.Optional;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "book")
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Book extends BaseEntity<Long> {
 
     @Column(name = "title")
@@ -35,7 +35,7 @@ public class Book extends BaseEntity<Long> {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "co_author_id")
-    private Author coAuthors;
+    private Author coAuthor;
 
     @OneToMany(mappedBy = "bookId", cascade = {CascadeType.MERGE, CascadeType.REMOVE})
     @ToString.Exclude

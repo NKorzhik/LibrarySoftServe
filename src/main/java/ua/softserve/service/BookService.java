@@ -5,15 +5,14 @@ import org.springframework.stereotype.Service;
 import ua.softserve.dao.AuthorDao;
 import ua.softserve.dao.BookDao;
 import ua.softserve.dao.QuantityDao;
-import ua.softserve.dto.BookDto;
+import ua.softserve.dto.BookReadUpdateDto;
 import ua.softserve.dto.BookCreateDto;
-import ua.softserve.mapper.AuthorCreateMapper;
-import ua.softserve.mapper.BookMapper;
+import ua.softserve.mapper.AuthorMapper;
+import ua.softserve.mapper.BookReadUpdateMapper;
 import ua.softserve.mapper.BookCreateMapper;
 import ua.softserve.model.Author;
 import ua.softserve.model.Book;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -41,7 +40,7 @@ public class BookService {
         if (author.isPresent()) {
             book.setAuthor(author.get());
         } else {
-            book.setAuthor(authorDao.addAuthor(AuthorCreateMapper
+            book.setAuthor(authorDao.addAuthor(AuthorMapper
                     .mapToModel(bookDto.getAuthorDto())));
             bookDao.addBook(book);
         }
@@ -61,13 +60,13 @@ public class BookService {
         if (mainAuthor.isPresent()) {
             book.setAuthor(mainAuthor.get());
         } else {
-            book.setAuthor(authorDao.addAuthor(AuthorCreateMapper
+            book.setAuthor(authorDao.addAuthor(AuthorMapper
                     .mapToModel(bookDto.getAuthorDto())));
         }
         if (coAuthor.isPresent()) {
-            book.setCoAuthors(coAuthor.get());
+            book.setCoAuthor(coAuthor.get());
         } else {
-            book.setCoAuthors(authorDao.addAuthor(AuthorCreateMapper
+            book.setCoAuthor(authorDao.addAuthor(AuthorMapper
                     .mapToModel(bookDto.getCoAuthorDto())));
         }
         bookDao.addBook(book);
@@ -78,20 +77,22 @@ public class BookService {
         bookDao.deleteBook(id);
     }
 
-    public List<BookDto> listBook() {
+    public List<BookReadUpdateDto> listBook() {
         return bookDao.listBook().stream()
-                .map(BookMapper::toDto)
+                .map(BookReadUpdateMapper::toDto)
                 .collect(Collectors.toList());
     }
 
-    public List<BookDto> findBookByTitle(String title){
+    public List<BookReadUpdateDto> findBookByTitle(String title){
         return bookDao.findBookByTitle(title).stream()
-                .map(BookMapper::toDto)
+                .map(BookReadUpdateMapper::toDto)
                 .collect(Collectors.toList());
     }
 
-    public Book getBook(long id){
-        return bookDao.getBook(id);
+    public BookReadUpdateDto getBook(long id){
+        return Optional.of(bookDao.getBook(id))
+                .map(BookReadUpdateMapper::toDto)
+                .get();
     }
 
     public void addQuantity(Book book, int count){

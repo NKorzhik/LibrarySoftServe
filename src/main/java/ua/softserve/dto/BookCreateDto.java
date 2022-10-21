@@ -1,9 +1,6 @@
 package ua.softserve.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import ua.softserve.model.enums.Genre;
 
 import java.util.Objects;
@@ -12,13 +9,14 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class BookCreateDto {
     private String title;
     private Genre genre;
     private String description;
     private String ISBN;
-    private AuthorCreateDto authorDto;
-    private AuthorCreateDto coAuthorDto;
+    private AuthorDto authorDto;
+    private AuthorDto coAuthorDto;
     private int quantity;
 
     @Override

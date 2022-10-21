@@ -44,7 +44,7 @@ public class BookDaoImpl implements BookDao {
         List<Book> bookList;
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            bookList = session.createQuery("select b from Book b LEFT JOIN FETCH b.coAuthors LEFT JOIN FETCH " +
+            bookList = session.createQuery("select b from Book b LEFT JOIN FETCH b.coAuthor LEFT JOIN FETCH " +
                     "b.author order by b.id", Book.class).getResultList();
 
             session.getTransaction().commit();
@@ -57,7 +57,7 @@ public class BookDaoImpl implements BookDao {
         Book book;
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            book = session.createQuery("select b from Book b LEFT JOIN FETCH b.coAuthors LEFT JOIN FETCH " +
+            book = session.createQuery("select b from Book b LEFT JOIN FETCH b.coAuthor LEFT JOIN FETCH " +
                             "b.author where b.id=:id",Book.class)
                     .setParameter("id", id).getSingleResult();
             session.getTransaction().commit();
@@ -70,7 +70,7 @@ public class BookDaoImpl implements BookDao {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             List<Book> books = session.createQuery("from Book b LEFT JOIN FETCH b.author LEFT JOIN FETCH " +
-                            "b.coAuthors WHERE b.title like :title or b.author.name like :title or b.author.surname like :title or b.coAuthors.name like :title or b.coAuthors.surname like: title", Book.class)
+                            "b.coAuthor WHERE b.title like :title or b.author.name like :title or b.author.surname like :title or b.coAuthor.name like :title or b.coAuthor.surname like: title", Book.class)
                     .setParameter("title", "%" + title + "%")
                     .getResultList();
             session.getTransaction().commit();
