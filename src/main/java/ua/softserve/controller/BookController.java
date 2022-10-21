@@ -6,11 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import ua.softserve.dto.BookDto;
 import ua.softserve.dto.BookCreateDto;
-import ua.softserve.model.Author;
+import ua.softserve.dto.BookDto;
 import ua.softserve.model.Book;
-import ua.softserve.model.Quantity;
 import ua.softserve.service.AuthorService;
 import ua.softserve.service.BookService;
 import ua.softserve.service.QuantityService;
@@ -77,15 +75,4 @@ public class BookController {
         model.addAttribute("books", books);
         return "user/books";
     }
-
-
-    /*public List<BookDto> setAuthors(List<BookDto> books){
-        for (BookDto book : books) {
-            Author author = authorService.getAuthor(book.getAuthor().getId());
-            Author coAuthor = authorService.getAuthor(book.getCoAuthors().getId());
-            book.setAuthor(author);
-            book.setCoAuthors(coAuthor);
-        }
-        return books;
-    }*/
 }

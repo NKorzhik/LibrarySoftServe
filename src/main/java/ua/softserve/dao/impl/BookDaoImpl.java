@@ -60,7 +60,7 @@ public class BookDaoImpl implements BookDao {
             session.beginTransaction();
             book = session.createQuery("select b from Book b LEFT JOIN FETCH b.coAuthors LEFT JOIN FETCH " +
                             "b.author where b.id=:id",Book.class)
-                            .setParameter("id", id).getSingleResult();
+                    .setParameter("id", id).getSingleResult();
             session.getTransaction().commit();
         }
         return book;
@@ -70,29 +70,12 @@ public class BookDaoImpl implements BookDao {
     public List<Book> findBookByTitle(String title) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            //СОЗДАТЬ Query и присвоить ему параметр setParameter
-            //СДЕЛАТЬ SELECT с параметрами title, author, genre
             List<Book> books = session.createQuery("from Book b LEFT JOIN FETCH b.author LEFT JOIN FETCH " +
-                            "b.coAuthors author WHERE b.title like :title", Book.class)
-                    .setParameter("title", "%" + title + "%").getResultList();
+                            "b.coAuthors WHERE b.title like :title or b.author.name like :title or b.author.surname like :title or b.coAuthors.name like :title or b.coAuthors.surname like: title", Book.class)
+                    .setParameter("title", "%" + title + "%")
+                    .getResultList();
             session.getTransaction().commit();
             return books;
         }
     }
-
-    @Override
-    public List<Book> findBookByAuthor(long id) {
-        try (Session session = sessionFactory.openSession()) {
-            session.beginTransaction();
-            //СОЗДАТЬ Query и присвоить ему параметр setParameter
-            //СДЕЛАТЬ SELECT с параметрами title, author, genre
-            List<Book> books = session.createQuery("from Book b WHERE b.author.id=:id or b.coAuthors.id =:id", Book.class)
-                    .setParameter("id", id).getResultList();
-            session.getTransaction().commit();
-            return books;
-        }
-
-    }
-
-
 }

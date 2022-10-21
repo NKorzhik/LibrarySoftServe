@@ -171,11 +171,19 @@
 
             <form th:action="@{/search}" method="get">
                 <label>
-                    <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find book by title" size="50" >
+                    <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find book " size="50" >
                 </label>
                 <button type="submit" class="btn btn-info" >Search</button>
                 <button type="submit" class="btn btn-info" >Reset</button>
             </form>
+
+<!--            <form th:action="@{/search2}" method="get">-->
+<!--                <label>-->
+<!--                    <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find book by author name" size="50" >-->
+<!--                </label>-->
+<!--                <button type="submit" class="btn btn-info" >Search</button>-->
+<!--                <button type="submit" class="btn btn-info" >Reset</button>-->
+<!--            </form>-->
 
 
             <table class = "table book-list">
