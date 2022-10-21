@@ -1,14 +1,11 @@
 package ua.softserve.dao.impl;
 
-import jakarta.persistence.Query;
-import jakarta.persistence.criteria.CriteriaBuilder;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import ua.softserve.config.HibernateConfig;
-import ua.softserve.dao.AuthorDao;
 import ua.softserve.dao.BookDao;
-import ua.softserve.model.Author;
 import ua.softserve.model.Book;
 
 import java.util.List;
@@ -17,7 +14,6 @@ import java.util.List;
 //@Transactional(readOnly = true)
 public class BookDaoImpl implements BookDao {
     private final SessionFactory sessionFactory;
-
 
     public BookDaoImpl() {
         this.sessionFactory = HibernateConfig.getSessionFactory();
@@ -77,7 +73,7 @@ public class BookDaoImpl implements BookDao {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             //book = session.get(Book.class, id);
-            book = session.createQuery("select b from Book b LEFT JOIN FETCH b.coAuthors LEFT JOIN FETCH b.author where b.id=:id",Book.class).
+            book = session.createQuery("select b from Book b LEFT JOIN FETCH b.coAuthors LEFT JOIN FETCH b.author where b.id=:id", Book.class).
                     setParameter("id", id).getSingleResult();
             session.getTransaction().commit();
         }
@@ -88,24 +84,32 @@ public class BookDaoImpl implements BookDao {
     public List<Book> findBookByTitle(String title) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            List<Book> books = session.createQuery("from Book b LEFT JOIN FETCH b.author LEFT JOIN FETCH b.coAuthors author WHERE b.title like :title", Book.class)
-                    .setParameter("title", "%" + title + "%").getResultList();
+            List<Book> books = session.createQuery("from Book b LEFT JOIN FETCH b.author LEFT JOIN FETCH " +
+                            "b.coAuthors WHERE b.title like :title or b.author.name like :title or b.author.surname like :title or b.coAuthors.name like :title or b.coAuthors.surname like: title", Book.class)
+                    .setParameter("title", "%" + title + "%")
+                    .getResultList();
             session.getTransaction().commit();
             return books;
         }
     }
 
     @Override
-    public List<Book> findBookByAuthor(long id) {
+    public List<Book> findBookByAuthor(String name) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            List<Book> books = session.createQuery("from Book b WHERE b.author.id=:id or b.coAuthors.id =:id", Book.class)
-                    .setParameter("id", id).getResultList();
+            List<Book> books =
+                    session.createQuery(
+                                    "from Book b LEFT JOIN FETCH b.author LEFT JOIN FETCH b.coAuthors" +
+                                            " WHERE b.author.name=:name or b.coAuthors.name =:name", Book.class)
+                            .setParameter("name", name).getResultList();
             session.getTransaction().commit();
             return books;
         }
 
     }
+
+
+
 
 
 }

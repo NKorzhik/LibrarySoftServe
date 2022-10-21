@@ -24,18 +24,18 @@ public class Main {
 
 
 //
-//        List<Book> list = bookDao.findBookByAuthor(3);
+//        List<Book> list = bookDao.findBookByAuthor("1");
 //
 //        for (Book b : list) {
 //            System.out.println(b.getTitle());
 //        }
 //        Book book = service.getBook(1);
 
-//        List<Book> list = bookDao.findBookByTitle("Pride");
-//
-//        for (Book b : list) {
-//            System.out.println(b.getTitle());
-//        }
+        List<Book> list = bookDao.findBookByTitle("nikita2");
+
+        for (Book b : list) {
+            System.out.println(b.getTitle());
+        }
 
 //        Author author2 = new Author();
 //        author2.setName("nikita2");
@@ -72,12 +72,12 @@ public class Main {
 
 
 
-        List<Book> lis  = bookDao.listBook();
-//
-        for (Book b : lis) {
-            //System.out.println(authorDao.getAuthor(b.getAuthor().getId()).getName());
-            System.out.println(b.getId() + b.getAuthor().getName() + " " + b.getCoAuthors().getName());
-        }
+//        List<Book> lis  = bookDao.listBook();
+////
+//        for (Book b : lis) {
+//            //System.out.println(authorDao.getAuthor(b.getAuthor().getId()).getName());
+//            System.out.println(b.getId() + b.getAuthor().getName() + " " + b.getCoAuthors().getName());
+//        }
 //        //CREATE QUANTITY
           //quantityDao.addQuantity(book, 5);
 //        quantityDao.deleteOneQuantity(9);

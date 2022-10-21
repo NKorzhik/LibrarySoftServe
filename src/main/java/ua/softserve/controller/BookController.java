@@ -22,7 +22,6 @@ public class BookController {
     private final BookService bookService;
     private final AuthorService authorService;
 
-
     @Autowired
     public BookController(BookService bookService, AuthorService authorService) {
         this.bookService = bookService;
@@ -47,7 +46,6 @@ public class BookController {
     @GetMapping("/list")
     public String getBook(Model model) {
         List<BookDto> books = bookService.listBook();
-        //setAuthors(books);
         model.addAttribute("books", books);
         return "user/books";
     }
@@ -55,31 +53,23 @@ public class BookController {
     @GetMapping("/more/{id}")
     public String getMoreInfoAboutBook(@PathVariable(value = "id") long id, Model model){
         Book book = bookService.getBook(id);
-//        Author author =  authorService.getAuthor(book.getAuthor().getId());
-//        Author co_author = authorService.getAuthor(book.getCoAuthors().getId());
         long quantity = bookService.getCountOfQuantityByBookId(book.getId());
         model.addAttribute("book", book);
-//        model.addAttribute("author", author);
-//        model.addAttribute("co_author", co_author);
         model.addAttribute("quantity",quantity);
         return "user/description-of-book";
     }
     @RequestMapping("/search")
     public String getBooksByTitle(String keyword, Model model){
         List<BookDto> books = bookService.findBookByTitle(keyword);
-//        setAuthors(books);
         model.addAttribute("books", books);
         return "user/books";
     }
 
+//    @RequestMapping("/search2")
+//    public String getBooksByAuthor(String keyword, Model model){
+//        List<BookDto> books = bookService.findBookByAuthor(keyword);
+//        model.addAttribute("books", books);
+//        return "user/books";
+//    }
 
-    public List<BookDto> setAuthors(List<BookDto> books){
-        for (BookDto book : books) {
-            Author author = authorService.getAuthor(book.getAuthor().getId());
-            Author coAuthor = authorService.getAuthor(book.getCoAuthors().getId());
-            book.setAuthor(author);
-            book.setCoAuthors(coAuthor);
-        }
-        return books;
-    }
 }

@@ -140,6 +140,11 @@ public class BookService {
                 .collect(Collectors.toList());
     }
 
+    public List<BookDto> findBookByAuthor(String name){
+        return bookDao.findBookByAuthor(name).stream()
+                .map(BookMapper::toDto)
+                .collect(Collectors.toList());
+    }
 
     public Book getBook(long id){
         return bookDao.getBook(id);
