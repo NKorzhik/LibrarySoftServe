@@ -53,7 +53,6 @@ public class BookController {
         model.addAttribute("books", books);
         return "user/books";
     }
-
     @GetMapping("/more/{id}")
     public String getMoreInfoAboutBook(@PathVariable("id") long id, Model model){
         Book book = bookService.getBook(id);
@@ -63,13 +62,12 @@ public class BookController {
         model.addAttribute("quantity",quantity);
         return "user/description-of-book";
     }
-
     @DeleteMapping("/delete/{id}")
     public String deleteOneCopyById(@PathVariable("id") long id) {
         quantityService.deleteOneCopyById(id);
         return "redirect:/more/{id}";
     }
-    @RequestMapping("/search")
+    @GetMapping("/search")
     public String getBooksByTitle(String keyword, Model model){
         List<BookDto> books = bookService.findBookByTitle(keyword);
         model.addAttribute("books", books);

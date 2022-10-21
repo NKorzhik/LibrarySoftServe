@@ -28,7 +28,6 @@ public class BookDaoImpl implements BookDao {
             e.printStackTrace();
         }
     }
-
     @Override
     public void deleteBook(long id) {
         try (Session session = sessionFactory.openSession()) {
