@@ -30,4 +30,14 @@ public class UserDaoImpl implements UserDao {
             return Optional.of(user);
         }
     }
+
+    @Override
+    public void addUser(User user) {
+        try(Session session = sessionFactory.openSession()){
+            session.beginTransaction();
+            session.persist(user);
+            session.getTransaction().commit();
+        }
+    }
+
 }

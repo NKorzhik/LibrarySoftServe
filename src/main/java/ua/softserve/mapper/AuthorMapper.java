@@ -4,7 +4,6 @@ import ua.softserve.dto.AuthorDto;
 import ua.softserve.model.Author;
 
 import java.util.Collections;
-import java.util.Optional;
 
 public class AuthorMapper {
 
