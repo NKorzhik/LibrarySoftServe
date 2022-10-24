@@ -17,16 +17,12 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
+
     @GetMapping("/login")
-    public String login(Model model, UserDto userDto) {
-        model.addAttribute("user", userDto);
+    public String login() {
         return "user/login";
     }
 
-    @PostMapping("/post/login")
-    public String signing(@ModelAttribute("user") UserDto userDto) {
-        return "redirect:/list";
-    }
 
     @GetMapping("/register")
     public String newUser(UserDto userDto, Model model) {

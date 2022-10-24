@@ -30,6 +30,7 @@ public class BookController {
     }
 
     @GetMapping("/list")
+    @PreAuthorize("hasRole('ROLE_MANAGER')")
     public String getBook(Model model) {
         List<BookReadUpdateDto> books = bookService.listBook();
         model.addAttribute("booksReadDto", books);
