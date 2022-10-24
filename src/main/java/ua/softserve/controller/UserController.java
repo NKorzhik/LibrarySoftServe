@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ua.softserve.dto.UserDto;
-import ua.softserve.model.User;
 import ua.softserve.service.UserService;
 
 @Controller
@@ -18,20 +17,15 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
-
-
-
-
-
     @GetMapping("/login")
-    public String login(Model model,  UserDto userDto) {
+    public String login(Model model, UserDto userDto) {
         model.addAttribute("user", userDto);
         return "user/login";
     }
 
     @PostMapping("/post/login")
     public String signing(@ModelAttribute("user") UserDto userDto) {
-        return "redirect:/get/add";
+        return "redirect:/list";
     }
 
     @GetMapping("/register")
@@ -42,10 +36,7 @@ public class UserController {
 
     @PostMapping("/post/register")
     public String addUser(@ModelAttribute("userDto") UserDto userDto) {
-
-
-//            userDto.setBirthday(LocalDate.of(2000,9,12));
-            userService.addUser(userDto);
+        userService.addUser(userDto);
         return "redirect:/list";
     }
 

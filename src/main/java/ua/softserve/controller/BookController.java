@@ -51,7 +51,7 @@ public class BookController {
         return "user/books";
     }
     @GetMapping("/get/add")
-    @PreAuthorize("hasRole('ROLE_MANAGER')")
+    //@PreAuthorize("hasRole('ROLE_MANAGER')")
     public String newBook(@ModelAttribute("bookCreateDto") BookCreateDto bookDto) {
         return "manager/add-book";
     }
