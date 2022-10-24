@@ -42,7 +42,15 @@ public class WebSecurityConfig {
                 .and()
                  .authenticationProvider(authenticationProvider())
                 .httpBasic()
-                .and().build();
+                .and()
+                 .formLogin()
+                 .loginPage("/login")
+                 .defaultSuccessUrl("/book")
+                 .failureUrl("/login?error")
+                 .permitAll()
+                 .and()
+                 .logout()
+                 .permitAll().and().build();
     }
 
     @Bean
