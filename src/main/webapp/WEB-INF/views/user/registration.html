@@ -187,7 +187,7 @@
             <!--            <p><a href="#">Link</a></p>-->
         </div>
         <div class="col-sm-8 text-left">
-                <form th:method="POST" class="form-signing" th:object="${userDto}" th:action="@{/post/register}">
+                <form th:method="POST" class="form-signing" th:object="${userCreateDto}" th:action="@{/post/register}">
                     <h2 class="form-signing-heading">Create your account</h2>
                     <div class="form-group">
                         <input type="text" th:field="*{name}" class="form-control" placeholder="Name">

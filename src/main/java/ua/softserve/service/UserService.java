@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ua.softserve.dao.UserDao;
-import ua.softserve.dto.UserDto;
-import ua.softserve.mapper.UserMapper;
+import ua.softserve.dto.UserCreateDto;
+import ua.softserve.mapper.UserCreateMapper;
 import ua.softserve.model.User;
 import ua.softserve.model.enums.Role;
 
@@ -23,11 +23,11 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public void addUser(UserDto userDto){
-        userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        userDto.setRegistrationDate(LocalDate.now());
-        userDto.setRole(Role.READER);
-        User user = UserMapper.mapToModel(userDto);
+    public void addUser(UserCreateDto userCreateDto){
+        userCreateDto.setPassword(passwordEncoder.encode(userCreateDto.getPassword()));
+        userCreateDto.setRegistrationDate(LocalDate.now());
+        userCreateDto.setRole(Role.READER);
+        User user = UserCreateMapper.mapToModel(userCreateDto);
         userDao.addUser(user);
     }
 

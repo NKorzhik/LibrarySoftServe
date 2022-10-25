@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ua.softserve.dto.UserDto;
+import ua.softserve.dto.UserCreateDto;
 import ua.softserve.service.UserService;
 
 @Controller
@@ -18,25 +18,25 @@ public class UserController {
         this.userService = userService;
     }
     @GetMapping("/login")
-    public String login(Model model, UserDto userDto) {
-        model.addAttribute("user", userDto);
+    public String login(Model model, UserCreateDto userCreateDto) {
+        //model.addAttribute("user", userDto);
         return "user/login";
     }
 
-    @PostMapping("/post/login")
+    /*@PostMapping("/post/login")
     public String signing(@ModelAttribute("user") UserDto userDto) {
         return "redirect:/list";
-    }
+    }*/
 
     @GetMapping("/register")
-    public String newUser(UserDto userDto, Model model) {
-        model.addAttribute("userDto", userDto);
+    public String newUser(UserCreateDto userCreateDto, Model model) {
+        model.addAttribute("userCreateDto", userCreateDto);
         return "user/registration";
     }
 
     @PostMapping("/post/register")
-    public String addUser(@ModelAttribute("userDto") UserDto userDto) {
-        userService.addUser(userDto);
+    public String addUser(@ModelAttribute("userCreateDto") UserCreateDto userCreateDto) {
+        userService.addUser(userCreateDto);
         return "redirect:/list";
     }
 

@@ -1,11 +1,11 @@
 package ua.softserve.mapper;
 
-import ua.softserve.dto.UserDto;
+import ua.softserve.dto.UserCreateDto;
 import ua.softserve.model.User;
 
-public class UserMapper {
+public class UserCreateMapper {
 
-    public static User mapToModel(UserDto userDto){
+    public static User mapToModel(UserCreateDto userDto){
         return User.builder()
                 .name(userDto.getName())
                 .surname(userDto.getSurname())
@@ -17,8 +17,8 @@ public class UserMapper {
                 .build();
     }
 
-    public static UserDto mapToDto(User user){
-        return UserDto.builder()
+    public static UserCreateDto mapToDto(User user){
+        return UserCreateDto.builder()
                 .name(user.getName())
                 .surname(user.getSurname())
                 .email(user.getEmail())

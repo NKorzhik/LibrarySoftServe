@@ -169,30 +169,19 @@
 
         <div class="col-sm-8 text-left">
 
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="text-center">Login Form</h2>
-                </div>
-                <div class="card-body">
-                    <form class = "form-signing" th:method="POST" th:action="@{/post/login}" >
-
-                       <div class="form-group mb-3">
-                            <label class="control-label"> Email</label>
-                           <input name="email" type="text" class="form-control" placeholder="Email"/>
-
-                       </div>
-                        <div class="form-group mb-3">
-                            <label class="control-label"> Password</label>
-                            <input name = "password" type="password"  class="form-control" placeholder="Enter password" />
-                        </div>
-                        <div class="form-group mb-3">
-                            <button type="submit" class="btn btn-primary" >Submit</button>
-                            <span> Not registered ?
-                                <a th:href="@{register}">Register/Signup here</a>
-                            </span>
-                        </div>
-                    </form>
-                </div>
+            <div class="container">
+                <form class="form-signing" method="post" action="/post/login">
+                    <h2 class="form-signing-heading">Login</h2>
+                    <p>
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" class="form-control" placeholder="Username" required>
+                    </p>
+                    <p>
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+                    </p>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                </form>
             </div>
         </div>
 
