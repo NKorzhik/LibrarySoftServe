@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" , xmlns:th="http://www.thymeleaf.org">
+<html lang="en" , xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <title>Bootstrap Example</title>
     <meta charset="utf-8">
@@ -172,7 +173,8 @@
                 <!--                <li><a href="#">Contact</a></li>-->
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a th:href="@{/login}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                <li sec:authorize="isAnonymous()"><a th:href="@{/login}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
         </div>
     </div>
@@ -186,66 +188,9 @@
             <!--            <p><a href="#">Link</a></p>-->
         </div>
         <div class="col-sm-8 text-left">
-            <h1 style="text-align: center;">Add Book with author</h1>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-10 mx-auto">
-                        <form th:method="POST" th:action="@{/post/add}" th:object="${bookCreateDto}">
-                            <div class="form-group row">
-                                <div class="col-sm-3">
-                                    <label for="title">Title</label>
-                                    <input type="text" th:field="*{title}" id="title"/>
-                                </div>
-                                <div class="col-sm-3">
-                                    <label for="authorName">Author:name</label>
-                                    <input type="text" th:field="*{authorDto.name}" id="authorName"/>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-3">
-                                    <label for="authorSurname">Author:surname</label>
-                                    <input type="text" th:field="*{authorDto.surname}" id="authorSurname"/>
-                                </div>
-                                <div class="col-sm-3">
-                                    <label for="coAuthorName">Co-Author:name</label>
-                                    <input type="text" th:field="*{coAuthorDto.name}" id="coAuthorName"/>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-3">
-                                    <label for="coAuthorSurname">Co-Author:surname</label>
-                                    <input type="text" th:field="*{coAuthorDto.surname}" id="coAuthorSurname"/>
-                                </div>
-                                <div class="col-sm-3">
-                                    <label for="genre">Genre</label>
-                                    <input type="text" th:field="*{genre}" id="genre"/>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-3">
-                                    <label for="description">Description</label>
-                                    <input type="text" th:field="*{description}" id="description"/>
-                                </div>
-                                <div class="col-sm-3">
-                                    <label for="quantity">Quantity</label>
-                                    <input type="text" th:field="*{quantity}" id="quantity"/>
-                                </div>
-                            </div>
+            <h1> Історія реквестів на книги для юзера зі статусом та кнопкою </h1>
 
-                            <div class="form-group row">
-                                <div class="col-sm-3">
-                                    <label for="isbn">ISBN</label>
-                                    <input type="text" th:field="*{ISBN}" id="isbn"/>
-                                </div>
-                            </div>
-                                <button type="button" class="btn btn-primary px-4 float-right">Add</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
 
-            <!--            <h3>Test</h3>-->
-            <!--            <p>Lorem ipsum...</p>-->
         </div>
         <div class="col-sm-2 sidenav">
             <!--            <div class="well">-->

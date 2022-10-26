@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" , xmlns:th="http://www.thymeleaf.org">
+<html lang="en" , xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <title>Bootstrap Example</title>
     <meta charset="utf-8">
@@ -13,14 +14,17 @@
         .table {
             border-collapse: separate;
         }
+
         .table-hover > tbody > tr:hover > td,
         .table-hover > tbody > tr:hover > th {
             background-color: #eee;
         }
+
         .table thead > tr > th {
             border-bottom: 1px solid #C2C2C2;
             padding-bottom: 0;
         }
+
         .table tbody > tr > td {
             font-size: 0.875em;
             background: #f5f5f5;
@@ -28,19 +32,23 @@
             vertical-align: middle;
             padding: 12px 8px;
         }
+
         .table tbody > tr > td:first-child,
         .table thead > tr > th:first-child {
             padding-left: 20px;
         }
+
         .table thead > tr > th span {
             border-bottom: 2px solid #C2C2C2;
             display: inline-block;
             padding: 0 5px 5px;
             font-weight: normal;
         }
+
         .table thead > tr > th > a span {
             color: #344644;
         }
+
         .table thead > tr > th > a span:after {
             content: "\f0dc";
             font-family: FontAwesome;
@@ -50,36 +58,44 @@
             margin-left: 5px;
             font-size: 0.75em;
         }
+
         .table thead > tr > th > a.asc span:after {
             content: "\f0dd";
         }
+
         .table thead > tr > th > a.desc span:after {
             content: "\f0de";
         }
+
         .table thead > tr > th > a:hover span {
             text-decoration: none;
             color: #2bb6a3;
             border-color: #2bb6a3;
         }
+
         .table.table-hover tbody > tr > td {
             -webkit-transition: background-color 0.15s ease-in-out 0s;
             transition: background-color 0.15s ease-in-out 0s;
         }
+
         .table tbody tr td .call-type {
             display: block;
             font-size: 0.75em;
             text-align: center;
         }
+
         .table tbody tr td .first-line {
             line-height: 1.5;
             font-weight: 400;
             font-size: 1.125em;
         }
+
         .table tbody tr td .first-line span {
             font-size: 0.875em;
             color: #969696;
             font-weight: 300;
         }
+
         .table tbody tr td .second-line {
             font-size: 0.875em;
             line-height: 1.2;
@@ -106,7 +122,9 @@
         }
 
         /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-        .row.content {height: 450px}
+        .row.content {
+            height: 450px
+        }
 
         /* Set gray background color and 100% height */
         .sidenav {
@@ -128,7 +146,10 @@
                 height: auto;
                 padding: 15px;
             }
-            .row.content {height:auto;}
+
+            .row.content {
+                height: auto;
+            }
         }
     </style>
 </head>
@@ -147,12 +168,17 @@
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
                 <li class="active"><a th:href="@{/list}">Home</a></li>
-<!--                <li><a href="#">About</a></li>-->
-<!--                <li><a href="#">Projects</a></li>-->
-<!--                <li><a href="#">Contact</a></li>-->
+                <li class="active" sec:authorize="hasRole('ROLE_READER')"><a th:href='@{/pageReader}'>Profile</a></li>
+                <li class="active" sec:authorize="hasRole('ROLE_MANAGER')"><a th:href='@{/pageManager}'>Profile</a></li>
+                <!--                <li><a href="#">About</a></li>-->
+                <!--                <li><a href="#">Projects</a></li>-->
+                <!--                <li><a href="#">Contact</a></li>-->
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a th:href="@{/login}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}"><span
+                        class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                <li sec:authorize="isAnonymous()"><a th:href="@{/login}"><span
+                        class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
         </div>
     </div>
@@ -161,9 +187,9 @@
 <div class="container-fluid text-center">
     <div class="row content">
         <div class="col-sm-2 sidenav">
-<!--            <p><a href="#">Link</a></p>-->
-<!--            <p><a href="#">Link</a></p>-->
-<!--            <p><a href="#">Link</a></p>-->
+            <!--            <p><a href="#">Link</a></p>-->
+            <!--            <p><a href="#">Link</a></p>-->
+            <!--            <p><a href="#">Link</a></p>-->
         </div>
         <div class="col-sm-8 text-left">
 
@@ -171,26 +197,26 @@
 
             <form th:action="@{/search}" method="get">
                 <label>
-                    <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find book " size="50" >
+                    <input type="text" name="keyword" th:value="${keyword}" placeholder="Find book " size="50">
                 </label>
-                <button type="submit" class="btn btn-info" >Search</button>
-                <button type="submit" class="btn btn-info" >Reset</button>
+                <button type="submit" class="btn btn-info">Search</button>
+                <button type="submit" class="btn btn-info">Reset</button>
             </form>
 
-<!--            <form th:action="@{/search2}" method="get">-->
-<!--                <label>-->
-<!--                    <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find book by author name" size="50" >-->
-<!--                </label>-->
-<!--                <button type="submit" class="btn btn-info" >Search</button>-->
-<!--                <button type="submit" class="btn btn-info" >Reset</button>-->
-<!--            </form>-->
+            <!--            <form th:action="@{/search2}" method="get">-->
+            <!--                <label>-->
+            <!--                    <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find book by author name" size="50" >-->
+            <!--                </label>-->
+            <!--                <button type="submit" class="btn btn-info" >Search</button>-->
+            <!--                <button type="submit" class="btn btn-info" >Reset</button>-->
+            <!--            </form>-->
 
-
-            <table class = "table book-list">
+            <table class="table book-list">
                 <thead>
                 <tr>
                     <th><span>Title</span></th>
                     <th><span>Author</span></th>
+                    <th><span>CoAuthor</span></th>
                     <th><span>Genre</span></th>
                 </tr>
                 </thead>
@@ -198,22 +224,25 @@
                 <tr th:each="book : ${booksReadDto}">
                     <td th:text="${book.title}"></td>
                     <td th:text="${book.authorDto.name} + ' ' + ${book.authorDto.surname}"></td>
+                    <td th:if="${book.coAuthorDto != null}"
+                        th:text="${book.coAuthorDto.name} + ' ' +  ${book.coAuthorDto.surname}"></td>
+                    <td th:if="${book.coAuthorDto == null}"> Missing</td>
                     <td th:text="${book.genre}"></td>
                     <td><a th:href="@{/more/{id}(id=${book.id})}" class="btn btn-primary">More</a></td>
-                    </tr>
+                </tr>
                 </tbody>
             </table>
 
-<!--            <h3>Test</h3>-->
-<!--            <p>Lorem ipsum...</p>-->
+            <!--            <h3>Test</h3>-->
+            <!--            <p>Lorem ipsum...</p>-->
         </div>
         <div class="col-sm-2 sidenav">
-<!--            <div class="well">-->
-<!--                <p>ADS</p>-->
-<!--            </div>-->
-<!--            <div class="well">-->
-<!--                <p>ADS</p>-->
-<!--            </div>-->
+            <!--            <div class="well">-->
+            <!--                <p>ADS</p>-->
+            <!--            </div>-->
+            <!--            <div class="well">-->
+            <!--                <p>ADS</p>-->
+            <!--            </div>-->
         </div>
     </div>
 </div>

@@ -1,6 +1,7 @@
 package ua.softserve.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +34,18 @@ public class UserController {
     public String addUser(@ModelAttribute("userDto") UserCreateDto userDto) {
         userService.addUser(userDto);
         return "redirect:/list";
+    }
+
+
+    @PreAuthorize("hasRole('ROLE_READER')")
+    @GetMapping("pageReader")
+    public String getProfileOfReader(){
+        return "reader/page-reader";
+    }
+    @PreAuthorize("hasRole('ROLE_MANAGER')")
+    @GetMapping("pageManager")
+    public String getProfileOfManager(){
+        return "manager/page-manager";
     }
 
 }
