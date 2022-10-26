@@ -17,8 +17,8 @@ create table if not exists user_account
 -- Table author:
 create table if not exists author
 (
-    id      bigserial NOT NULL,
-    name    varchar(100) NOT NULL ,
+    id      bigserial    NOT NULL,
+    name    varchar(100) NOT NULL,
     surname varchar(100) NOT NULL,
 
     CONSTRAINT PK_author_id PRIMARY KEY (id)
@@ -49,7 +49,7 @@ create table if not exists history_of_request
     book_id          bigint      NOT NULL,
     date_of_issue    date        NOT NULL,
     should_be_return date        NOT NULL,
-    return_date      date        NOT NULL,
+    return_date      date,
     status           varchar(64) NOT NULL,
 
     CONSTRAINT PK_history_of_request_id PRIMARY KEY (id),

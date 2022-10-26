@@ -24,7 +24,6 @@ public class User extends BaseEntity<Long>{
     @Enumerated(value = EnumType.STRING)
     private Role role;
 
-//    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthday;
 
     @Column(name = "registration_date")
