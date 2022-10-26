@@ -9,6 +9,8 @@ import ua.softserve.model.HistoryOfRequest;
 
 import java.util.List;
 
+import static ua.softserve.model.enums.Status.WAITING;
+
 @Repository
 public class RequestDaoImpl implements RequestDao {
 
@@ -53,5 +55,17 @@ public class RequestDaoImpl implements RequestDao {
             session.getTransaction().commit();
             return request;
         }
+    }
+
+    @Override
+    public List<HistoryOfRequest> getBooksWithStatusWaiting() {
+       try(Session session = sessionFactory.openSession()){
+           session.beginTransaction();
+           List<HistoryOfRequest> request =
+                   session.createQuery("select r from HistoryOfRequest r left join fetch r.bookId left join fetch r.bookId.author left join fetch r.bookId.coAuthor where r.status =: status",HistoryOfRequest.class)
+                           .setParameter("status",WAITING).getResultList();
+           session.getTransaction().commit();
+           return request;
+       }
     }
 }

@@ -44,8 +44,6 @@ public class UserController {
     }
 
 
-
-
     @PreAuthorize("hasRole('ROLE_READER')")
     @GetMapping("/returnBook")
     public String returnBook(){
@@ -58,14 +56,6 @@ public class UserController {
 //        model.addAttribute("requested", books);
 //        return "reader/page-reader";
 //    }
-
-
-    @PreAuthorize("hasRole('ROLE_MANAGER')")
-    @GetMapping("pageManager")
-    public String getProfileOfManager(){
-        return "manager/page-manager";
-    }
-
 
 
 }
