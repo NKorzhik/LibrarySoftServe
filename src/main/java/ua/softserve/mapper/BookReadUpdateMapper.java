@@ -4,7 +4,7 @@ import ua.softserve.dto.BookReadUpdateDto;
 import ua.softserve.model.Book;
 
 public class BookReadUpdateMapper {
-    public static BookReadUpdateDto toDto(Book book) {
+    public static BookReadUpdateDto mapToDto(Book book) {
         BookReadUpdateDto bookDto = BookReadUpdateDto.builder()
                 .id(book.getId())
                 .title(book.getTitle())
@@ -22,7 +22,7 @@ public class BookReadUpdateMapper {
         return bookDto;
     }
 
-    public static Book toModel(BookReadUpdateDto bookDto) {
+    public static Book mapToModel(BookReadUpdateDto bookDto) {
         return Book.builder()
                 .title(bookDto.getTitle())
                 .genre(bookDto.getGenre())
@@ -30,7 +30,7 @@ public class BookReadUpdateMapper {
                 .ISBN(bookDto.getISBN())
                 .author(AuthorMapper
                         .mapToModel(bookDto.getAuthorDto()))
-                //возможно тоже сделать проверку на null
+                //возможно тоже сделать проверку на null? но у нас есть проверка на наличие соавтора в контроллере
                 .coAuthor(AuthorMapper
                         .mapToModel(bookDto.getCoAuthorDto()))
                 //.quantities(bookDto.getQuantities())

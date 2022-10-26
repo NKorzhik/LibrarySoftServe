@@ -1,10 +1,7 @@
 package ua.softserve.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import ua.softserve.model.enums.Status;
 
 import java.time.LocalDate;
@@ -14,6 +11,7 @@ import java.time.LocalDate;
 @Table(name = "history_of_request")
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class HistoryOfRequest extends BaseEntity<Long> {
 
     @ManyToOne(fetch = FetchType.LAZY)

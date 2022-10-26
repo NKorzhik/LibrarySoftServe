@@ -206,6 +206,11 @@
             <p th:text="'In stock: ' + ${quantity}"></p>
 
 
+            <div sec:authorize="hasRole('ROLE_READER')">
+                <form th:method="POST" th:action="@{/request/add/{bookId}(bookId=${bookReadDto.id})}">
+                    <button type="submit" class="btn btn-default">Make a request</button>
+                </form>
+            </div>
 
             <div sec:authorize="hasRole('ROLE_MANAGER')">
                 <form th:method="DELETE" th:action="@{/delete/copy/{id}(id=${bookReadDto.id})}">

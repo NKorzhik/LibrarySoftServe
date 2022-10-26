@@ -32,7 +32,8 @@ public class BookService {
         this.quantityDao = quantityDao;
     }
     public void addBookWithMainAuthor(BookCreateDto bookDto) {
-        Book book = BookCreateMapper.toModel(bookDto);
+        //перенести строку с преобразованием в dto в самый конец
+        Book book = BookCreateMapper.mapToModel(bookDto);
         Optional<Author> author = authorDao.getAuthorByNameAndSurname(
                 bookDto.getAuthorDto().getName(),
                 bookDto.getAuthorDto().getSurname()
@@ -48,7 +49,8 @@ public class BookService {
         quantityDao.addQuantity(book, bookDto.getQuantity());
     }
     public void addBookWithMainAuthorAndCoAuthor(BookCreateDto bookDto) {
-        Book book = BookCreateMapper.toModel(bookDto);
+        //перенести строку с преобразованием в dto в самый конец
+        Book book = BookCreateMapper.mapToModel(bookDto);
         Optional<Author> mainAuthor = authorDao.getAuthorByNameAndSurname(
                 bookDto.getAuthorDto().getName(),
                 bookDto.getAuthorDto().getSurname()
@@ -79,19 +81,19 @@ public class BookService {
 
     public List<BookReadUpdateDto> listBook() {
         return bookDao.listBook().stream()
-                .map(BookReadUpdateMapper::toDto)
+                .map(BookReadUpdateMapper::mapToDto)
                 .collect(Collectors.toList());
     }
 
     public List<BookReadUpdateDto> findBookByTitle(String title){
         return bookDao.findBookByTitle(title).stream()
-                .map(BookReadUpdateMapper::toDto)
+                .map(BookReadUpdateMapper::mapToDto)
                 .collect(Collectors.toList());
     }
 
     public BookReadUpdateDto getBook(long id){
         return Optional.of(bookDao.getBook(id))
-                .map(BookReadUpdateMapper::toDto)
+                .map(BookReadUpdateMapper::mapToDto)
                 .orElseThrow();
     }
     
