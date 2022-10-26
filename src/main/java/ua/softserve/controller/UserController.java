@@ -44,21 +44,7 @@ public class UserController {
     }
 
 
-    @PreAuthorize("hasRole('ROLE_READER')")
-    @GetMapping("pageReader")
-    public String getRequestedBooks(Authentication auth, Model model){
-        Optional<User> user = userService.findUserByEmail(auth.getName());
-        //чем заменить гет?
-        model.addAttribute("list", userService.getRequestedBooks(user.orElseThrow().getId()));
-        return "reader/page-reader";
-    }
 
-    @PreAuthorize("hasRole('ROLE_READER')")
-    @GetMapping("/getBook/{id}")
-    public String getRequestInfo(@PathVariable("id") long id, Model model){
-        model.addAttribute("request", userService.getRequestById(id));
-        return "reader/description-of-request";
-    }
 
     @PreAuthorize("hasRole('ROLE_READER')")
     @GetMapping("/returnBook")

@@ -57,6 +57,7 @@ public class BookDaoImpl implements BookDao {
         Book book;
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
+            //ДОБАВИТЬ QUANTITY
             book = session.createQuery("select b from Book b LEFT JOIN FETCH b.coAuthor LEFT JOIN FETCH " +
                             "b.author where b.id=:id",Book.class)
                     .setParameter("id", id).getSingleResult();

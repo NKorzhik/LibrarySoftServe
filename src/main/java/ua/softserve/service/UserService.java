@@ -35,17 +35,13 @@ public class UserService {
     }
 
 
-    public List<HistoryOfRequest> getRequestedBooks(long id){
-        return userDao.getRequestedBooks(id);
-    }
+
 
     public Optional<User> findUserByEmail(String email){
         return userDao.findByEmail(email);
     }
 
-    public HistoryOfRequest getRequestById(long id){
-        return userDao.getRequestById(id);
-    }
+
 
 //    public List<HistoryOfRequest> searchBook(String title){
 //        return userDao.findBook(title);

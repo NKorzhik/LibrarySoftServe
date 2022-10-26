@@ -7,6 +7,8 @@ import ua.softserve.config.HibernateConfig;
 import ua.softserve.dao.RequestDao;
 import ua.softserve.model.HistoryOfRequest;
 
+import java.util.List;
+
 @Repository
 public class RequestDaoImpl implements RequestDao {
 
@@ -24,6 +26,32 @@ public class RequestDaoImpl implements RequestDao {
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+    @Override
+    public List<HistoryOfRequest> getRequestedBooks(long id) {
+        List<HistoryOfRequest> list;
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            list = session.createQuery("SELECT r from HistoryOfRequest r left join fetch r.bookId " +
+                                    "left join fetch r.bookId.author left join fetch r.bookId.coAuthor where r.userId.id =:id",
+                            HistoryOfRequest.class)
+                    .setParameter("id", id)
+                    .getResultStream()
+                    .toList();
+            session.getTransaction().commit();
+        }
+        return list;
+    }
+
+    @Override
+    public HistoryOfRequest getRequestById(long id) {
+        try(Session session = sessionFactory.openSession()){
+            session.beginTransaction();
+            HistoryOfRequest request = session.createQuery("select r from HistoryOfRequest r left join fetch r.bookId left join fetch r.bookId.author left join fetch r.bookId.coAuthor where r.id =:id", HistoryOfRequest.class)
+                    .setParameter("id",id).getSingleResult();
+            session.getTransaction().commit();
+            return request;
         }
     }
 }

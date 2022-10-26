@@ -207,7 +207,7 @@
 
 
             <div sec:authorize="hasRole('ROLE_READER')">
-                <form th:method="POST" th:action="@{/request/add/{bookId}(bookId=${bookReadDto.id})}">
+                <form th:method="POST" th:action="@{/add/{bookId}(bookId=${bookReadDto.id})}">
                     <button type="submit" class="btn btn-default">Make a request</button>
                 </form>
             </div>

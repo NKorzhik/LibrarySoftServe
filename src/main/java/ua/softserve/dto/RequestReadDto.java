@@ -1,9 +1,6 @@
 package ua.softserve.dto;
 
-import jakarta.persistence.*;
 import lombok.*;
-import ua.softserve.model.Book;
-import ua.softserve.model.User;
 import ua.softserve.model.enums.Status;
 
 import java.time.LocalDate;
@@ -14,7 +11,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class RequestCreateDto {
+public class RequestReadDto {
 
     private UserCreateDto userDto;
     private BookReadUpdateDto bookDto;
@@ -26,7 +23,7 @@ public class RequestCreateDto {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        RequestCreateDto requestDto = (RequestCreateDto) o;
+        RequestReadDto requestDto = (RequestReadDto) o;
         return userDto.equals(requestDto.userDto)
                 && bookDto.equals(requestDto.bookDto)
                 && dateOfIssue.equals(requestDto.dateOfIssue);

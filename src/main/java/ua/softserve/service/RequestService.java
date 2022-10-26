@@ -1,21 +1,18 @@
 package ua.softserve.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import ua.softserve.dao.BookDao;
 import ua.softserve.dao.RequestDao;
 import ua.softserve.dao.UserDao;
-import ua.softserve.dto.RequestCreateDto;
-import ua.softserve.mapper.RequestCreateMapper;
-import ua.softserve.mapper.UserCreateMapper;
-import ua.softserve.mapper.UserReadMapper;
+import ua.softserve.dto.RequestReadDto;
 import ua.softserve.model.HistoryOfRequest;
 import ua.softserve.model.enums.Status;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class RequestService {
@@ -31,7 +28,7 @@ public class RequestService {
         this.bookDao = bookDao;
     }
 
-    public void addRequest(RequestCreateDto requestDto, long bookId) {
+    public void addRequest(RequestReadDto requestDto, long bookId) {
         UserDetails userDetails  = (UserDetails) SecurityContextHolder.getContext()
                 .getAuthentication()
                 .getPrincipal();
@@ -51,5 +48,15 @@ public class RequestService {
         request.setStatus(Status.WAITING);
         requestDao.addRequest(request);
         //requestDao.addRequest(RequestCreateMapper.mapToModel(requestDto));
+    }
+
+    //ПОМЕНЯТЬ НА ДТО
+    public List<HistoryOfRequest> getRequestedBooks(long id){
+        return requestDao.getRequestedBooks(id);
+    }
+
+    //ПОМЕНЯТЬ НА ДТО
+    public HistoryOfRequest getRequestById(long id){
+        return requestDao.getRequestById(id);
     }
 }
