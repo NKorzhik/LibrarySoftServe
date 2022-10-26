@@ -3,11 +3,11 @@ values ('NIKITA', 'Korzh', 'nikita@gmail.com', '$2a$12$/rvn3kHDg/BigpA99UIJY.fBX
         'MANAGER', '09.02.2000', '05.05.2021'),
        ('Renat', 'Safarov', 'renat@gmail.com', '$2a$12$6ILIpUHQ45gxUfF4dJO7h.uhKSIiD9BCQQxuz7eW4SyIe.xnPz/Qm',
         'MANAGER', '28.04.2003', '07.08.2021'),
-       ('Name1', 'Surname1', 'user1@gmail.com', '$2a$12$kHVwGbi.sfgjwjsgunR6n.vpYE4O3iYnVuUX3iBJoN23t4kpYa/Ea',
+       ('Name1', 'Surname1', 'user1@gmail.com', '$2a$12$E8UBHb0RCiMOcyLd3JAECegfE6jGRSiBwuhLDh8tC8zEGrP476dzG',
         'READER', '10.02.2005', '12.10.2022'),
-       ('Name2', 'Surname2', 'user2@gmail.com', '$2a$12$kHVwGbi.sfgjwjsgunR6n.vpYE4O3iYnVuUX3iBJoN23t4kpYa/Ea',
+       ('Name2', 'Surname2', 'user2@gmail.com', '$2a$12$E8UBHb0RCiMOcyLd3JAECegfE6jGRSiBwuhLDh8tC8zEGrP476dzG',
         'READER', '01.03.1999', '05.05.2022'),
-       ('Name3', 'Surname3', 'user3@gmail.com', '$2a$12$kHVwGbi.sfgjwjsgunR6n.vpYE4O3iYnVuUX3iBJoN23t4kpYa/Ea',
+       ('Name3', 'Surname3', 'user3@gmail.com', '$2a$12$E8UBHb0RCiMOcyLd3JAECegfE6jGRSiBwuhLDh8tC8zEGrP476dzG',
         'READER', '01.04.1995', '04.07.2022');
 
 
@@ -66,19 +66,19 @@ VALUES (1, 'FREE'),
        (11, 'FREE');
 
 INSERT INTO history_of_request (user_id, book_id, date_of_issue, should_be_return, return_date, status)
-VALUES (1, 2, '06.05.2021', '06.08.2021', '06.07.2021', 'RETURNED_ON_TIME'),
-       (1, 5, '09.10.2021', '09.01.2022', '09.12.2021', 'RETURNED_ON_TIME'),
-       (1, 11, '20.10.2022', '20.01.2023', null, 'READING'),
-       (2, 4, '21.09.2021', '21.12.2021', '21.11.2021', 'RETURNED_ON_TIME'),
-       (2, 2, '07.05.2022', '07.08.2022', '07.07.2022', 'RETURNED_ON_TIME'),
-       (2, 9, '10.10.2022', '10.01.2023', null, 'READING'),
-       (4, 8, '08.05.2022', '08.08.2022', '10.08.2022', 'RETURNED_NOT_ON_TIME'),
+VALUES (4, 2, '06.05.2021', '06.08.2021', '06.07.2021', 'RETURNED_ON_TIME'),
+       (4, 5, '09.10.2021', '09.01.2022', '09.12.2021', 'RETURNED_ON_TIME'),
+       (3, 11, '20.10.2022', '20.01.2023', null, 'READING'),
+       (5, 4, '21.09.2021', '21.12.2021', '21.11.2021', 'RETURNED_ON_TIME'),
+       (5, 2, '07.05.2022', '07.08.2022', '07.07.2022', 'RETURNED_ON_TIME'),
+       (4, 9, '10.10.2022', '10.01.2023', null, 'READING'),
+       (3, 8, '08.05.2022', '08.08.2022', '10.08.2022', 'RETURNED_NOT_ON_TIME'),
        (4, 10, '08.05.2022', '08.08.2022', '10.08.2022', 'RETURNED_NOT_ON_TIME'),
        (3, 2, '20.10.2022', '20.01.2023', null, 'READING'),
        (3, 9, '24.10.2022', '24.01.2023', null, 'READING'),
        (5,9, '10.07.2022','10.10.2022','15.10.2022','RETURNED_NOT_ON_TIME'),
        (5,9, '10.09.2022','10.12.2022',null,'READING'),
-       (1,9, '12.09.2022','12.12.2022',null,'REJECTED');
+       (3,9, '12.09.2022','12.12.2022',null,'REJECTED');
 
 
 

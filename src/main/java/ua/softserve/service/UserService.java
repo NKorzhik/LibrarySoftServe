@@ -6,10 +6,13 @@ import org.springframework.stereotype.Service;
 import ua.softserve.dao.UserDao;
 import ua.softserve.dto.UserCreateDto;
 import ua.softserve.mapper.UserCreateMapper;
+import ua.softserve.model.HistoryOfRequest;
 import ua.softserve.model.User;
 import ua.softserve.model.enums.Role;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -32,4 +35,19 @@ public class UserService {
     }
 
 
+    public List<HistoryOfRequest> getRequestedBooks(long id){
+        return userDao.getRequestedBooks(id);
+    }
+
+    public Optional<User> findUserByEmail(String email){
+        return userDao.findByEmail(email);
+    }
+
+    public HistoryOfRequest getRequestById(long id){
+        return userDao.getRequestById(id);
+    }
+
+//    public List<HistoryOfRequest> searchBook(String title){
+//        return userDao.findBook(title);
+//    }
 }
