@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ua.softserve.config.HibernateConfig;
 import ua.softserve.dao.UserDao;
+import ua.softserve.model.Book;
+import ua.softserve.model.HistoryOfRequest;
 import ua.softserve.model.User;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -39,5 +42,48 @@ public class UserDaoImpl implements UserDao {
             session.getTransaction().commit();
         }
     }
+
+    @Override
+    public List<HistoryOfRequest> getRequestedBooks(long id) {
+        List<HistoryOfRequest> list;
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            list = session.createQuery("SELECT r from HistoryOfRequest r left join fetch r.bookId " +
+                            "left join fetch r.bookId.author left join fetch r.bookId.coAuthor where r.userId.id =:id",
+                    HistoryOfRequest.class)
+                    .setParameter("id", id)
+                    .getResultStream()
+                    .toList();
+            session.getTransaction().commit();
+        }
+        return list;
+    }
+
+    @Override
+    public HistoryOfRequest getRequestById(long id) {
+        try(Session session = sessionFactory.openSession()){
+            session.beginTransaction();
+            HistoryOfRequest request = session.createQuery("select r from HistoryOfRequest r left join fetch r.bookId left join fetch r.bookId.author left join fetch r.bookId.coAuthor where r.id =:id", HistoryOfRequest.class)
+                    .setParameter("id",id).getSingleResult();
+            session.getTransaction().commit();
+            return request;
+        }
+    }
+
+//    @Override
+//    public List<HistoryOfRequest> findBook(String title) {
+//        try (Session session = sessionFactory.openSession()) {
+//            session.beginTransaction();
+//            List<HistoryOfRequest> books = session.createQuery("from HistoryOfRequest r left join fetch r.bookId" +
+//                            " left join fetch r.bookId.author left join fetch r.bookId.coAuthor where r.bookId.title like :title" +
+//                            " or r.bookId.author.name like :title or r.bookId.author.surname like :title" +
+//                            " or r.bookId.coAuthor.name like :title or r.bookId.coAuthor.surname like: title", HistoryOfRequest.class)
+//                    .setParameter("title", "%" + title + "%")
+//                    .getResultList();
+//            session.getTransaction().commit();
+//            return books;
+//        }
+//    }
+
 
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ua" , xmlns:th="http://www.thymeleaf.org"
+<html lang="en" , xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <title>Bootstrap Example</title>
@@ -168,6 +168,8 @@
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
                 <li class="active"><a th:href="@{/list}">Home</a></li>
+                <li class="active" sec:authorize="hasRole('ROLE_READER')"><a th:href='@{/pageReader}'>Profile</a></li>
+                <li class="active" sec:authorize="hasRole('ROLE_MANAGER')"><a th:href='@{/pageManager}'>Profile</a></li>
                 <!--                <li><a href="#">About</a></li>-->
                 <!--                <li><a href="#">Projects</a></li>-->
                 <!--                <li><a href="#">Contact</a></li>-->
@@ -188,39 +190,28 @@
             <!--            <p><a href="#">Link</a></p>-->
         </div>
         <div class="col-sm-8 text-left">
-            <h1> Requests </h1>
+            <h1>Detailed description of the request</h1>
+            <p th:text="'Title of book: ' + ${request.bookId.title}"></p>
+            <p th:text="'Author: '  + ${request.bookId.author.name} + ' ' +  ${request.bookId.author.surname}"></p>
 
-<!--            <form th:action="@{/readerSearch}" method="get">-->
-<!--                <label>-->
-<!--                    <input type="text" name="keyword" th:value="${keyword}" placeholder="Find book " size="50">-->
-<!--                </label>-->
-<!--                <button type="submit" class="btn btn-info">Search</button>-->
-<!--                <button type="submit" class="btn btn-info">Reset</button>-->
-<!--            </form>-->
+            <p th:if="${request.bookId.coAuthor != null}"
+               th:text="'Co-author: ' + ${request.bookId.coAuthor.name} + ' ' +  ${request.bookId.coAuthor.surname}"></p>
 
-            <table class="table book-list">
-                <thead>
-                <tr>
-                    <th><span>Title</span></th>
-                    <th><span>Author</span></th>
-                    <th><span>DateOfIssue</span></th>
-                    <th><span>ShouldBeReturned</span></th>
-                    <th><span>Status</span></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="l : ${list}">
-                    <td th:text="${l.bookId.title}"></td>
-                    <td th:text="${l.bookId.author.name} + ' ' +  ${l.bookId.author.surname} "></td>
-                    <td th:text="${l.dateOfIssue}"></td>
-                    <td th:text="${l.shouldBeReturn}"></td>
-                    <td th:text="${l.status}"></td>
-<!--                    th:if="${l.status == l.status.READING}"-->
-                    <td ><a th:href="@{/getBook/{id}(id=${l.getId()})}" class="btn btn-primary">More</a></td>
-                </tr>
-                </tbody>
-            </table>
+            <p th:text="'Description of book: ' + ${request.bookId.description}"></p>
+            <p th:text="'Genre: ' + ${request.bookId.genre}"></p>
+            <p th:text="'ISBN of book: ' +  ${request.bookId.ISBN}"></p>
+            <p th:text="'Date of issue: ' + ${request.dateOfIssue}"></p>
+            <p th:text="'Should be return: ' + ${request.shouldBeReturn}"></p>
+            <p th:text="'Return date: ' + ${request.returnDate}"></p>
+            <p th:text="'Status: ' + ${request.status}"></p>
 
+            <div th:if="${request.status == request.status.WAITING}">
+                <button type="submit" class="btn btn-primary">Cancel</button>
+            </div>
+
+            <div th:if="${request.status == request.status.READING}">
+                <button type="submit" class="btn btn-primary">Return</button>
+            </div>
 
 
 

@@ -3,11 +3,14 @@ package ua.softserve;
 import ua.softserve.dao.AuthorDao;
 import ua.softserve.dao.BookDao;
 import ua.softserve.dao.QuantityDao;
+import ua.softserve.dao.UserDao;
 import ua.softserve.dao.impl.AuthorDaoImpl;
 import ua.softserve.dao.impl.BookDaoImpl;
 import ua.softserve.dao.impl.QuantityDaoImpl;
+import ua.softserve.dao.impl.UserDaoImpl;
 import ua.softserve.model.Author;
 import ua.softserve.model.Book;
+import ua.softserve.model.HistoryOfRequest;
 import ua.softserve.model.enums.Genre;
 import ua.softserve.service.BookService;
 
@@ -20,8 +23,13 @@ public class Main {
         BookDao bookDao = new BookDaoImpl();
         QuantityDao quantityDao = new QuantityDaoImpl();
         BookService service = new BookService(bookDao, authorDao, quantityDao);
+        UserDao userDao = new UserDaoImpl();
 
-
+//        List<HistoryOfRequest> list = userDao.findBook("book1");
+//
+//        for (HistoryOfRequest h: list) {
+//            System.out.println(h.bookId.getTitle());
+//        }
 
 //
 //        List<Book> list = bookDao.findBookByAuthor("1");
@@ -31,11 +39,11 @@ public class Main {
 //        }
 //        Book book = service.getBook(1);
 
-        List<Book> list = bookDao.findBookByTitle("nikita2");
-
-        for (Book b : list) {
-            System.out.println(b.getTitle());
-        }
+//        List<Book> list = bookDao.findBookByTitle("nikita2");
+//
+//        for (Book b : list) {
+//            System.out.println(b.getTitle());
+//        }
 
 //        Author author2 = new Author();
 //        author2.setName("nikita2");
