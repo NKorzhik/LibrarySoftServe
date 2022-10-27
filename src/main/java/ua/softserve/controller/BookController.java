@@ -1,14 +1,12 @@
 package ua.softserve.controller;
 
-import com.sun.security.auth.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ua.softserve.dto.BookCreateDto;
-import ua.softserve.dto.BookReadUpdateDto;
+import ua.softserve.dto.book.BookCreateDto;
+import ua.softserve.dto.book.BookReadUpdateDto;
 import ua.softserve.service.AuthorService;
 import ua.softserve.service.BookService;
 import ua.softserve.service.QuantityService;

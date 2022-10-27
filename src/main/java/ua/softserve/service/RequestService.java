@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import ua.softserve.dao.BookDao;
 import ua.softserve.dao.RequestDao;
 import ua.softserve.dao.UserDao;
-import ua.softserve.dto.RequestReadDto;
+import ua.softserve.dto.request.RequestReadDto;
 import ua.softserve.model.HistoryOfRequest;
 import ua.softserve.model.enums.Status;
 
@@ -28,7 +28,7 @@ public class RequestService {
         this.bookDao = bookDao;
     }
 
-    public void addRequest(RequestReadDto requestDto, long bookId) {
+    public void addRequest(long bookId) {
         UserDetails userDetails  = (UserDetails) SecurityContextHolder.getContext()
                 .getAuthentication()
                 .getPrincipal();
@@ -38,7 +38,9 @@ public class RequestService {
                 userDao.findByEmail(userEmail).orElseThrow()));
         requestDto.setDateOfIssue(LocalDate.now());
         requestDto.setShouldBeReturn(LocalDate.now().plusMonths(3));
-        requestDto.setStatus(Status.WAITING);*/
+        requestDto.setStatus(Status.WAITING);
+        requestDao.addRequest(RequestCreateMapper.mapToModel(requestDto));*/
+
         HistoryOfRequest request = new HistoryOfRequest();
         request.setBookId(bookDao.getBook(bookId));
         request.setUserId(userDao.findByEmail(userEmail)
@@ -47,7 +49,7 @@ public class RequestService {
         request.setShouldBeReturn(LocalDate.now().plusMonths(3));
         request.setStatus(Status.WAITING);
         requestDao.addRequest(request);
-        //requestDao.addRequest(RequestCreateMapper.mapToModel(requestDto));
+
     }
 
     //ПОМЕНЯТЬ НА ДТО

@@ -1,12 +1,11 @@
-package ua.softserve.mapper;
+package ua.softserve.mapper.author;
 
-import ua.softserve.dto.AuthorDto;
+import ua.softserve.dto.author.AuthorDto;
 import ua.softserve.model.Author;
 
 import java.util.Collections;
 
 public class AuthorMapper {
-
     public static Author mapToModel(AuthorDto authorDto) {
         return Author.builder()
                 .name(authorDto.getName())

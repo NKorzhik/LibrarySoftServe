@@ -8,8 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import ua.softserve.dto.RequestReadDto;
+import ua.softserve.dto.request.RequestReadDto;
 import ua.softserve.model.User;
 import ua.softserve.service.BookService;
 import ua.softserve.service.RequestService;
@@ -37,7 +36,7 @@ public class RequestController {
     public String add(@PathVariable("bookId") long bookId, RequestReadDto requestDto) {
         /*BookReadUpdateDto bookDto = bookService.getBook(bookId);
         requestDto.setBookDto(bookDto);*/
-        requestService.addRequest(requestDto, bookId);
+        requestService.addRequest(bookId);
         return "redirect:/list";
     }
 

@@ -5,11 +5,11 @@ import org.springframework.stereotype.Service;
 import ua.softserve.dao.AuthorDao;
 import ua.softserve.dao.BookDao;
 import ua.softserve.dao.QuantityDao;
-import ua.softserve.dto.BookReadUpdateDto;
-import ua.softserve.dto.BookCreateDto;
-import ua.softserve.mapper.AuthorMapper;
-import ua.softserve.mapper.BookReadUpdateMapper;
-import ua.softserve.mapper.BookCreateMapper;
+import ua.softserve.dto.book.BookReadUpdateDto;
+import ua.softserve.dto.book.BookCreateDto;
+import ua.softserve.mapper.author.AuthorMapper;
+import ua.softserve.mapper.book.BookReadUpdateMapper;
+import ua.softserve.mapper.book.BookCreateMapper;
 import ua.softserve.model.Author;
 import ua.softserve.model.Book;
 

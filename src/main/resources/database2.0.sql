@@ -50,6 +50,7 @@ create table if not exists history_of_request
     date_of_issue    date        NOT NULL,
     should_be_return date        NOT NULL,
     return_date      date,
+    request_processing date,
     status           varchar(64) NOT NULL,
 
     CONSTRAINT PK_history_of_request_id PRIMARY KEY (id),

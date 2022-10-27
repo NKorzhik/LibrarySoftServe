@@ -1,6 +1,7 @@
-package ua.softserve.mapper;
+package ua.softserve.mapper.book;
 
-import ua.softserve.dto.BookReadUpdateDto;
+import ua.softserve.dto.book.BookReadUpdateDto;
+import ua.softserve.mapper.author.AuthorMapper;
 import ua.softserve.model.Book;
 
 public class BookReadUpdateMapper {
@@ -24,6 +25,7 @@ public class BookReadUpdateMapper {
 
     public static Book mapToModel(BookReadUpdateDto bookDto) {
         return Book.builder()
+                .id(bookDto.getId())
                 .title(bookDto.getTitle())
                 .genre(bookDto.getGenre())
                 .description(bookDto.getDescription())

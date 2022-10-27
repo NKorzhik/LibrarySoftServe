@@ -13,6 +13,7 @@ import java.io.Serializable;
 @Setter
 @ToString
 @NoArgsConstructor
+@AllArgsConstructor
 @MappedSuperclass
 //@SuperBuilder
 public class BaseEntity<K extends Serializable> {

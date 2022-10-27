@@ -1,6 +1,8 @@
-package ua.softserve.dto;
+package ua.softserve.dto.request;
 
 import lombok.*;
+import ua.softserve.dto.book.BookReadUpdateDto;
+import ua.softserve.dto.user.UserCreateDto;
 import ua.softserve.model.enums.Status;
 
 import java.time.LocalDate;

@@ -1,6 +1,7 @@
-package ua.softserve.dto;
+package ua.softserve.dto.book;
 
 import lombok.*;
+import ua.softserve.dto.author.AuthorDto;
 import ua.softserve.model.enums.Genre;
 
 import java.util.Objects;
@@ -12,7 +13,7 @@ import java.util.Objects;
 @Builder
 public class BookReadUpdateDto {
 
-    private long id;
+    private Long id;
     private String title;
     private Genre genre;
     private String description;
