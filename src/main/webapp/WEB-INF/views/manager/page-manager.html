@@ -188,7 +188,35 @@
             <!--            <p><a href="#">Link</a></p>-->
         </div>
         <div class="col-sm-8 text-left">
-            <h1> History of requests and something else </h1>
+            <h1> Manager </h1>
+
+            <a class="btn btn-primary" th:href="@{/list}" role="button">List Of Book </a>
+            <a class="btn btn-primary" th:href="@{/get/add}" role="button">Add Book</a>
+
+
+            <table class="table book-list">
+                <thead>
+                <tr>
+                    <th><span>Title</span></th>
+                    <th><span>Author</span></th>
+                    <th><span>DateOfIssue</span></th>
+                    <th><span>ShouldBeReturned</span></th>
+                    <th><span>Status</span></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="l : ${list}">
+                    <td th:text="${l.bookId.title}"></td>
+                    <td th:text="${l.bookId.author.name} + ' ' +  ${l.bookId.author.surname} "></td>
+                    <td th:text="${l.dateOfIssue}"></td>
+                    <td th:text="${l.shouldBeReturn}"></td>
+                    <td th:text="${l.status}"></td>
+                    <!--                    th:if="${l.status == l.status.READING}"-->
+                    <td ><a href="#" class="btn btn-primary">Give</a></td>
+                    <td ><a href="#" class="btn btn-primary">Reject</a></td>
+                </tr>
+                </tbody>
+            </table>
 
 
         </div>

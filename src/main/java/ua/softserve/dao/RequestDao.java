@@ -9,4 +9,6 @@ public interface RequestDao {
     void addRequest(HistoryOfRequest request);
     List<HistoryOfRequest> getRequestedBooks(long id);
     HistoryOfRequest getRequestById(long id);
+
+    List<HistoryOfRequest> getBooksWithStatusWaiting();
 }

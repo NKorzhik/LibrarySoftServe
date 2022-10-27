@@ -54,4 +54,11 @@ public class RequestController {
         model.addAttribute("request", requestService.getRequestById(id));
         return "reader/description-of-request";
     }
+
+    @PreAuthorize("hasRole('ROLE_MANAGER')")
+    @GetMapping("/pageManager")
+    public String getRequestedBooksWithStatusWaiting(Model model){
+        model.addAttribute("list", requestService.getBooksWithStatusWaiting());
+        return "manager/page-manager";
+    }
 }
