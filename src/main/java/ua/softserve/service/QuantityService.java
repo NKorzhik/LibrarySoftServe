@@ -7,7 +7,6 @@ import ua.softserve.dao.QuantityDao;
 @Service
 public class QuantityService {
     private final QuantityDao quantityDao;
-
     @Autowired
     public QuantityService(QuantityDao quantityDao) {
         this.quantityDao = quantityDao;

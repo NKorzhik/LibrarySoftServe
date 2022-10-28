@@ -32,15 +32,12 @@ public class BookController {
         this.quantityService = quantityService;
         this.paginationResultService = paginationResultService;
     }
-
-
     @GetMapping("/list")
     public String getBook(Model model, @RequestParam( value = "pageNumber", required = false, defaultValue = "1") int pageNumber){
         PaginationResult<Book> bookPaginationResult = paginationResultService.paginate(pageNumber);
         model.addAttribute("books", bookPaginationResult);
         return "user/books";
     }
-
 
     @GetMapping("/getPopUnPopBook")
     public String getPopularAndUnpopularBook(String firstDate, String secondDate, Model model){
