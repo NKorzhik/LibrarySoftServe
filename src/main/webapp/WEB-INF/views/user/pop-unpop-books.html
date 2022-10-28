@@ -175,8 +175,10 @@
                 <!--                <li><a href="#">Contact</a></li>-->
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-                <li sec:authorize="isAnonymous()"><a th:href="@{/login}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}"><span
+                        class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                <li sec:authorize="isAnonymous()"><a th:href="@{/login}"><span
+                        class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
         </div>
     </div>
@@ -184,49 +186,83 @@
 
 <div class="container-fluid text-center">
     <div class="row content">
-        <div class="col-sm-2 sidenav">
-            <!--            <p><a href="#">Link</a></p>-->
-            <!--            <p><a href="#">Link</a></p>-->
-            <!--            <p><a href="#">Link</a></p>-->
+        <div class="col-sm-2 ">
+
+            <h7>Get the most popular and unpopular book in selected period</h7>
+            <form th:action="@{/getPopUnPopBook}" method="get">
+                <label>
+                    <input type="text" th:value="${firstDate}" name = "firstDate" placeholder="First Date(yyyy-mm-d)" size="18">
+                    <input type="text" th:value="${secondDate}" name = "secondDate" placeholder="Second Date(yyyy-mm-d) " size="18">
+                </label>
+                <button type="submit" class="btn btn-info">Search</button>
+            </form>
+
+            <!--                        <p><a href="#"></a></p>-->
+            <!--                        <p><a href="#">Link</a></p>-->
+            <!--                        <p><a href="#">Link</a></p>-->
         </div>
         <div class="col-sm-8 text-left">
-            <h1>Detailed description of the request</h1>
-            <p th:text="'Title of book: ' + ${request.bookId.title}"></p>
-            <p th:text="'Author: '  + ${request.bookId.author.name} + ' ' +  ${request.bookId.author.surname}"></p>
 
-            <p th:if="${request.bookId.coAuthor != null}"
-               th:text="'Co-author: ' + ${request.bookId.coAuthor.name} + ' ' +  ${request.bookId.coAuthor.surname}"></p>
+            <h1>Most popular books</h1>
 
-            <p th:text="'Description of book: ' + ${request.bookId.description}"></p>
-            <p th:text="'Genre: ' + ${request.bookId.genre}"></p>
-            <p th:text="'ISBN of book: ' +  ${request.bookId.ISBN}"></p>
-            <p th:text="'Date of issue: ' + ${request.dateOfIssue}"></p>
-            <p th:text="'Should be return: ' + ${request.shouldBeReturn}"></p>
-            <p th:text="'Return date: ' + ${request.returnDate}"></p>
-            <p th:text="'Status: ' + ${request.status}"></p>
+            <table class="table book-list">
+                <thead>
+                <tr>
+                    <th><span>Title</span></th>
+<!--                    <th><span>Author</span></th>-->
+<!--                    <th><span>CoAuthor</span></th>-->
+                    <th><span>Genre</span></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="book : ${popular}">
+                    <td th:text="${book.title}"></td>
+<!--                    <td th:text="${book.getAuthor().getName()} + ' ' + ${book.author.surname}"></td>-->
+<!--                    <td th:if="${book.coAuthor != null}"-->
+<!--                        th:text="${book.coAuthor.name} + ' ' +  ${book.coAuthor.surname}"></td>-->
+<!--                    <td th:if="${book.coAuthor == null}"> Missing</td>-->
+                    <td th:text="${book.genre}"></td>
+                    <td><a th:href="@{/more/{id}(id=${book.id})}" class="btn btn-primary">More</a></td>
+                </tr>
+                </tbody>
+            </table>
 
-            <div th:if="${request.status == request.status.WAITING}">
-                <button type="submit" class="btn btn-primary">Cancel</button>
-            </div>
-
-
-            <div th:if="${request.status == request.status.READING}">
-                <form th:method="POST" th:action="@{/returnBookToLibrary/{id}(id=${request.id})}">
-                <button type="submit" class="btn btn-primary">Return</button>
-                </form>
-            </div>
+<!--            <h1>Most UnPopular books</h1>-->
+<!--            -->
+<!--            <table class="table book-list">-->
+<!--                <thead>-->
+<!--                <tr>-->
+<!--                    <th><span>Title</span></th>-->
+<!--&lt;!&ndash;                    <th><span>Author</span></th>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <th><span>CoAuthor</span></th>&ndash;&gt;-->
+<!--                    <th><span>Genre</span></th>-->
+<!--                </tr>-->
+<!--                </thead>-->
+<!--                <tbody>-->
+<!--                <tr th:each="book1 : ${unpopular}">-->
+<!--                    <td th:text="${book1.title}"></td>-->
+<!--&lt;!&ndash;                    <td th:text="${book1.author.name} + ' ' + ${book1.author.surname}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <td th:if="${book1.coAuthor != null}"&ndash;&gt;-->
+<!--&lt;!&ndash;                        th:text="${book1.coAuthor.name} + ' ' +  ${book1.coAuthor.surname}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <td th:if="${book1.coAuthor == null}"> Missing</td>&ndash;&gt;-->
+<!--                    <td th:text="${book1.genre}"></td>-->
+<!--                    <td><a th:href="@{/more/{id}(id=${book1.id})}" class="btn btn-primary">More</a></td>-->
+<!--                </tr>-->
+<!--                </tbody>-->
+<!--            </table>-->
 
 
 
         </div>
-        <div class="col-sm-2 sidenav">
-            <!--            <div class="well">-->
-            <!--                <p>ADS</p>-->
-            <!--            </div>-->
-            <!--            <div class="well">-->
-            <!--                <p>ADS</p>-->
-            <!--            </div>-->
-        </div>
+        <!--        <div class="col-sm-2 sidenav">-->
+
+        <!--                        <div class="well">-->
+        <!--                            <p>ADS</p>-->
+        <!--            &lt;!&ndash;            </div>&ndash;&gt;-->
+        <!--            &lt;!&ndash;            <div class="well">&ndash;&gt;-->
+        <!--            &lt;!&ndash;                <p>ADS</p>&ndash;&gt;-->
+        <!--            &lt;!&ndash;            </div>&ndash;&gt;-->
+        <!--        </div>-->
     </div>
 </div>
 

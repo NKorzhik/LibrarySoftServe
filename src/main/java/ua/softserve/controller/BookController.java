@@ -9,10 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ua.softserve.dto.BookCreateDto;
 import ua.softserve.dto.BookReadUpdateDto;
+import ua.softserve.model.Book;
 import ua.softserve.service.AuthorService;
 import ua.softserve.service.BookService;
 import ua.softserve.service.QuantityService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -37,6 +39,22 @@ public class BookController {
         model.addAttribute("booksReadDto", books);
         return "user/books";
     }
+
+    @GetMapping("/getPopUnPopBook")
+    public String getPopularAndUnpopularBook(String firstDate, String secondDate, Model model){
+        List<Book> popular = bookService.getPopularBookInSelectedPeriod(firstDate, secondDate);
+        List<Book> unpopular = bookService.getUnpopularBookInSelectedPeriod(firstDate, secondDate);
+        model.addAttribute("popular",popular);
+        model.addAttribute("unpopular",unpopular);
+        return "user/pop-unpop-books";
+    }
+
+    @GetMapping("/search")
+    public String getBooksByTitle(String keyword, Model model){
+        List<BookReadUpdateDto> books = bookService.findBookByTitle(keyword);
+        model.addAttribute("booksReadDto", books);
+        return "user/books";
+    }
     @GetMapping("/more/{id}")
     public String getMoreInfoAboutBook(@PathVariable("id") long id, Model model){
         BookReadUpdateDto book = bookService.getBook(id);
@@ -46,12 +64,7 @@ public class BookController {
         model.addAttribute("quantity",quantity);
         return "user/description-of-book";
     }
-    @GetMapping("/search")
-    public String getBooksByTitle(String keyword, Model model){
-        List<BookReadUpdateDto> books = bookService.findBookByTitle(keyword);
-        model.addAttribute("booksReadDto", books);
-        return "user/books";
-    }
+
     @GetMapping("/get/add")
     @PreAuthorize("hasRole('ROLE_MANAGER')")
     public String newBook(@ModelAttribute("bookCreateDto") BookCreateDto bookDto) {

@@ -13,6 +13,7 @@ import ua.softserve.mapper.BookCreateMapper;
 import ua.softserve.model.Author;
 import ua.softserve.model.Book;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -102,6 +103,14 @@ public class BookService {
     }
     public long getCountOfQuantityByBookId(long bookId){
         return quantityDao.getCountOfQuantityByBookId(bookId);
+    }
+
+    public List<Book> getPopularBookInSelectedPeriod(String firstDate, String secondDate){
+        return bookDao.getPopularBookInSelectedPeriod(firstDate,secondDate);
+    }
+
+    public List<Book> getUnpopularBookInSelectedPeriod(String firstDate, String secondDate){
+        return bookDao.getUnpopularBookInSelectedPeriod(firstDate,secondDate);
     }
 
 }

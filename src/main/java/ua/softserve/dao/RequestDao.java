@@ -2,6 +2,7 @@ package ua.softserve.dao;
 
 import ua.softserve.model.HistoryOfRequest;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface RequestDao {
@@ -11,4 +12,6 @@ public interface RequestDao {
     HistoryOfRequest getRequestById(long id);
 
     List<HistoryOfRequest> getBooksWithStatusWaiting();
+
+    void returnBookToLibrary(long bookId);
 }

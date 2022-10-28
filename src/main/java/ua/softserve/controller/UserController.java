@@ -44,12 +44,6 @@ public class UserController {
     }
 
 
-    @PreAuthorize("hasRole('ROLE_READER')")
-    @GetMapping("/returnBook")
-    public String returnBook(){
-        return "redirect:/pageReader";
-    }
-
 //    @GetMapping("/readerSearch")
 //    public String getBooksByTitle(String keyword, Model model){
 //        List<HistoryOfRequest> books = userService.searchBook(keyword);

@@ -63,4 +63,8 @@ public class RequestService {
     public List<HistoryOfRequest> getBooksWithStatusWaiting(){
         return requestDao.getBooksWithStatusWaiting();
     }
+
+    public void returnBookToLibrary(long requestId){
+        requestDao.returnBookToLibrary(requestId);
+    }
 }

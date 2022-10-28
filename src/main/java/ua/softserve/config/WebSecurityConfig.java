@@ -32,7 +32,7 @@ public class WebSecurityConfig {
         return http.csrf()
                 .disable()
                 .authorizeRequests()
-                .mvcMatchers("/list","/register","/more/{id}","/search").permitAll()
+                .mvcMatchers("/list","/register","/more/{id}","/search","/getPopUnPopBook").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .authenticationProvider(authenticationProvider())
