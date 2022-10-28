@@ -1,20 +1,19 @@
 package ua.softserve.controller;
 
-import com.sun.security.auth.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ua.softserve.dto.book.BookCreateDto;
 import ua.softserve.dto.book.BookReadUpdateDto;
 import ua.softserve.model.Book;
+import ua.softserve.model.PaginationResult;
 import ua.softserve.service.AuthorService;
 import ua.softserve.service.BookService;
+import ua.softserve.service.PaginationResultService;
 import ua.softserve.service.QuantityService;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -24,21 +23,24 @@ public class BookController {
     private final AuthorService authorService;
     private final QuantityService quantityService;
 
+    private final PaginationResultService paginationResultService;
+
     @Autowired
-    public BookController(BookService bookService,
-                          AuthorService authorService,
-                          QuantityService quantityService) {
+    public BookController(BookService bookService, AuthorService authorService, QuantityService quantityService, PaginationResultService paginationResultService) {
         this.bookService = bookService;
         this.authorService = authorService;
         this.quantityService = quantityService;
+        this.paginationResultService = paginationResultService;
     }
 
+
     @GetMapping("/list")
-    public String getBook(Model model) {
-        List<BookReadUpdateDto> books = bookService.listBook();
-        model.addAttribute("booksReadDto", books);
+    public String getBook(Model model, @RequestParam( value = "pageNumber", required = false, defaultValue = "1") int pageNumber){
+        PaginationResult<Book> bookPaginationResult = paginationResultService.paginate(pageNumber);
+        model.addAttribute("books", bookPaginationResult);
         return "user/books";
     }
+
 
     @GetMapping("/getPopUnPopBook")
     public String getPopularAndUnpopularBook(String firstDate, String secondDate, Model model){

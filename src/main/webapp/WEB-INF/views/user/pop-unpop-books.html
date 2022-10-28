@@ -78,41 +78,11 @@
             transition: background-color 0.15s ease-in-out 0s;
         }
 
-        .table tbody tr td .call-type {
-            display: block;
-            font-size: 0.75em;
-            text-align: center;
-        }
-
-        .table tbody tr td .first-line {
-            line-height: 1.5;
-            font-weight: 400;
-            font-size: 1.125em;
-        }
-
         .table tbody tr td .first-line span {
             font-size: 0.875em;
             color: #969696;
             font-weight: 300;
         }
-
-        .table tbody tr td .second-line {
-            font-size: 0.875em;
-            line-height: 1.2;
-        }
-
-        /*.table-products tbody > tr > td {*/
-        /*    background: none;*/
-        /*    border: none;*/
-        /*    border-bottom: 1px solid #ebebeb;*/
-        /*    -webkit-transition: background-color 0.15s ease-in-out 0s;*/
-        /*    transition: background-color 0.15s ease-in-out 0s;*/
-        /*    position: relative;*/
-        /*}*/
-        /*.table-products tbody > tr:hover > td {*/
-        /*    text-decoration: none;*/
-        /*    background-color: #f6f6f6;*/
-        /*}*/
 
 
         /* Remove the navbar's default margin-bottom and rounded borders */
@@ -170,9 +140,7 @@
                 <li class="active"><a th:href="@{/list}">Home</a></li>
                 <li class="active" sec:authorize="hasRole('ROLE_READER')"><a th:href='@{/pageReader}'>Profile</a></li>
                 <li class="active" sec:authorize="hasRole('ROLE_MANAGER')"><a th:href='@{/pageManager}'>Profile</a></li>
-                <!--                <li><a href="#">About</a></li>-->
-                <!--                <li><a href="#">Projects</a></li>-->
-                <!--                <li><a href="#">Contact</a></li>-->
+
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}"><span
@@ -191,15 +159,14 @@
             <h7>Get the most popular and unpopular book in selected period</h7>
             <form th:action="@{/getPopUnPopBook}" method="get">
                 <label>
-                    <input type="text" th:value="${firstDate}" name = "firstDate" placeholder="First Date(yyyy-mm-d)" size="18">
-                    <input type="text" th:value="${secondDate}" name = "secondDate" placeholder="Second Date(yyyy-mm-d) " size="18">
+                    <input type="text" th:value="${firstDate}" name="firstDate" placeholder="First Date(yyyy-mm-d)"
+                           size="18">
+                    <input type="text" th:value="${secondDate}" name="secondDate" placeholder="Second Date(yyyy-mm-d) "
+                           size="18">
                 </label>
                 <button type="submit" class="btn btn-info">Search</button>
             </form>
 
-            <!--                        <p><a href="#"></a></p>-->
-            <!--                        <p><a href="#">Link</a></p>-->
-            <!--                        <p><a href="#">Link</a></p>-->
         </div>
         <div class="col-sm-8 text-left">
 
@@ -209,60 +176,21 @@
                 <thead>
                 <tr>
                     <th><span>Title</span></th>
-<!--                    <th><span>Author</span></th>-->
-<!--                    <th><span>CoAuthor</span></th>-->
                     <th><span>Genre</span></th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="book : ${popular}">
                     <td th:text="${book.title}"></td>
-<!--                    <td th:text="${book.getAuthor().getName()} + ' ' + ${book.author.surname}"></td>-->
-<!--                    <td th:if="${book.coAuthor != null}"-->
-<!--                        th:text="${book.coAuthor.name} + ' ' +  ${book.coAuthor.surname}"></td>-->
-<!--                    <td th:if="${book.coAuthor == null}"> Missing</td>-->
                     <td th:text="${book.genre}"></td>
                     <td><a th:href="@{/more/{id}(id=${book.id})}" class="btn btn-primary">More</a></td>
                 </tr>
                 </tbody>
             </table>
 
-<!--            <h1>Most UnPopular books</h1>-->
-
-<!--            <table class="table book-list">-->
-<!--                <thead>-->
-<!--                <tr>-->
-<!--                    <th><span>Title</span></th>-->
-<!--&lt;!&ndash;                    <th><span>Author</span></th>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <th><span>CoAuthor</span></th>&ndash;&gt;-->
-<!--                    <th><span>Genre</span></th>-->
-<!--                </tr>-->
-<!--                </thead>-->
-<!--                <tbody>-->
-<!--                <tr th:each="book1 : ${unpopular}">-->
-<!--                    <td th:text="${book1.title}"></td>-->
-<!--&lt;!&ndash;                    <td th:text="${book1.author.name} + ' ' + ${book1.author.surname}"></td>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <td th:if="${book1.coAuthor != null}"&ndash;&gt;-->
-<!--&lt;!&ndash;                        th:text="${book1.coAuthor.name} + ' ' +  ${book1.coAuthor.surname}"></td>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <td th:if="${book1.coAuthor == null}"> Missing</td>&ndash;&gt;-->
-<!--                    <td th:text="${book1.genre}"></td>-->
-<!--                    <td><a th:href="@{/more/{id}(id=${book1.id})}" class="btn btn-primary">More</a></td>-->
-<!--                </tr>-->
-<!--                </tbody>-->
-<!--            </table>-->
-
-
-
         </div>
-        <!--        <div class="col-sm-2 sidenav">-->
-
-        <!--                        <div class="well">-->
-        <!--                            <p>ADS</p>-->
-        <!--            &lt;!&ndash;            </div>&ndash;&gt;-->
-        <!--            &lt;!&ndash;            <div class="well">&ndash;&gt;-->
-        <!--            &lt;!&ndash;                <p>ADS</p>&ndash;&gt;-->
-        <!--            &lt;!&ndash;            </div>&ndash;&gt;-->
-        <!--        </div>-->
+        <div class="col-sm-2 sidenav">
+        </div>
     </div>
 </div>
 

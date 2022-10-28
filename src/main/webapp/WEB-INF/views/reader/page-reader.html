@@ -78,42 +78,12 @@
             transition: background-color 0.15s ease-in-out 0s;
         }
 
-        .table tbody tr td .call-type {
-            display: block;
-            font-size: 0.75em;
-            text-align: center;
-        }
-
-        .table tbody tr td .first-line {
-            line-height: 1.5;
-            font-weight: 400;
-            font-size: 1.125em;
-        }
 
         .table tbody tr td .first-line span {
             font-size: 0.875em;
             color: #969696;
             font-weight: 300;
         }
-
-        .table tbody tr td .second-line {
-            font-size: 0.875em;
-            line-height: 1.2;
-        }
-
-        /*.table-products tbody > tr > td {*/
-        /*    background: none;*/
-        /*    border: none;*/
-        /*    border-bottom: 1px solid #ebebeb;*/
-        /*    -webkit-transition: background-color 0.15s ease-in-out 0s;*/
-        /*    transition: background-color 0.15s ease-in-out 0s;*/
-        /*    position: relative;*/
-        /*}*/
-        /*.table-products tbody > tr:hover > td {*/
-        /*    text-decoration: none;*/
-        /*    background-color: #f6f6f6;*/
-        /*}*/
-
 
         /* Remove the navbar's default margin-bottom and rounded borders */
         .navbar {
@@ -168,9 +138,6 @@
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
                 <li class="active"><a th:href="@{/list}">Home</a></li>
-                <!--                <li><a href="#">About</a></li>-->
-                <!--                <li><a href="#">Projects</a></li>-->
-                <!--                <li><a href="#">Contact</a></li>-->
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
@@ -183,20 +150,10 @@
 <div class="container-fluid text-center">
     <div class="row content">
         <div class="col-sm-2 sidenav">
-            <!--            <p><a href="#">Link</a></p>-->
-            <!--            <p><a href="#">Link</a></p>-->
-            <!--            <p><a href="#">Link</a></p>-->
+
         </div>
         <div class="col-sm-8 text-left">
             <h1> Requests </h1>
-
-<!--            <form th:action="@{/readerSearch}" method="get">-->
-<!--                <label>-->
-<!--                    <input type="text" name="keyword" th:value="${keyword}" placeholder="Find book " size="50">-->
-<!--                </label>-->
-<!--                <button type="submit" class="btn btn-info">Search</button>-->
-<!--                <button type="submit" class="btn btn-info">Reset</button>-->
-<!--            </form>-->
 
             <table class="table book-list">
                 <thead>
@@ -209,31 +166,18 @@
                 </tr>
                 </thead>
                 <tbody>
-                <!--<tr th:each="l : ${list}">
-                    <td th:text="${l.bookId.title}"></td>
-                    <td th:text="${l.bookId.author.name} + ' ' +  ${l.bookId.author.surname} "></td>
-                    <td th:text="${l.dateOfIssue}"></td>
-                    <td th:text="${l.shouldBeReturn}"></td>
-                    <td th:text="${l.status}"></td>-->
                 <tr th:each="request : ${requests}">
                     <td th:text="${request.getBookDto().getTitle()}"></td>
                     <td th:text="${request.getBookDto().getAuthorDto().name} + ' ' +  ${request.getBookDto().getCoAuthorDto().name} "></td>
                     <td th:text="${request.getDateOfIssue()}"></td>
                     <td th:text="${request.shouldBeReturn}"></td>
                     <td th:text="${request.status}"></td>
-<!--                    th:if="${l.status == l.status.READING}"-->
                     <td ><a th:href="@{/getBook/{id}(id=${request.getId()})}" class="btn btn-primary">More</a></td>
                 </tr>
                 </tbody>
             </table>
         </div>
         <div class="col-sm-2 sidenav">
-            <!--            <div class="well">-->
-            <!--                <p>ADS</p>-->
-            <!--            </div>-->
-            <!--            <div class="well">-->
-            <!--                <p>ADS</p>-->
-            <!--            </div>-->
         </div>
     </div>
 </div>
