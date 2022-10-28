@@ -209,21 +209,23 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="l : ${list}">
+                <!--<tr th:each="l : ${list}">
                     <td th:text="${l.bookId.title}"></td>
                     <td th:text="${l.bookId.author.name} + ' ' +  ${l.bookId.author.surname} "></td>
                     <td th:text="${l.dateOfIssue}"></td>
                     <td th:text="${l.shouldBeReturn}"></td>
-                    <td th:text="${l.status}"></td>
+                    <td th:text="${l.status}"></td>-->
+                <tr th:each="request : ${requests}">
+                    <td th:text="${request.getBookDto().getTitle()}"></td>
+                    <td th:text="${request.getBookDto().getAuthorDto().name} + ' ' +  ${request.getBookDto().getCoAuthorDto().name} "></td>
+                    <td th:text="${request.getDateOfIssue()}"></td>
+                    <td th:text="${request.shouldBeReturn}"></td>
+                    <td th:text="${request.status}"></td>
 <!--                    th:if="${l.status == l.status.READING}"-->
-                    <td ><a th:href="@{/getBook/{id}(id=${l.getId()})}" class="btn btn-primary">More</a></td>
+                    <td ><a th:href="@{/getBook/{id}(id=${request.getId()})}" class="btn btn-primary">More</a></td>
                 </tr>
                 </tbody>
             </table>
-
-
-
-
         </div>
         <div class="col-sm-2 sidenav">
             <!--            <div class="well">-->

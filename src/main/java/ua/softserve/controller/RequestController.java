@@ -44,8 +44,7 @@ public class RequestController {
     @GetMapping("/pageReader")
     public String getRequestedBooks(Authentication auth, Model model){
         Optional<User> user = userService.findUserByEmail(auth.getName());
-        //чем заменить гет?
-        model.addAttribute("list", requestService.getRequestedBooks(user.orElseThrow().getId()));
+        model.addAttribute("requests", requestService.getRequestedBooks(user.orElseThrow().getId()));
         return "reader/page-reader";
     }
     @PreAuthorize("hasRole('ROLE_READER')")
@@ -60,5 +59,12 @@ public class RequestController {
     public String getRequestedBooksWithStatusWaiting(Model model){
         model.addAttribute("list", requestService.getBooksWithStatusWaiting());
         return "manager/page-manager";
+    }
+
+    @PreAuthorize("hasRole('ROLE_MANAGER')")
+    @PostMapping("/accept/{id}")
+    public String acceptRequest(@PathVariable("id") long id) {
+        requestService.acceptRequest(id);
+        return "redirect:/pageManager";
     }
 }

@@ -212,6 +212,29 @@
             <div th:if="${request.status == request.status.READING}">
                 <button type="submit" class="btn btn-primary">Return</button>
             </div>
+        <!--<div class="col-sm-8 text-left">
+            <h1>Detailed description of the request</h1>
+            <p th:text="'Title of book: ' + ${request.getBookDto().getTitle()}"></p>
+            <p th:text="'Author: '  + ${request.getBookDto().getAuthorDto().getName()} + ' ' +  ${request.getBookDto().getAuthorDto().getSurname()}"></p>
+
+            <p th:if="${request.getBookDto().getCoAuthorDto() != null}"
+               th:text="'Co-author: ' + ${request.getBookDto.getCoAuthorDto().getName()} + ' ' +  ${request.getBookDto.getCoAuthorDto().getSurname()()}"></p>
+
+            <p th:text="'Description of book: ' + ${request.getBookDto.getDescription()}"></p>
+            <p th:text="'Genre: ' + ${request.getBookDto.getGenre()}"></p>
+            <p th:text="'ISBN of book: ' +  ${request.getBookDto.getISBN()}"></p>
+            <p th:text="'Date of issue: ' + ${request.dateOfIssue}"></p>
+            <p th:text="'Should be return: ' + ${request.shouldBeReturn}"></p>
+            <p th:text="'Return date: ' + ${request.returnDate}"></p>
+            <p th:text="'Status: ' + ${request.status}"></p>
+
+            <div th:if="${request.status == request.status.WAITING}">
+                <button type="submit" class="btn btn-primary">Cancel</button>
+            </div>
+
+            <div th:if="${request.status == request.status.READING}">
+                <button type="submit" class="btn btn-primary">Return</button>
+            </div>-->
 
 
 

@@ -2,7 +2,7 @@ package ua.softserve.dto.request;
 
 import lombok.*;
 import ua.softserve.dto.book.BookReadUpdateDto;
-import ua.softserve.dto.user.UserCreateDto;
+import ua.softserve.dto.user.UserReadDto;
 import ua.softserve.model.enums.Status;
 
 import java.time.LocalDate;
@@ -15,10 +15,12 @@ import java.util.Objects;
 @Builder
 public class RequestReadDto {
 
-    private UserCreateDto userDto;
+    private Long id;
+    private UserReadDto userDto;
     private BookReadUpdateDto bookDto;
     private LocalDate dateOfIssue;
     private LocalDate shouldBeReturn;
+    private LocalDate returnDate;
     private Status status;
 
     @Override

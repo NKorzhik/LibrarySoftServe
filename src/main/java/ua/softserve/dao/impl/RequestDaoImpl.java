@@ -10,12 +10,9 @@ import ua.softserve.model.HistoryOfRequest;
 import java.util.List;
 
 import static ua.softserve.model.enums.Status.WAITING;
-
 @Repository
 public class RequestDaoImpl implements RequestDao {
-
     private final SessionFactory sessionFactory;
-
     public RequestDaoImpl() {
         this.sessionFactory = HibernateConfig.getSessionFactory();
     }
@@ -31,12 +28,24 @@ public class RequestDaoImpl implements RequestDao {
         }
     }
     @Override
+    public void acceptRequest(HistoryOfRequest request) {
+        try(Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.merge(request);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public List<HistoryOfRequest> getRequestedBooks(long id) {
         List<HistoryOfRequest> list;
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             list = session.createQuery("SELECT r from HistoryOfRequest r left join fetch r.bookId " +
-                                    "left join fetch r.bookId.author left join fetch r.bookId.coAuthor where r.userId.id =:id",
+                                    "left join fetch r.bookId.author left join fetch r.bookId.coAuthor " +
+                                    "left join fetch r.userId where r.userId.id =:id",
                             HistoryOfRequest.class)
                     .setParameter("id", id)
                     .getResultStream()
@@ -50,7 +59,9 @@ public class RequestDaoImpl implements RequestDao {
     public HistoryOfRequest getRequestById(long id) {
         try(Session session = sessionFactory.openSession()){
             session.beginTransaction();
-            HistoryOfRequest request = session.createQuery("select r from HistoryOfRequest r left join fetch r.bookId left join fetch r.bookId.author left join fetch r.bookId.coAuthor where r.id =:id", HistoryOfRequest.class)
+            HistoryOfRequest request = session.createQuery("select r from HistoryOfRequest r " +
+                            "left join fetch r.bookId left join fetch r.bookId.author left join fetch r.bookId.coAuthor " +
+                            "left join fetch r.userId where r.id =:id", HistoryOfRequest.class)
                     .setParameter("id",id).getSingleResult();
             session.getTransaction().commit();
             return request;

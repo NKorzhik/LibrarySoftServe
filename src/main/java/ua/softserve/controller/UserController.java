@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ua.softserve.dto.user.UserCreateDto;
+import ua.softserve.dto.user.UserLoginDto;
 import ua.softserve.dto.user.UserReadDto;
 import ua.softserve.service.UserService;
 
@@ -20,8 +21,8 @@ public class UserController {
         this.userService = userService;
     }
     @GetMapping("/login")
-    public String login(Model model, UserReadDto userDto) {
-        model.addAttribute("userReadDto", userDto);
+    public String login(Model model, UserLoginDto userDto) {
+        model.addAttribute("userLoginDto", userDto);
         return "user/login";
     }
     @GetMapping("/register")
