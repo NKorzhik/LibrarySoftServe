@@ -1,9 +1,7 @@
 package ua.softserve.controller;
 
-import com.sun.security.auth.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +12,6 @@ import ua.softserve.service.AuthorService;
 import ua.softserve.service.BookService;
 import ua.softserve.service.QuantityService;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -91,7 +88,9 @@ public class BookController {
 
     @PatchMapping("/{id}")
     @PreAuthorize("hasRole('ROLE_MANAGER')")
-    public String update(@ModelAttribute("bookReadDto") BookReadUpdateDto bookDto) {
+    public String update(@ModelAttribute("bookReadDto") BookReadUpdateDto bookDto,
+                         @PathVariable("id") long id) {
+        bookService.updateBook(bookDto, id);
         return "redirect:/more/{id}";
     }
 
@@ -108,5 +107,4 @@ public class BookController {
         bookService.deleteBook(id);
         return "redirect:/list";
     }
-
 }

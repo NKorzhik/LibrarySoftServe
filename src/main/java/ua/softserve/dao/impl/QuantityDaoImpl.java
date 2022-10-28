@@ -35,10 +35,11 @@ public class QuantityDaoImpl implements QuantityDao {
         try(Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             Long quantityId = session.createQuery(
-                    "select q.id from Quantity q where q.bookId =: bookId and q.type =: type",
+                    "select q.id from Quantity q where q.bookId.id=:bookId and q.type=:type",
                     Long.class)
                     .setParameter("bookId", bookId)
                     .setParameter("type", Type.FREE)
+                    .setMaxResults(1)
                     .getSingleResult();
             session.getTransaction().commit();
             return quantityId;
@@ -61,14 +62,17 @@ public class QuantityDaoImpl implements QuantityDao {
     }
 
     @Override
-    public void changeTypeOfCopyById(long id) {
+    public void changeTypeOfCopyById(long id, Type type) {
         try(Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            session.createNativeQuery("update Quantity q set type =: type where q.id =: id",
-                            Integer.class)
-                    .setParameter("type", Type.READING)
+           /* session.createNativeQuery("update Quantity q set type=:type where q.id=:id",
+                            Class.class)*/
+            Quantity quantity = session.getReference(Quantity.class, id);
+            quantity.setType(type);
+            session.merge(quantity);
+                   /* .setParameter("type", Type.READING)
                     .setParameter("id", id)
-                    .executeUpdate();
+                    .executeUpdate();*/
             session.getTransaction().commit();
         }
     }

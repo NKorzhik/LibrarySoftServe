@@ -36,7 +36,7 @@ public class RequestDaoImpl implements RequestDao {
     }
 
     @Override
-    public void acceptRequest(HistoryOfRequest request) {
+    public void processRequest(HistoryOfRequest request) {
         try(Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             session.merge(request);

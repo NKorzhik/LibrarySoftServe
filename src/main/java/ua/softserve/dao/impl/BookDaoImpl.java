@@ -48,6 +48,16 @@ public class BookDaoImpl implements BookDao {
             e.printStackTrace();
         }
     }
+    @Override
+    public void updateBook(Book book) {
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.merge(book);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public List<Book> listBook() {
@@ -96,7 +106,7 @@ public class BookDaoImpl implements BookDao {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             session.getTransaction().begin();
 
-            List<Book> mostPopular = session.createQuery("Select b.bookId from HistoryOfRequest b  left join  b.bookId left join b.bookId.author  left join  b.bookId.coAuthor  where b.dateOfIssue between :firstDate AND :secondDate group by b.bookId order by count (b.bookId) desc ", Book.class)
+            List<Book> mostPopular = session.createQuery("Select b.bookId from HistoryOfRequest b  left join  b.bookId left join b.bookId.author  left join  b.bookId.coAuthor where b.dateOfIssue between :firstDate AND :secondDate group by b.bookId order by count (b.bookId) desc ", Book.class)
                     .setParameter("firstDate", LocalDate.parse(firstDate,formatter))
                     .setParameter("secondDate", LocalDate.parse(secondDate,formatter)).getResultList();
 

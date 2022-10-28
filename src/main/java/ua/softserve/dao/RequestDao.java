@@ -9,7 +9,7 @@ public interface RequestDao {
 
     void addRequest(HistoryOfRequest request);
 
-    void acceptRequest(HistoryOfRequest request);
+    void processRequest(HistoryOfRequest request);
     List<HistoryOfRequest> getRequestedBooks(long id);
     HistoryOfRequest getRequestById(long id);
     List<HistoryOfRequest> getBooksWithStatusWaiting();

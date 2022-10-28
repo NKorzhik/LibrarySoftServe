@@ -34,7 +34,7 @@ public class RequestController {
     }
 
     @PostMapping("/add/{bookId}")
-    public String add(@PathVariable("bookId") long bookId, RequestReadDto requestDto) {
+    public String add(@PathVariable("bookId") long bookId) {
         /*BookReadUpdateDto bookDto = bookService.getBook(bookId);
         requestDto.setBookDto(bookDto);*/
         requestService.addRequest(bookId);
@@ -79,5 +79,10 @@ public class RequestController {
         return "redirect:/pageManager";
     }
 
-
+    @PreAuthorize("hasRole('ROLE_MANAGER')")
+    @PostMapping("/reject/{id}")
+    public String rejectRequest(@PathVariable("id") long id) {
+        requestService.rejectRequest(id);
+        return "redirect:/pageManager";
+    }
 }

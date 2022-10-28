@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en" , xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Bootstrap Example</title>
@@ -147,9 +147,9 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li class="active"><a th:href="@{/list}">Home</a></li>
-        <!--                <li><a href="#">About</a></li>-->
-        <!--                <li><a href="#">Projects</a></li>-->
-        <!--                <li><a href="#">Contact</a></li>-->
+        &lt;!&ndash;                <li><a href="#">About</a></li>&ndash;&gt;
+        &lt;!&ndash;                <li><a href="#">Projects</a></li>&ndash;&gt;
+        &lt;!&ndash;                <li><a href="#">Contact</a></li>&ndash;&gt;
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a th:href="@{/login}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
@@ -161,9 +161,9 @@
 <div class="container-fluid text-center">
   <div class="row content">
     <div class="col-sm-2 sidenav">
-      <!--            <p><a href="#">Link</a></p>-->
-      <!--            <p><a href="#">Link</a></p>-->
-      <!--            <p><a href="#">Link</a></p>-->
+      &lt;!&ndash;            <p><a href="#">Link</a></p>&ndash;&gt;
+      &lt;!&ndash;            <p><a href="#">Link</a></p>&ndash;&gt;
+      &lt;!&ndash;            <p><a href="#">Link</a></p>&ndash;&gt;
     </div>
     <div class="col-sm-8 text-left">
       <form th:method="PATCH" th:action="@{/{id}(id=${bookReadDto.getId()})}" th:object="${bookReadDto}">
@@ -199,8 +199,277 @@
         <div>
           <input type="text" th:field="*{description}" id="description"/>
         </div>
-        <button type="submit" class="btn btn-default">Add book</button>
+        <div>
+          <input type="text" th:field="*{quantity}" id="quantity"/>
+        </div>
+        <button type="submit" class="btn btn-default">Update</button>
       </form>
+      &lt;!&ndash;            <h3>Test</h3>&ndash;&gt;
+      &lt;!&ndash;            <p>Lorem ipsum...</p>&ndash;&gt;
+    </div>
+    <div class="col-sm-2 sidenav">
+      &lt;!&ndash;            <div class="well">&ndash;&gt;
+      &lt;!&ndash;                <p>ADS</p>&ndash;&gt;
+      &lt;!&ndash;            </div>&ndash;&gt;
+      &lt;!&ndash;            <div class="well">&ndash;&gt;
+      &lt;!&ndash;                <p>ADS</p>&ndash;&gt;
+      &lt;!&ndash;            </div>&ndash;&gt;
+    </div>
+  </div>
+</div>
+
+<footer class="container-fluid text-center">
+  <p>Application by Nikita and Renat</p>
+</footer>
+
+</body>
+</html>-->
+
+<!DOCTYPE html>
+<html lang="en" , xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+
+    /* TABLES */
+    .table {
+      border-collapse: separate;
+    }
+
+    .table-hover > tbody > tr:hover > td,
+    .table-hover > tbody > tr:hover > th {
+      background-color: #eee;
+    }
+
+    .table thead > tr > th {
+      border-bottom: 1px solid #C2C2C2;
+      padding-bottom: 0;
+    }
+
+    .table tbody > tr > td {
+      font-size: 0.875em;
+      background: #f5f5f5;
+      border-top: 10px solid #fff;
+      vertical-align: middle;
+      padding: 12px 8px;
+    }
+
+    .table tbody > tr > td:first-child,
+    .table thead > tr > th:first-child {
+      padding-left: 20px;
+    }
+
+    .table thead > tr > th span {
+      border-bottom: 2px solid #C2C2C2;
+      display: inline-block;
+      padding: 0 5px 5px;
+      font-weight: normal;
+    }
+
+    .table thead > tr > th > a span {
+      color: #344644;
+    }
+
+    .table thead > tr > th > a span:after {
+      content: "\f0dc";
+      font-family: FontAwesome;
+      font-style: normal;
+      font-weight: normal;
+      text-decoration: inherit;
+      margin-left: 5px;
+      font-size: 0.75em;
+    }
+
+    .table thead > tr > th > a.asc span:after {
+      content: "\f0dd";
+    }
+
+    .table thead > tr > th > a.desc span:after {
+      content: "\f0de";
+    }
+
+    .table thead > tr > th > a:hover span {
+      text-decoration: none;
+      color: #2bb6a3;
+      border-color: #2bb6a3;
+    }
+
+    .table.table-hover tbody > tr > td {
+      -webkit-transition: background-color 0.15s ease-in-out 0s;
+      transition: background-color 0.15s ease-in-out 0s;
+    }
+
+    .table tbody tr td .call-type {
+      display: block;
+      font-size: 0.75em;
+      text-align: center;
+    }
+
+    .table tbody tr td .first-line {
+      line-height: 1.5;
+      font-weight: 400;
+      font-size: 1.125em;
+    }
+
+    .table tbody tr td .first-line span {
+      font-size: 0.875em;
+      color: #969696;
+      font-weight: 300;
+    }
+
+    .table tbody tr td .second-line {
+      font-size: 0.875em;
+      line-height: 1.2;
+    }
+
+    /*.table-products tbody > tr > td {*/
+    /*    background: none;*/
+    /*    border: none;*/
+    /*    border-bottom: 1px solid #ebebeb;*/
+    /*    -webkit-transition: background-color 0.15s ease-in-out 0s;*/
+    /*    transition: background-color 0.15s ease-in-out 0s;*/
+    /*    position: relative;*/
+    /*}*/
+    /*.table-products tbody > tr:hover > td {*/
+    /*    text-decoration: none;*/
+    /*    background-color: #f6f6f6;*/
+    /*}*/
+
+
+    /* Remove the navbar's default margin-bottom and rounded borders */
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {
+      height: 450px
+    }
+
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+
+      .row.content {
+        height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Logo</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a th:href="@{/list}">Home</a></li>
+        <!--                <li><a href="#">About</a></li>-->
+        <!--                <li><a href="#">Projects</a></li>-->
+        <!--                <li><a href="#">Contact</a></li>-->
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a th:href="@{/login}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid text-center">
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
+      <!--            <p><a href="#">Link</a></p>-->
+      <!--            <p><a href="#">Link</a></p>-->
+      <!--            <p><a href="#">Link</a></p>-->
+    </div>
+    <div class="col-sm-8 text-left">
+      <h1 style="text-align: center;">Update Book Information</h1>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-10 mx-auto">
+            <form th:method="PATCH" th:action="@{/{id}(id=${bookReadDto.getId()})}" th:object="${bookReadDto}">
+              <div class="form-group row">
+                <div class="col-sm-3">
+                  <label for="title">Title</label>
+                  <input type="text" th:field="*{title}" id="title"/>
+                </div>
+                <div class="col-sm-3">
+                  <label for="authorName">Author:name</label>
+                  <input type="text" th:field="*{authorDto.name}" id="authorName"/>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-3">
+                  <label for="authorSurname">Author:surname</label>
+                  <input type="text" th:field="*{authorDto.surname}" id="authorSurname"/>
+                </div>
+                <div class="col-sm-3">
+                  <label for="coAuthorName">Co-Author:name</label>
+                  <input type="text" th:field="*{coAuthorDto.name}" id="coAuthorName"/>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-3">
+                  <label for="coAuthorSurname">Co-Author:surname</label>
+                  <input type="text" th:field="*{coAuthorDto.surname}" id="coAuthorSurname"/>
+                </div>
+                <div class="col-sm-3">
+                  <label for="genre">Genre</label>
+                  <input type="text" th:field="*{genre}" id="genre"/>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-3">
+                  <label for="description">Description</label>
+                  <input type="text" th:field="*{description}" id="description"/>
+                </div>
+                <div class="col-sm-3">
+                  <label for="quantity">Quantity</label>
+                  <input type="text" th:field="*{quantity}" id="quantity"/>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-3">
+                  <label for="isbn">ISBN</label>
+                  <input type="text" th:field="*{ISBN}" id="isbn"/>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary px-4 float-right">Update</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
       <!--            <h3>Test</h3>-->
       <!--            <p>Lorem ipsum...</p>-->
     </div>
@@ -221,4 +490,5 @@
 
 </body>
 </html>
+
 

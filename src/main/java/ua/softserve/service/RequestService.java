@@ -12,6 +12,7 @@ import ua.softserve.dto.request.RequestReadDto;
 import ua.softserve.mapper.request.RequestReadMapper;
 import ua.softserve.model.HistoryOfRequest;
 import ua.softserve.model.enums.Status;
+import ua.softserve.model.enums.Type;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -37,18 +38,25 @@ public class RequestService {
         this.quantityDao = quantityDao;
     }
 
+    private long processRequest(long id, Status status) {
+        HistoryOfRequest request = requestDao.getRequestById(id);
+        requestDao.processRequest(
+                Optional.of(request)
+                        //возможно нужно замапить в дто перед присвоеним значений
+                        .map(ofRequest -> {
+                            ofRequest.setStatus(status);
+                            ofRequest.setRequestProcessingDate(LocalDate.now());
+                            return ofRequest;
+                        }).orElseThrow()
+        );
+        return request.getBookId().getId();
+    }
+
     public void addRequest(long bookId) {
         UserDetails userDetails  = (UserDetails) SecurityContextHolder.getContext()
                 .getAuthentication()
                 .getPrincipal();
         String userEmail = userDetails.getUsername();
-
-        /*requestDto.setUserDto(UserCreateMapper.mapToDto(
-                userDao.findByEmail(userEmail).orElseThrow()));
-        requestDto.setDateOfIssue(LocalDate.now());
-        requestDto.setShouldBeReturn(LocalDate.now().plusMonths(3));
-        requestDto.setStatus(Status.WAITING);
-        requestDao.addRequest(RequestCreateMapper.mapToModel(requestDto));*/
 
         HistoryOfRequest request = new HistoryOfRequest();
         request.setBookId(bookDao.getBook(bookId));
@@ -56,22 +64,21 @@ public class RequestService {
                 .orElseThrow());
         request.setDateOfIssue(LocalDate.now());
         request.setShouldBeReturn(LocalDate.now().plusMonths(3));
-        request.setStatus(Status.WAITING);
+
+        long countOfBookCopies = quantityDao.getCountOfQuantityByBookId(bookId);
+        request.setStatus(countOfBookCopies == 0 ? Status.NOT_AVAILABLE : Status.WAITING);
+
         requestDao.addRequest(request);
     }
 
     public void acceptRequest(long id) {
-        requestDao.acceptRequest(
-                Optional.of(requestDao.getRequestById(id))
-                        //возможно нужно замапить в дто перед присвоеним значений
-                        .map(request -> {
-                            request.setStatus(Status.READING);
-                            request.setRequestProcessingDate(LocalDate.now());
-                            return request;
-                        }).orElseThrow()
-        );
-        long copyId = quantityDao.getFirstFreeCopyByBookId(id);
-        quantityDao.changeTypeOfCopyById(copyId);
+        long bookId = processRequest(id, Status.READING);
+        long copyId = quantityDao.getFirstFreeCopyByBookId(bookId);
+        quantityDao.changeTypeOfCopyById(copyId, Type.READING);
+    }
+
+    public void rejectRequest(long id) {
+        processRequest(id, Status.REJECTED);
     }
 
     //ПОМЕНЯТЬ НА ДТО

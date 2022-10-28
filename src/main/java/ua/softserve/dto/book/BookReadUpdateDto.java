@@ -20,12 +20,7 @@ public class BookReadUpdateDto {
     private String ISBN;
     private AuthorDto authorDto;
     private AuthorDto coAuthorDto;
-
-    //private List<Quantity> quantities; //закоментировано т.к в методе getMoreInfoAboutBook мы используем метод
-    //getCountOfQuantityByBookId
-
-    //private int quantities;
-    //private List<HistoryOfRequest> requests;
+    private int quantity;
 
     @Override
     public boolean equals(Object o) {
