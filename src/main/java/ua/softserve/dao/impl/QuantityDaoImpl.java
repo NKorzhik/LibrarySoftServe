@@ -66,7 +66,7 @@ public class QuantityDaoImpl implements QuantityDao {
             session.beginTransaction();
             session.createNativeQuery("update Quantity q set type =: type where q.id =: id",
                             Integer.class)
-                    .setParameter("type", Type.READ)
+                    .setParameter("type", Type.READING)
                     .setParameter("id", id)
                     .executeUpdate();
             session.getTransaction().commit();

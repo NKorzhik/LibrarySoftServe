@@ -52,7 +52,7 @@ public class RequestDaoImpl implements RequestDao {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             list = session.createQuery("SELECT r from HistoryOfRequest r left join fetch r.bookId " +
-                                    "left join fetch r.bookId.author left join fetch r.bookId.coAuthor where r.userId.id =:id",
+                                    "left join fetch r.bookId.author left join fetch r.bookId.coAuthor left join fetch r.userId where r.userId.id =:id",
                             HistoryOfRequest.class)
                     .setParameter("id", id)
                     .getResultStream()
@@ -102,7 +102,7 @@ public class RequestDaoImpl implements RequestDao {
 
             request.setReturnDate(LocalDate.now());
 
-            int result = LocalDate.now().compareTo(request.shouldBeReturn);
+            int result = LocalDate.now().compareTo(request.getShouldBeReturn());
             if (result > 0) {
                 request.setStatus(Status.RETURNED_NOT_ON_TIME);
             } else {
