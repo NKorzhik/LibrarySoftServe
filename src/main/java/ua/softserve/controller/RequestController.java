@@ -72,6 +72,12 @@ public class RequestController {
         return "redirect:/pageReader";
     }
 
+    @PreAuthorize("hasRole('ROLE_MANAGER')")
+    @PostMapping("/accept/{id}")
+    public String acceptRequest(@PathVariable("id") long id) {
+        requestService.acceptRequest(id);
+        return "redirect:/pageManager";
+    }
 
 
 }

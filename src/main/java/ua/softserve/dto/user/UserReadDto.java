@@ -1,4 +1,4 @@
-package ua.softserve.dto;
+package ua.softserve.dto.user;
 
 import lombok.*;
 
@@ -10,6 +10,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @Builder
 public class UserReadDto {
+    private Long id;
     private String email;
     private String password;
 

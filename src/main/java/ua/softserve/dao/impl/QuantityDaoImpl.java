@@ -29,16 +29,19 @@ public class QuantityDaoImpl implements QuantityDao {
             session.getTransaction().commit();
         }
     }
+
     @Override
-    public void deleteOneCopyById(long bookId) {
+    public long getFirstFreeCopyByBookId(long bookId) {
         try(Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            Query<Quantity> query = session.createQuery(
-                    "select q from Quantity q where q.bookId.id=:bookId",
-                    Quantity.class).setMaxResults(1);
-            query.setParameter("bookId", bookId);
-            session.remove(query.getSingleResult());
+            Long quantityId = session.createQuery(
+                    "select q.id from Quantity q where q.bookId =: bookId and q.type =: type",
+                    Long.class)
+                    .setParameter("bookId", bookId)
+                    .setParameter("type", Type.FREE)
+                    .getSingleResult();
             session.getTransaction().commit();
+            return quantityId;
         }
     }
 
@@ -54,6 +57,32 @@ public class QuantityDaoImpl implements QuantityDao {
             long result = query.getResultStream().count();
             session.getTransaction().commit();
             return result;
+        }
+    }
+
+    @Override
+    public void changeTypeOfCopyById(long id) {
+        try(Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.createNativeQuery("update Quantity q set type =: type where q.id =: id",
+                            Integer.class)
+                    .setParameter("type", Type.READ)
+                    .setParameter("id", id)
+                    .executeUpdate();
+            session.getTransaction().commit();
+        }
+    }
+
+    @Override
+    public void deleteOneCopyById(long bookId) {
+        try(Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            Query<Quantity> query = session.createQuery(
+                    "select q from Quantity q where q.bookId.id=:bookId",
+                    Quantity.class).setMaxResults(1);
+            query.setParameter("bookId", bookId);
+            session.remove(query.getSingleResult());
+            session.getTransaction().commit();
         }
     }
 

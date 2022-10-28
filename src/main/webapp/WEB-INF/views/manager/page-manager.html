@@ -212,7 +212,7 @@
                     <td th:text="${l.shouldBeReturn}"></td>
                     <td th:text="${l.status}"></td>
                     <!--                    th:if="${l.status == l.status.READING}"-->
-                    <td ><a href="#" class="btn btn-primary">Give</a></td>
+                    <td ><a th:href="@{/accept/{id}(id=${l.getId()})}" class="btn btn-primary">Give</a></td>
                     <td ><a href="#" class="btn btn-primary">Reject</a></td>
                 </tr>
                 </tbody>

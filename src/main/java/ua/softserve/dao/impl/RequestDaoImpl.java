@@ -36,6 +36,17 @@ public class RequestDaoImpl implements RequestDao {
     }
 
     @Override
+    public void acceptRequest(HistoryOfRequest request) {
+        try(Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.merge(request);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public List<HistoryOfRequest> getRequestedBooks(long id) {
         List<HistoryOfRequest> list;
         try (Session session = sessionFactory.openSession()) {
@@ -53,15 +64,16 @@ public class RequestDaoImpl implements RequestDao {
 
     @Override
     public HistoryOfRequest getRequestById(long id) {
-        try (Session session = sessionFactory.openSession()) {
+        try(Session session = sessionFactory.openSession()){
             session.beginTransaction();
-            HistoryOfRequest request = session.createQuery("select r from HistoryOfRequest r left join fetch r.bookId left join fetch r.bookId.author left join fetch r.bookId.coAuthor where r.id =:id", HistoryOfRequest.class)
-                    .setParameter("id", id).getSingleResult();
+            HistoryOfRequest request = session.createQuery("select r from HistoryOfRequest r " +
+                            "left join fetch r.bookId left join fetch r.bookId.author left join fetch r.bookId.coAuthor " +
+                            "left join fetch r.userId where r.id =:id", HistoryOfRequest.class)
+                    .setParameter("id",id).getSingleResult();
             session.getTransaction().commit();
             return request;
         }
     }
-
     @Override
     public List<HistoryOfRequest> getBooksWithStatusWaiting() {
         try (Session session = sessionFactory.openSession()) {

@@ -4,14 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ua.softserve.dao.UserDao;
-import ua.softserve.dto.UserCreateDto;
-import ua.softserve.mapper.UserCreateMapper;
-import ua.softserve.model.HistoryOfRequest;
+import ua.softserve.dto.user.UserCreateDto;
+import ua.softserve.mapper.user.UserCreateMapper;
 import ua.softserve.model.User;
 import ua.softserve.model.enums.Role;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -33,10 +31,6 @@ public class UserService {
         User user = UserCreateMapper.mapToModel(userCreateDto);
         userDao.addUser(user);
     }
-
-
-
-
     public Optional<User> findUserByEmail(String email){
         return userDao.findByEmail(email);
     }

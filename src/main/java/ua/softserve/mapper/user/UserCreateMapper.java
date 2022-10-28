@@ -1,6 +1,6 @@
-package ua.softserve.mapper;
+package ua.softserve.mapper.user;
 
-import ua.softserve.dto.UserCreateDto;
+import ua.softserve.dto.user.UserCreateDto;
 import ua.softserve.model.User;
 
 public class UserCreateMapper {

@@ -14,7 +14,7 @@ import java.util.List;
 @Table(name = "user_account")
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+//@Builder
 public class User extends BaseEntity<Long>{
 
     private String name;
@@ -33,4 +33,22 @@ public class User extends BaseEntity<Long>{
     @ToString.Exclude
     private List<HistoryOfRequest> listOfRequests;
 
+    @Builder
+    public User(Long id,
+                String name,
+                String surname,
+                String email,
+                String password,
+                Role role,
+                LocalDate birthday,
+                LocalDate registrationDate) {
+        super(id);
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.birthday = birthday;
+        this.registrationDate = registrationDate;
+    }
 }

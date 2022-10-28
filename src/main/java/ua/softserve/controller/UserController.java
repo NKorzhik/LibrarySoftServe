@@ -2,19 +2,13 @@ package ua.softserve.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ua.softserve.dto.BookReadUpdateDto;
-import ua.softserve.dto.UserCreateDto;
-import ua.softserve.dto.UserReadDto;
-import ua.softserve.model.HistoryOfRequest;
-import ua.softserve.model.User;
+import ua.softserve.dto.user.UserCreateDto;
+import ua.softserve.dto.user.UserLoginDto;
+import ua.softserve.dto.user.UserReadDto;
 import ua.softserve.service.UserService;
-
-import java.util.List;
-import java.util.Optional;
 
 @Controller
 //@RequestMapping("/user")
@@ -27,8 +21,8 @@ public class UserController {
         this.userService = userService;
     }
     @GetMapping("/login")
-    public String login(Model model, UserReadDto userDto) {
-        model.addAttribute("userReadDto", userDto);
+    public String login(Model model, UserLoginDto userDto) {
+        model.addAttribute("userLoginDto", userDto);
         return "user/login";
     }
     @GetMapping("/register")

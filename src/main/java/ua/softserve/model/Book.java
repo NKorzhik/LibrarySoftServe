@@ -2,6 +2,7 @@ package ua.softserve.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import ua.softserve.model.enums.Genre;
 
 import java.util.List;
@@ -13,7 +14,8 @@ import java.util.Optional;
 @Table(name = "book")
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+//@SuperBuilder
+//@Builder
 public class Book extends BaseEntity<Long> {
 
     @Column(name = "title")
@@ -45,4 +47,24 @@ public class Book extends BaseEntity<Long> {
     @ToString.Exclude
     private List<Quantity> quantities;
 
+    @Builder
+    public Book(Long id,
+                String title,
+                Genre genre,
+                String description,
+                String ISBN,
+                Author author,
+                Author coAuthor
+                /*List<HistoryOfRequest> requests,
+                List<Quantity> quantities*/) {
+        super(id);
+        this.title = title;
+        this.genre = genre;
+        this.description = description;
+        this.ISBN = ISBN;
+        this.author = author;
+        this.coAuthor = coAuthor;
+        /*this.requests = requests;
+        this.quantities = quantities;*/
+    }
 }

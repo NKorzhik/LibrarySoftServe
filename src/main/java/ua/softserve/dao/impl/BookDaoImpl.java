@@ -80,7 +80,7 @@ public class BookDaoImpl implements BookDao {
     public List<Book> findBookByTitle(String title) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            List<Book> books = session.createQuery("from Book b LEFT JOIN FETCH b.author LEFT JOIN FETCH " +
+            List<Book> books = session.createQuery("select b from Book b LEFT JOIN FETCH b.author LEFT JOIN FETCH " +
                             "b.coAuthor WHERE b.title like :title or b.author.name like :title or b.author.surname like :title or b.coAuthor.name like :title or b.coAuthor.surname like: title", Book.class)
                     .setParameter("title", "%" + title + "%")
                     .getResultList();

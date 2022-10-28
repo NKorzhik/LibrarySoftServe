@@ -1,6 +1,7 @@
-package ua.softserve.dto;
+package ua.softserve.dto.book;
 
 import lombok.*;
+import ua.softserve.dto.author.AuthorDto;
 import ua.softserve.model.enums.Genre;
 
 import java.util.Objects;
