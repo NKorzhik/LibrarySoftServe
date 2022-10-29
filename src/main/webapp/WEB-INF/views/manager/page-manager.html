@@ -178,8 +178,16 @@
                     <td th:text="${l.dateOfIssue}"></td>
                     <td th:text="${l.shouldBeReturn}"></td>
                     <td th:text="${l.status}"></td>
-                    <td ><a th:method="POST" th:href="@{/request/accept/{id}(id=${l.getId()})}" class="btn btn-primary">Give</a></td>
-                    <td ><a href="#" class="btn btn-primary">Reject</a></td>
+                    <td>
+                        <form th:method="POST" th:action="@{/request/accept/{id}(id=${l.id})}">
+                            <button type="submit" class="btn btn-default">Give</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form th:method="POST" th:action="@{/request/reject/{id}(id=${l.id})}">
+                            <button type="submit" class="btn btn-default">Reject</button>
+                        </form>
+                    </td>
                 </tr>
                 </tbody>
             </table>

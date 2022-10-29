@@ -42,7 +42,6 @@ public class RequestService {
         HistoryOfRequest request = requestDao.getRequestById(id);
         requestDao.processRequest(
                 Optional.of(request)
-                        //возможно нужно замапить в дто перед присвоеним значений
                         .map(ofRequest -> {
                             ofRequest.setStatus(status);
                             ofRequest.setRequestProcessingDate(LocalDate.now());

@@ -65,14 +65,9 @@ public class QuantityDaoImpl implements QuantityDao {
     public void changeTypeOfCopyById(long id, Type type) {
         try(Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-           /* session.createNativeQuery("update Quantity q set type=:type where q.id=:id",
-                            Class.class)*/
             Quantity quantity = session.getReference(Quantity.class, id);
             quantity.setType(type);
             session.merge(quantity);
-                   /* .setParameter("type", Type.READING)
-                    .setParameter("id", id)
-                    .executeUpdate();*/
             session.getTransaction().commit();
         }
     }

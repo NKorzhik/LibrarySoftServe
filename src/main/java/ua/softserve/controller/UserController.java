@@ -3,6 +3,7 @@ package ua.softserve.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,9 +15,7 @@ import ua.softserve.service.UserService;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-
     UserService userService;
-
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
@@ -36,11 +35,12 @@ public class UserController {
 
 
     @PostMapping("/post/register")
-    public String addUser(@ModelAttribute("userDto") UserCreateDto userDto) {
+    public String addUser(@ModelAttribute("userDto") UserCreateDto userDto, BindingResult result) {
+        if (result.hasErrors()) {
+            return "user/registration";
+        }
         userService.addUser(userDto);
         return "redirect:/book/list";
     }
-
-
 }
 

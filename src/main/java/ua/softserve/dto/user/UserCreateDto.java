@@ -1,6 +1,5 @@
 package ua.softserve.dto.user;
 
-
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 import ua.softserve.model.enums.Role;

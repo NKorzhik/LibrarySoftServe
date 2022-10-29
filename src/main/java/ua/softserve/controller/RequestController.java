@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ua.softserve.dto.request.RequestReadDto;
 import ua.softserve.model.User;
-import ua.softserve.service.BookService;
 import ua.softserve.service.RequestService;
 import ua.softserve.service.UserService;
 
@@ -69,7 +67,7 @@ public class RequestController {
     }
 
     @PreAuthorize("hasRole('ROLE_MANAGER')")
-    @PostMapping(" /accept/{id}")
+    @PostMapping("/accept/{id}")
     public String acceptRequest(@PathVariable("id") long id) {
         requestService.acceptRequest(id);
         return "redirect:/request/pageManager";
@@ -79,6 +77,6 @@ public class RequestController {
     @PostMapping("/reject/{id}")
     public String rejectRequest(@PathVariable("id") long id) {
         requestService.rejectRequest(id);
-        return "redirect:/pageManager";
+        return "redirect:request/pageManager";
     }
 }

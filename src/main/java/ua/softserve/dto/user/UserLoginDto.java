@@ -3,8 +3,6 @@ package ua.softserve.dto.user;
 import lombok.*;
 
 import java.util.Objects;
-
-//реализовать: поля - email, password
 @Getter
 @Setter
 @AllArgsConstructor

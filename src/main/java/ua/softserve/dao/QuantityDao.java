@@ -1,6 +1,7 @@
 package ua.softserve.dao;
 
 import ua.softserve.model.Book;
+import ua.softserve.model.enums.Type;
 
 
 public interface QuantityDao {
@@ -10,7 +11,7 @@ public interface QuantityDao {
 
     long getCountOfQuantityByBookId(long bookId);
 
-    void changeTypeOfCopyById(long id);
+    void changeTypeOfCopyById(long id, Type type);
 
     void deleteOneCopyById(long bookId);
 
