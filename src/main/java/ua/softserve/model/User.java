@@ -2,6 +2,8 @@ package ua.softserve.model;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 import ua.softserve.model.enums.Role;
@@ -14,12 +16,14 @@ import java.util.List;
 @Table(name = "user_account")
 @AllArgsConstructor
 @NoArgsConstructor
-//@Builder
 public class User extends BaseEntity<Long>{
 
     private String name;
+
     private String surname;
+
     private String email;
+
     private String password;
     @Enumerated(value = EnumType.STRING)
     private Role role;

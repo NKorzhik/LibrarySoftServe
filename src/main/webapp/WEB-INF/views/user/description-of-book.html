@@ -138,13 +138,13 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a th:href="@{/list}">Home</a></li>
-                <li class="active" sec:authorize="hasRole('ROLE_READER')"><a th:href='@{/pageReader}'>Profile</a></li>
-                <li class="active" sec:authorize="hasRole('ROLE_MANAGER')"><a th:href='@{/pageManager}'>Profile</a></li>
+                <li class="active"><a th:href="@{/book/list}">Home</a></li>
+                <li class="active" sec:authorize="hasRole('ROLE_READER')"><a th:href='@{/request/pageReader}'>Profile</a></li>
+                <li class="active" sec:authorize="hasRole('ROLE_MANAGER')"><a th:href='@{/request/pageManager}'>Profile</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-                <li sec:authorize="isAnonymous()"><a th:href="@{/login}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li sec:authorize="isAnonymous()"><a th:href="@{/user/login}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
         </div>
     </div>
@@ -169,17 +169,17 @@
 
 
             <div sec:authorize="hasRole('ROLE_READER')">
-                <form th:method="POST" th:action="@{/add/{bookId}(bookId=${bookReadDto.id})}">
+                <form th:method="POST" th:action="@{/request/add/{bookId}(bookId=${bookReadDto.id})}">
                     <button type="submit" class="btn btn-default">Make a request</button>
                 </form>
             </div>
 
             <div sec:authorize="hasRole('ROLE_MANAGER')">
-                <form th:method="DELETE" th:action="@{/delete/copy/{id}(id=${bookReadDto.id})}">
+                <form th:method="DELETE" th:action="@{/book/delete/copy/{id}(id=${bookReadDto.id})}">
                     <button type="submit" class="btn btn-default">Delete one copy</button>
                 </form>
 
-                <form th:method="DELETE" th:action="@{/delete/{id}(id=${bookReadDto.id})}">
+                <form th:method="DELETE" th:action="@{/book/delete/{id}(id=${bookReadDto.id})}">
                     <button type="submit" class="btn btn-default">Delete book</button>
                 </form>
 

@@ -18,18 +18,15 @@ import ua.softserve.service.UserService;
 import java.util.Optional;
 
 @Controller
-//@RequestMapping("/request")
+@RequestMapping("/request")
 public class RequestController {
     private final RequestService requestService;
     private final UserService userService;
-    private final BookService bookService;
 
     @Autowired
     public RequestController(RequestService requestService,
-                             BookService bookService,
                              UserService userService) {
         this.requestService = requestService;
-        this.bookService = bookService;
         this.userService = userService;
     }
 
@@ -38,7 +35,7 @@ public class RequestController {
         /*BookReadUpdateDto bookDto = bookService.getBook(bookId);
         requestDto.setBookDto(bookDto);*/
         requestService.addRequest(bookId);
-        return "redirect:/list";
+        return "redirect:/book/list";
     }
 
     @PreAuthorize("hasRole('ROLE_READER')")
@@ -48,7 +45,6 @@ public class RequestController {
         model.addAttribute("requests", requestService.getRequestedBooks(user.orElseThrow().getId()));
         return "reader/page-reader";
     }
-
 
     @PreAuthorize("hasRole('ROLE_READER')")
     @GetMapping("/getBook/{id}")
@@ -69,14 +65,14 @@ public class RequestController {
     @PostMapping("/returnBookToLibrary/{id}")
     public String returnBookToLibrary(@PathVariable("id") long requestId){
         requestService.returnBookToLibrary(requestId);
-        return "redirect:/pageReader";
+        return "redirect:/request/pageReader";
     }
 
     @PreAuthorize("hasRole('ROLE_MANAGER')")
-    @PostMapping("/accept/{id}")
+    @PostMapping(" /accept/{id}")
     public String acceptRequest(@PathVariable("id") long id) {
         requestService.acceptRequest(id);
-        return "redirect:/pageManager";
+        return "redirect:/request/pageManager";
     }
 
     @PreAuthorize("hasRole('ROLE_MANAGER')")

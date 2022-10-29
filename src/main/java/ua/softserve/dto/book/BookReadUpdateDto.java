@@ -29,6 +29,7 @@ public class BookReadUpdateDto {
         BookReadUpdateDto bookDto = (BookReadUpdateDto) o;
         return title.equals(bookDto.title) && ISBN.equals(bookDto.ISBN);
     }
+
     @Override
     public int hashCode() {
         return Objects.hash(title, ISBN);

@@ -38,13 +38,14 @@ public class AuthorDaoImpl implements AuthorDao {
     @Override
     public Author getAuthor(long id) {
         Author author;
-        try(Session session = sessionFactory.openSession()){
+        try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             author = session.get(Author.class, id);
             session.getTransaction().commit();
         }
         return author;
     }
+
     @Override
     public Optional<Author> getAuthorByNameAndSurname(String name, String surname) {
         Optional<Author> author;

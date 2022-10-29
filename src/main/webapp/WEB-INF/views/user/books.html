@@ -129,14 +129,14 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a th:href="@{/list}">Home</a></li>
-                <li class="active" sec:authorize="hasRole('ROLE_READER')"><a th:href='@{/pageReader}'>Profile</a></li>
-                <li class="active" sec:authorize="hasRole('ROLE_MANAGER')"><a th:href='@{/pageManager}'>Profile</a></li>
+                <li class="active"><a th:href="@{/book/list}">Home</a></li>
+                <li class="active" sec:authorize="hasRole('ROLE_READER')"><a th:href='@{/request/pageReader}'>Profile</a></li>
+                <li class="active" sec:authorize="hasRole('ROLE_MANAGER')"><a th:href='@{/request/pageManager}'>Profile</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}"><span
                         class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-                <li sec:authorize="isAnonymous()"><a th:href="@{/login}"><span
+                <li sec:authorize="isAnonymous()"><a th:href="@{/user/login}"><span
                         class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
         </div>
@@ -148,7 +148,7 @@
         <div class="col-sm-2 ">
 
             <h6>Get the most popular and unpopular book in selected period</h6>
-            <form th:action="@{/getPopUnPopBook}" method="get">
+            <form th:action="@{/book/getPopUnPopBook}" method="get">
                 <label>
                     <input type="text" th:value="${firstDate}" name = "firstDate" placeholder="First Date(yyyy-mm-d)" size="18">
                     <input type="text" th:value="${secondDate}" name = "secondDate" placeholder="Second Date(yyyy-mm-d) " size="18">
@@ -159,6 +159,15 @@
         <div class="col-sm-8 text-left">
 
             <h1>List of Book</h1>
+
+            <form th:action="@{/book/search}" method="get">
+                <label>
+                    <input type="text" name="keyword" th:value="${keyword}" placeholder="Find book " size="50">
+                </label>
+                <button type="submit" class="btn btn-info">Search</button>
+                <button type="submit" class="btn btn-info">Reset</button>
+            </form>
+
 
             <table class="table book-list">
                 <thead>
@@ -177,22 +186,22 @@
                         th:text="${book.coAuthor.name} + ' ' +  ${book.coAuthor.surname}"></td>
                     <td th:if="${book.coAuthor == null}"> Missing</td>
                     <td th:text="${book.genre}"></td>
-                    <td><a th:href="@{/more/{id}(id=${book.id})}" class="btn btn-primary">More</a></td>
+                    <td><a th:href="@{/book/more/{id}(id=${book.id})}" class="btn btn-primary">More</a></td>
                 </tr>
                 </tbody>
             </table>
 
             <div th:if="${books.currentPageNumber < books.lastPageNumber}" class="pagination">
-                <a th:href="@{/list(pageNumber=${books.currentPageNumber})}"
+                <a th:href="@{/book/list(pageNumber=${books.currentPageNumber})}"
                    th:text="${books.currentPageNumber}"
                    th:class="${books.currentPageNumber == books.currentPageNumber + 1} ? active"></a>
 
                 <a th:if ="${books.currentPageNumber + 1  != books.lastPageNumber}"
-                   th:href="@{/list(pageNumber=${books.currentPageNumber + 1})}"
+                   th:href="@{/book/list(pageNumber=${books.currentPageNumber + 1})}"
                    th:text="${books.currentPageNumber + 1}"
                    th:class="${books.currentPageNumber == books.currentPageNumber + 1} ? active"></a>
 
-                <a th:href="@{/list(pageNumber=${books.lastPageNumber})}"
+                <a th:href="@{/book/list(pageNumber=${books.lastPageNumber})}"
                    th:text="${books.lastPageNumber}"></a>
 
             </div>

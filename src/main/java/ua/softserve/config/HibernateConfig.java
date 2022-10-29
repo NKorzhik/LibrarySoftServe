@@ -39,8 +39,6 @@ public class HibernateConfig {
                 settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
 
                 settings.put(Environment.HBM2DDL_AUTO, "update");
-                //settings.put(Environment.AUTOCOMMIT, "true");
-                //settings.put(Environment.PERSISTENCE_UNIT_NAME, "manager");
                 configuration.setProperties(settings);
 
                 configuration.addAnnotatedClass(Book.class)
