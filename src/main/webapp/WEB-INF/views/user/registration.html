@@ -138,7 +138,7 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a th:href="@{/list}">Home</a></li>
+                <li class="active"><a th:href="@{/book/list}">Home</a></li>
             </ul>
         </div>
     </div>
@@ -149,37 +149,37 @@
         <div class="col-sm-2 sidenav">
         </div>
         <div class="col-sm-8 text-left">
-            <form th:method="POST" class="form-signing" th:object="${userCreateDto}" th:action="@{/post/register}">
+            <form th:method="POST" class="form-signing" th:object="${userCreateDto}" th:action="@{/user/post/register}">
                 <h2 class="form-signing-heading">Create your account</h2>
                 <div class="form-group">
                     <input type="text" th:field="*{name}" class="form-control" placeholder="Name">
-                    <!--                        <span class="has-error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>-->
+                    <span class="has-error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
                 </div>
 
                 <div class="form-group">
                     <input type="text" th:field="*{surname}" class="form-control" placeholder="Surname">
-                    <!--                        <span class="has-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>-->
+                    <span class="has-error" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></span>
                 </div>
 
                 <div class="form-group">
                     <input type="email" th:field="*{email}" class="form-control" placeholder="Email">
-                    <!--                        <span class="has-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>-->
+                    <span class="has-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
                 </div>
 
                 <div class="form-group">
                     <input type="password" th:field="*{password}" class="form-control" placeholder="Password">
-                    <!--                        <span class="has-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>-->
+                    <span class="has-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
                 </div>
 
 
                 <div class="form-group">
                     <label for="birthday"></label>
                     <input type="date" th:field="*{birthday}" class="form-control" id="birthday" placeholder="Birthday">
-                    <!--                        <span class="has-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>-->
+                    <span class="has-error" th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}"></span>
                 </div>
 
 
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+                <button class="btn btn-success btn-primary btn-block" type="submit">Submit</button>
             </form>
 
         </div>

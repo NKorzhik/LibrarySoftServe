@@ -137,15 +137,15 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a th:href="@{/list}">Home</a></li>
-                <li class="active" sec:authorize="hasRole('ROLE_READER')"><a th:href='@{/pageReader}'>Profile</a></li>
-                <li class="active" sec:authorize="hasRole('ROLE_MANAGER')"><a th:href='@{/pageManager}'>Profile</a></li>
+                <li class="active"><a th:href="@{/book/list}">Home</a></li>
+                <li class="active" sec:authorize="hasRole('ROLE_READER')"><a th:href='@{/request/pageReader}'>Profile</a></li>
+                <li class="active" sec:authorize="hasRole('ROLE_MANAGER')"><a th:href='@{/request/pageManager}'>Profile</a></li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}"><span
                         class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-                <li sec:authorize="isAnonymous()"><a th:href="@{/login}"><span
+                <li sec:authorize="isAnonymous()"><a th:href="@{/book/login}"><span
                         class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
         </div>
@@ -156,8 +156,8 @@
     <div class="row content">
         <div class="col-sm-2 ">
 
-            <h7>Get the most popular and unpopular book in selected period</h7>
-            <form th:action="@{/getPopUnPopBook}" method="get">
+            <h6>Get the most popular and unpopular book in selected period</h6>
+            <form th:action="@{/book/getPopUnPopBook}" method="get">
                 <label>
                     <input type="text" th:value="${firstDate}" name="firstDate" placeholder="First Date(yyyy-mm-d)"
                            size="18">
@@ -183,7 +183,7 @@
                 <tr th:each="book : ${popular}">
                     <td th:text="${book.title}"></td>
                     <td th:text="${book.genre}"></td>
-                    <td><a th:href="@{/more/{id}(id=${book.id})}" class="btn btn-primary">More</a></td>
+                    <td><a th:href="@{/book/more/{id}(id=${book.id})}" class="btn btn-primary">More</a></td>
                 </tr>
                 </tbody>
             </table>

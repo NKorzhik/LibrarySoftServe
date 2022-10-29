@@ -137,7 +137,7 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a th:href="@{/list}">Home</a></li>
+                <li class="active"><a th:href="@{/book/list}">Home</a></li>
             </ul>
         </div>
     </div>
@@ -156,7 +156,7 @@
                     <h2 class="text-center">Login Form</h2>
                 </div>
                 <div class="card-body">
-                    <form class="form-signing" method="post" action="/post/login">
+                    <form class="form-signing" method="post" action="/user/post/login">
                         <h2 class="form-signing-heading">Login</h2>
                         <p>
                             <label for="username">Username</label>
@@ -170,7 +170,7 @@
                         </p>
                         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
                         <div class="text-center">
-                            <p>Not a member? <a th:href="@{/register}">Register</a></p>
+                            <p>Not a member? <a th:href="@{/user/register}">Register</a></p>
                         </div>
 
                     </form>

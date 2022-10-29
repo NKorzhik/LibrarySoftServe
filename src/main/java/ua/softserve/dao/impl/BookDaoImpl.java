@@ -3,19 +3,13 @@ package ua.softserve.dao.impl;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
-import org.thymeleaf.util.ListUtils;
 import ua.softserve.config.HibernateConfig;
 import ua.softserve.dao.BookDao;
 import ua.softserve.model.Book;
-import ua.softserve.model.HistoryOfRequest;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 @Repository
 public class BookDaoImpl implements BookDao {
@@ -97,8 +91,8 @@ public class BookDaoImpl implements BookDao {
             session.getTransaction().begin();
 
             List<Book> mostPopular = session.createQuery("Select b.bookId from HistoryOfRequest b  left join  b.bookId left join b.bookId.author  left join  b.bookId.coAuthor  where b.dateOfIssue between :firstDate AND :secondDate group by b.bookId order by count (b.bookId) desc ", Book.class)
-                    .setParameter("firstDate", LocalDate.parse(firstDate,formatter))
-                    .setParameter("secondDate", LocalDate.parse(secondDate,formatter)).getResultList();
+                    .setParameter("firstDate", LocalDate.parse(firstDate, formatter))
+                    .setParameter("secondDate", LocalDate.parse(secondDate, formatter)).getResultList();
 
             session.getTransaction().commit();
             return mostPopular;
@@ -111,8 +105,8 @@ public class BookDaoImpl implements BookDao {
             session.beginTransaction();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             List<Book> mostUnpopular = session.createQuery("Select b.bookId from HistoryOfRequest b left join  b.bookId left join b.bookId.author left join b.bookId.coAuthor  where b.dateOfIssue between :firstDate AND :secondDate group by b.bookId order by count (b.bookId)", Book.class)
-                    .setParameter("firstDate",LocalDate.parse(firstDate,formatter))
-                    .setParameter("secondDate", LocalDate.parse(secondDate,formatter)).getResultList();
+                    .setParameter("firstDate", LocalDate.parse(firstDate, formatter))
+                    .setParameter("secondDate", LocalDate.parse(secondDate, formatter)).getResultList();
 
             session.getTransaction().commit();
             return mostUnpopular;

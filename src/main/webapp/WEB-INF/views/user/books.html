@@ -78,42 +78,11 @@
             transition: background-color 0.15s ease-in-out 0s;
         }
 
-        .table tbody tr td .call-type {
-            display: block;
-            font-size: 0.75em;
-            text-align: center;
-        }
-
-        .table tbody tr td .first-line {
-            line-height: 1.5;
-            font-weight: 400;
-            font-size: 1.125em;
-        }
-
         .table tbody tr td .first-line span {
             font-size: 0.875em;
             color: #969696;
             font-weight: 300;
         }
-
-        .table tbody tr td .second-line {
-            font-size: 0.875em;
-            line-height: 1.2;
-        }
-
-        /*.table-products tbody > tr > td {*/
-        /*    background: none;*/
-        /*    border: none;*/
-        /*    border-bottom: 1px solid #ebebeb;*/
-        /*    -webkit-transition: background-color 0.15s ease-in-out 0s;*/
-        /*    transition: background-color 0.15s ease-in-out 0s;*/
-        /*    position: relative;*/
-        /*}*/
-        /*.table-products tbody > tr:hover > td {*/
-        /*    text-decoration: none;*/
-        /*    background-color: #f6f6f6;*/
-        /*}*/
-
 
         /* Remove the navbar's default margin-bottom and rounded borders */
         .navbar {
@@ -124,13 +93,6 @@
         /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
         .row.content {
             height: 450px
-        }
-
-        /* Set gray background color and 100% height */
-        .sidenav {
-            padding-top: 20px;
-            background-color: #f1f1f1;
-            height: 100%;
         }
 
         /* Set black background color, white text and some padding */
@@ -167,17 +129,14 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a th:href="@{/list}">Home</a></li>
-                <li class="active" sec:authorize="hasRole('ROLE_READER')"><a th:href='@{/pageReader}'>Profile</a></li>
-                <li class="active" sec:authorize="hasRole('ROLE_MANAGER')"><a th:href='@{/pageManager}'>Profile</a></li>
-                <!--                <li><a href="#">About</a></li>-->
-                <!--                <li><a href="#">Projects</a></li>-->
-                <!--                <li><a href="#">Contact</a></li>-->
+                <li class="active"><a th:href="@{/book/list}">Home</a></li>
+                <li class="active" sec:authorize="hasRole('ROLE_READER')"><a th:href='@{/request/pageReader}'>Profile</a></li>
+                <li class="active" sec:authorize="hasRole('ROLE_MANAGER')"><a th:href='@{/request/pageManager}'>Profile</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}"><span
                         class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-                <li sec:authorize="isAnonymous()"><a th:href="@{/login}"><span
+                <li sec:authorize="isAnonymous()"><a th:href="@{/user/login}"><span
                         class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
         </div>
@@ -188,25 +147,20 @@
     <div class="row content">
         <div class="col-sm-2 ">
 
-            <h7>Get the most popular and unpopular book in selected period</h7>
-            <form th:action="@{/getPopUnPopBook}" method="get">
+            <h6>Get the most popular and unpopular book in selected period</h6>
+            <form th:action="@{/book/getPopUnPopBook}" method="get">
                 <label>
                     <input type="text" th:value="${firstDate}" name = "firstDate" placeholder="First Date(yyyy-mm-d)" size="18">
                     <input type="text" th:value="${secondDate}" name = "secondDate" placeholder="Second Date(yyyy-mm-d) " size="18">
                 </label>
                 <button type="submit" class="btn btn-info">Search</button>
             </form>
-
-            <!--                        <p><a href="#"></a></p>-->
-<!--                        <p><a href="#">Link</a></p>-->
-<!--                        <p><a href="#">Link</a></p>-->
         </div>
         <div class="col-sm-8 text-left">
 
             <h1>List of Book</h1>
 
-
-            <form th:action="@{/search}" method="get">
+            <form th:action="@{/book/search}" method="get">
                 <label>
                     <input type="text" name="keyword" th:value="${keyword}" placeholder="Find book " size="50">
                 </label>
@@ -214,13 +168,6 @@
                 <button type="submit" class="btn btn-info">Reset</button>
             </form>
 
-            <!--            <form th:action="@{/search2}" method="get">-->
-            <!--                <label>-->
-            <!--                    <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find book by author name" size="50" >-->
-            <!--                </label>-->
-            <!--                <button type="submit" class="btn btn-info" >Search</button>-->
-            <!--                <button type="submit" class="btn btn-info" >Reset</button>-->
-            <!--            </form>-->
 
             <table class="table book-list">
                 <thead>
@@ -232,28 +179,33 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="book : ${booksReadDto}">
+                <tr th:each="book : ${books.records}">
                     <td th:text="${book.title}"></td>
-                    <td th:text="${book.authorDto.name} + ' ' + ${book.authorDto.surname}"></td>
-                    <td th:if="${book.coAuthorDto != null}"
-                        th:text="${book.coAuthorDto.name} + ' ' +  ${book.coAuthorDto.surname}"></td>
-                    <td th:if="${book.coAuthorDto == null}"> Missing</td>
+                    <td th:text="${book.author.name} + ' ' + ${book.author.surname}"></td>
+                    <td th:if="${book.coAuthor != null}"
+                        th:text="${book.coAuthor.name} + ' ' +  ${book.coAuthor.surname}"></td>
+                    <td th:if="${book.coAuthor == null}"> Missing</td>
                     <td th:text="${book.genre}"></td>
-                    <td><a th:href="@{/more/{id}(id=${book.id})}" class="btn btn-primary">More</a></td>
+                    <td><a th:href="@{/book/more/{id}(id=${book.id})}" class="btn btn-primary">More</a></td>
                 </tr>
                 </tbody>
             </table>
 
-        </div>
-<!--        <div class="col-sm-2 sidenav">-->
+            <div th:if="${books.currentPageNumber < books.lastPageNumber}" class="pagination">
+                <a th:href="@{/book/list(pageNumber=${books.currentPageNumber})}"
+                   th:text="${books.currentPageNumber}"
+                   th:class="${books.currentPageNumber == books.currentPageNumber + 1} ? active"></a>
 
-<!--                        <div class="well">-->
-<!--                            <p>ADS</p>-->
-<!--            &lt;!&ndash;            </div>&ndash;&gt;-->
-<!--            &lt;!&ndash;            <div class="well">&ndash;&gt;-->
-<!--            &lt;!&ndash;                <p>ADS</p>&ndash;&gt;-->
-<!--            &lt;!&ndash;            </div>&ndash;&gt;-->
-<!--        </div>-->
+                <a th:if ="${books.currentPageNumber + 1  != books.lastPageNumber}"
+                   th:href="@{/book/list(pageNumber=${books.currentPageNumber + 1})}"
+                   th:text="${books.currentPageNumber + 1}"
+                   th:class="${books.currentPageNumber == books.currentPageNumber + 1} ? active"></a>
+
+                <a th:href="@{/book/list(pageNumber=${books.lastPageNumber})}"
+                   th:text="${books.lastPageNumber}"></a>
+
+            </div>
+        </div>
     </div>
 </div>
 

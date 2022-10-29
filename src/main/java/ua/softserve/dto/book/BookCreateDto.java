@@ -27,6 +27,7 @@ public class BookCreateDto {
         BookCreateDto bookDto = (BookCreateDto) o;
         return title.equals(bookDto.title) && ISBN.equals(bookDto.ISBN);
     }
+
     @Override
     public int hashCode() {
         return Objects.hash(title, ISBN);

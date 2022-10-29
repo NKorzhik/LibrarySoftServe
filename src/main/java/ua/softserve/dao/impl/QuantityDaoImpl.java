@@ -21,7 +21,7 @@ public class QuantityDaoImpl implements QuantityDao {
 
     @Override
     public void addQuantity(Book book, int count) {
-        try(Session session = sessionFactory.openSession()) {
+        try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             for (int i = 0; i < count; i++) {
                 session.persist(new Quantity(book, Type.FREE));
@@ -32,11 +32,11 @@ public class QuantityDaoImpl implements QuantityDao {
 
     @Override
     public long getFirstFreeCopyByBookId(long bookId) {
-        try(Session session = sessionFactory.openSession()) {
+        try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             Long quantityId = session.createQuery(
-                    "select q.id from Quantity q where q.bookId =: bookId and q.type =: type",
-                    Long.class)
+                            "select q.id from Quantity q where q.bookId =: bookId and q.type =: type",
+                            Long.class)
                     .setParameter("bookId", bookId)
                     .setParameter("type", Type.FREE)
                     .getSingleResult();
@@ -47,12 +47,12 @@ public class QuantityDaoImpl implements QuantityDao {
 
     @Override
     public long getCountOfQuantityByBookId(long bookId) {
-        try(Session session = sessionFactory.openSession()){
+        try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             Query<Quantity> query = session.createQuery(
                     "select q from Quantity q where q.bookId.id =:bookId and q.type =: type",
                     Quantity.class);
-            query.setParameter("bookId",bookId);
+            query.setParameter("bookId", bookId);
             query.setParameter("type", Type.FREE);
             long result = query.getResultStream().count();
             session.getTransaction().commit();
@@ -62,7 +62,7 @@ public class QuantityDaoImpl implements QuantityDao {
 
     @Override
     public void changeTypeOfCopyById(long id) {
-        try(Session session = sessionFactory.openSession()) {
+        try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             session.createNativeQuery("update Quantity q set type =: type where q.id =: id",
                             Integer.class)
@@ -75,7 +75,7 @@ public class QuantityDaoImpl implements QuantityDao {
 
     @Override
     public void deleteOneCopyById(long bookId) {
-        try(Session session = sessionFactory.openSession()) {
+        try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             Query<Quantity> query = session.createQuery(
                     "select q from Quantity q where q.bookId.id=:bookId",
